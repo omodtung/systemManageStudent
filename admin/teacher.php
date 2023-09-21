@@ -70,6 +70,7 @@ $teacher = getAllTeacher($conn);
 $s='';
 $subject = str_split(trim($teacher['subject']))
 foreach ($subject as $subject)
+{}
 $s_temp = get
 ?>
 </td>
