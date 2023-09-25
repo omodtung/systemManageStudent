@@ -36,6 +36,8 @@ $teacher = getAllTeacher($conn);
     {
 ?>
 <div class ="container mt-5" >
+
+
 <a href="teacher-add.php" class="btn btn-dark">add new teacher </a>
 <div class="table-responsive">
 <table class="table table-bordered mt-3 n-table">
@@ -68,10 +70,14 @@ $teacher = getAllTeacher($conn);
 
 <?php
 $s='';
-$subject = str_split(trim($teacher['subject']))
-foreach ($subject as $subject)
-{}
-$s_temp = get
+$subjects = str_split(trim($teacher['subjects']))
+// foreach ($subjects as $subject)
+// {
+
+
+// }
+// $s_temp = get
+
 ?>
 </td>
 </tr>
@@ -84,7 +90,8 @@ $s_temp = get
 </body>
 </html>
 
-<?php }else
+<?php }
+else
 {
     header("Location:../login.php");
     exit;

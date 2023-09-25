@@ -28,7 +28,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="container mt-6">
                 <div class="container text-center">
                     <div class="row row-cols-5">
-                    <a href="teacher.php" 
+                    <a href="teacherUI.php" 
                   class="col btn btn-dark m-2 py-3">
                  <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>
                   Teachers
@@ -79,7 +79,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             <script>
                 $(document).ready(function() {
-                    $("#navLinks li:nth-child(2) a").addClass('active')
+                    $("#navLinks li:nth-child(1) a").addClass('active')
                 });
             </script>
         </body>
