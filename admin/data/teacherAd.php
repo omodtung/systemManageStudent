@@ -28,3 +28,20 @@ function findNameDocNhat($uname, $conn){
    	return 1;
    }
 }
+
+function deleteTeacher($teacherId, $conn) {
+  $sql = "DELETE FROM teachers WHERE id=$teacherId";
+  
+  try {
+      $stmt = $conn->prepare($sql);
+      $stmt->execute([$teacherId]);
+      
+      if ($stmt->rowCount() >= 1) {
+          return 1;
+      } else {
+          return 0;
+      }
+  } catch (PDOException $e) {
+      return 0;
+  }
+}
