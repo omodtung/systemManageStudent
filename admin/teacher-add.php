@@ -15,11 +15,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $pass = '';
     $flname = '';
     $lopChuNhiem = '';
+
+    $gioiTinh = '';
     if (isset($_GET['fname'])) $fname =  $_GET['fname'];
 
     if (isset($_GET['lname'])) $lname  = $_GET['lname'];
 
     if (isset($_GET['uname'])) $uname = $_GET['uname'];
+
 
 ?>
     <html lang="en">
@@ -165,18 +168,31 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>">
 
             <h3> Mon Hoc</h3>
-            i
+           
+
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <select name="grades">
+                <?php foreach ($subjects as $subject) : ?>
+                  <option value="<?= $subject['subject_id'] ?>"><?= $subject['subject'] ?></option>
+                <?php endforeach ?>
+              </select>
+            </div>
 
 
 
 
 
 
-
-
-
-
-
+            <div class="mb-3">
+              <label class="form-label">Grade</label>
+              <select name="grades">
+                <?php foreach ($grades as $grade) : ?>
+                  <option value="<?= $grade['grade_id'] ?>"><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                <?php endforeach ?>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Change</button>
         </form>
       </div>
 
