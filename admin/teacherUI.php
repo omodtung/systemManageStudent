@@ -10,12 +10,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         $teachers =   getAllTeachers($conn);
 
-        print_r($teachers);
+       
 
 ?>
-
-
-        <!DOCTYPE html>
+ <!DOCTYPE html>
         <html lang="en">
 
         <head>
