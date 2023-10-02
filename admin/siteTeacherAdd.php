@@ -12,9 +12,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $fname = '';
     $lname  = '';
     $uname  = '';
-    $pass = '';
-    $flname = '';
-    $lopChuNhiem = '';
+    // $pass = '';
+    // $flname = '';
+    // $lopChuNhiem = '';
 
     $gioiTinh = '';
     if (isset($_GET['fname'])) $fname =  $_GET['fname'];
@@ -51,14 +51,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     </head>
 
     <body>
-      <?php
-      include "inc/navbar.php";
-      ?>
+    <?php 
+        include "inc/navBar.php";
+     ?>
 
       <div class="container mt-5">
-        <a href="teacher-add.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+        <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/teacher-add.php">
+        <form method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
           <h3> Site ADD teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert danger" role="alert">
@@ -102,7 +102,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                   Full Name
                 </label>
-                <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>">
+                <!-- <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>"> -->
               </div>
               <div class="col">
                 <label class="form-lable">
@@ -118,7 +118,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
               PassWord
             </label>
-            <input type="text" class="form-control" placeholder="PassWord" value="<?= $pass ?>" name="pass">
+            <input type="text" class="form-control" name="pass" id="passInput">
 
             <!-- chon BirthDate -->
             <section class="container">
@@ -168,11 +168,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>">
 
             <h3> Mon Hoc</h3>
-           
 
+            <!-- 
             <div class="mb-3">
               <label class="form-label">Subject</label>
-              <select name="grades">
+              <select name="subjects[]">
                 <?php foreach ($subjects as $subject) : ?>
                   <option value="<?= $subject['subject_id'] ?>"><?= $subject['subject'] ?></option>
                 <?php endforeach ?>
@@ -186,7 +186,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             <div class="mb-3">
               <label class="form-label">Grade</label>
-              <select name="grades">
+              <select name="grades[]">
                 <?php foreach ($grades as $grade) : ?>
                   <option value="<?= $grade['grade_id'] ?>"><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
                 <?php endforeach ?>
@@ -198,8 +198,38 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
+ -->
 
 
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <div class="row row-cols-5">
+                <?php foreach ($subjects as $subject) : ?>
+                  <div class="col">
+                    <input type="checkbox" name="subjects[]" value="<?= $subject['subject_id'] ?>">
+                    <?= $subject['subject'] ?>
+                  </div>
+                <?php endforeach ?>
+
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Grade</label>
+              <div class="row row-cols-5">
+                <?php foreach ($grades as $grade) : ?>
+                  <div class="col">
+                    <input type="checkbox" name="grades[]" value="<?= $grade['grade_id'] ?>">
+                    <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?>
+                  </div>
+                <?php endforeach ?>
+
+              </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Save Change</button>
+        </form>
+      </div>
     </body>
 
     </html>
