@@ -10,7 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         $teachers =   getAllTeachers($conn);
 
-       
+        //print_r($teachers);
 
 ?>
  <!DOCTYPE html>
@@ -95,7 +95,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         </td>
 
                                         <td>
-                                            <a href="" class="btn btn-warning">Edit</a>
+                                            <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a>
                                             <a href="" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
