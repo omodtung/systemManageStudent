@@ -10,7 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         $teachers =   getAllTeachers($conn);
 
-        print_r($teachers);
+        //print_r($teachers);
 
 ?>
 
