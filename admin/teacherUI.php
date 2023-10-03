@@ -13,9 +13,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         //print_r($teachers);
 
 ?>
-
-
-        <!DOCTYPE html>
+ <!DOCTYPE html>
         <html lang="en">
 
         <head>
@@ -32,13 +30,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body>
             <?php
-            include "inc/navbar.php";
+            include "inc/navBar.php";
             if ($teachers != 0) {
 
 
             ?>
                 <div class="container mt-5">
-                    <a href="teacher-add.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
+                    <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
                     <div class="table-responsive">
                         <table class="table table-success table-striped n-table">
                             <thead>
