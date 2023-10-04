@@ -44,7 +44,8 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         $sql = "UPDATE teachers SET fname='$fname',lname='$lname',username='$uname',subjects='$subjects',grade='$grades',birthDate='$brthday',Gender='$gender' WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        header("Location: ../teacher-edit.php?idteach=$id&success=Teacher Updated");
+        //header("Location: ../teacher-edit.php?idteach=$id&success=Teacher Updated");
+        header("Location: ../teacherUI.php");
         }
     }
 }

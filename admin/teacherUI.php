@@ -9,6 +9,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/grade.php";
 
         $teachers =   getAllTeachers($conn);
+        
 
         //print_r($teachers);
 
@@ -21,10 +22,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Home - Su Pham Thuc Hanh High School</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-            <link rel="stylesheet" href="..css/style.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+            <!-- <link rel="stylesheet" href="..css/style.css"> -->
             <link rel="icon" href="..logo.png">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
         </head>
 
@@ -96,7 +100,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         </td>
 
                                         <td>
-                                            <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a>
+                                            <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
+                                              Edit
+                                            </button>
                                             <a href="" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
@@ -108,6 +115,40 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             </tbody>
                         </table>
                     </div>
+                    <!-- Edit Teacher -->
+                    <script>
+                        function btnclick(_url){
+                            $.ajax({
+                                url : _url,
+                                type : 'post',
+                                success: function(data) {
+                                $('#modalbody').html(data);
+                                },
+                                error: function() {
+                                $('#modalbody').text('An error occurred');
+                                }
+                            });
+                        }
+                    </script>                        
+
+                    <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit teacher</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" id="modalbody">
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>                        
+                    <!-- End Edit Teaccher -->
                 </div>
             <?php } else { ?>
 

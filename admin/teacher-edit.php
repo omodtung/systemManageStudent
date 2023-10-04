@@ -1,6 +1,10 @@
 <?php
 
 
+
+//deprecated code use inc/editTeacher instead
+
+
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
