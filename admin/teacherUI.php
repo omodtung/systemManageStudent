@@ -7,6 +7,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/teacherAd.php";
         include "data/subject.php";
         include "data/grade.php";
+        include "data/getteacher.php";
 
         $teachers =   getAllTeachers($conn);
         
@@ -128,7 +129,27 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 $('#modalbody').text('An error occurred');
                                 }
                             });
+
+                            
                         }
+
+                        
+                        function Save(){
+                            setTimeout(function (){
+                        
+                            $('#modalbody').html('');
+                                    
+                            }, 500);
+                        }
+
+                        
+
+                        function toastShow(){
+                            setTimeout(function (){
+                                $('#liveToast').toast('show');     
+                            }, 500);
+                        }
+                        
                     </script>                        
 
                     <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -136,7 +157,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit teacher</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
                                 </div>
                                 <div class="modal-body" id="modalbody">
                                     
@@ -147,7 +168,42 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>                        
+                    </div> 
+                    <?php
+                    
+                    if(isset($_GET['sucsess'])){
+                        
+                        $toastteacher = getTeacher($conn,$_GET['sucsess']);
+                        echo "<script type='text/javascript'>",
+                            
+                            "setTimeout(function (){",
+                                "$('#toasttext').html('Sucsessfully edited teacher ". $toastteacher['fname'] . " " . $toastteacher['lname'] ."');",
+                                "$('#liveToast').toast('show');",     
+                            "}, 500);",
+                            "</script>"
+                        ;
+                        
+                    }
+                    
+                    
+                        
+                    
+                        
+                    ?>
+                    
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
+                            <div class="toast-header">
+                            <i class="fa-solid fa-database fa-spin"></i>
+                            <strong class="me-auto ms-1">System</strong>
+                            <small>now</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body" id="toasttext">
+                                Sucsessfully edited teacher
+                            </div>
+                        </div>
+                    </div>
                     <!-- End Edit Teaccher -->
                 </div>
             <?php } else { ?>
