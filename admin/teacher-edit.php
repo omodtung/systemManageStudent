@@ -52,7 +52,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     <body>
       <?php
-      include "inc/navbar.php";
+      include "inc/navBar.php";
       ?>
 
       <div class="container mt-5 pb-3">

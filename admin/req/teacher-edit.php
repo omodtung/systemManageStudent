@@ -16,6 +16,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         $lname = $_POST['lname'];
         $uname = $_POST['uname'];
         $subjects = "";
+        
         $grades = "";
         foreach ($_POST['subjects'] as $Subject) {
             $subjects .= $Subject;
