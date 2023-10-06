@@ -97,9 +97,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         </td>
 
                                         <td>
-                                            <a href="" class="btn btn-warning">Edit</a>
-                                            <a href="" class="btn btn-danger">Delete</a>
+                                            <a href="#" class="btn btn-warning">Edit</a>
+                                            <a href="#" class="btn btn-danger deleteButton" data-teacherid=<?= $teacher['id'] ?>>Delete</a>
                                         </td>
+
                                     </tr>
 
 
@@ -127,6 +128,33 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     $("#navLinks li:nth-child(2) a").addClass('active')
                 });
             </script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+            <script>
+            $(document).ready(function() {
+                // Handle the click event of the "Delete" button
+                $('.deleteButton').click(function(e) {
+                    e.preventDefault(); // Prevent the default behavior of the anchor tag
+                    
+                    // Perform the AJAX request
+                    $.ajax({
+                        type: 'POST',
+                        url: 'req/teacher-delete.php', // Replace with the actual path to your PHP script
+                        data: {
+                            teachers: $(this).data('teacherid') // You need to pass the teacherId here
+                        },
+                        success: function(response) {
+                            // Handle the response from the server
+                            alert(response); // You can replace this with any other action you want
+                        },
+                        error: function() {
+                            alert('Failed to delete teacher');
+                        }
+                    });
+                });
+            });
+            </script>
+
         </body>
 
         </html>
@@ -140,3 +168,4 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     header("Location: ../login.php");
     exit;
 } ?>
+
