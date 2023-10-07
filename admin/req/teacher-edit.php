@@ -18,6 +18,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         $brthday = $_POST['birthdate'];
         $gender = $_POST['genderbtn'];
         $subjects = "";
+        
         $grades = "";
         $brthday = date("Y-m-d", strtotime($brthday));
 

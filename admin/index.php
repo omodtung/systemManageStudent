@@ -23,7 +23,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body >
             <?php
-            include "inc/navbar.php";
+            include "inc/navBar.php";
             ?>
             <div class="container mt-6">
                 <div class="container text-center">
