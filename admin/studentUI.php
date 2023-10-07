@@ -36,7 +36,7 @@ $students = getAllStudents($conn);
 
             ?>
                 <div class="container mt-5">
-                    <a href="siteStudentAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
+                    <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
                     <a href="./req/encryptpasswords.php" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
                     <div class="table-responsive">
                         <table class="table table-success table-striped n-table">
