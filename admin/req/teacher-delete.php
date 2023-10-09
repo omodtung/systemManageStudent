@@ -4,7 +4,9 @@ session_start();
 include "../../DB_connection.php";
 
 function deleteTeacher($teacherId, $conn){
-    $sql = "DELETE FROM test.teachers WHERE id =:teacherId";
+    $sql = "UPDATE test.teachers SET active='0' WHERE id =:teacherId;";
+    // UPDATE test.teachers SET active='0' WHERE id =:teacherId;
+
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':teacherId', $teacherId, PDO::PARAM_INT);
     try {
@@ -21,7 +23,7 @@ if ($_SESSION['role'] !== 'Admin') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['teachers'])) {
     $teacherId = $_POST['teachers'];
-    
+
 
     if (deleteTeacher($teacherId, $conn)) {
         echo 'Teacher deleted successfully';
