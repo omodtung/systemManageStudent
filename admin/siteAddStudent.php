@@ -7,8 +7,17 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "../DB_connection.php";
         include "data/subject.php";
         include "data/grade.php";
+        include "data/student.php";
+include "data/class.php";
+
         $subjects = getAllSubjects($conn);
         $grades = getAllGrade($conn);
+$students = getAllStudents($conn);
+$classes = getAllClass($conn);
+
+
+
+
         $fname = '';
         $lname  = '';
         $uname  = '';
@@ -171,7 +180,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
-                        <h3> Mon Hoc</h3>
+
 
                         <!-- 
             <div class="mb-3">
@@ -231,40 +240,38 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
                                 </div>
-                                <div class="col-md-3">
-                        <select name="grades[]" multiple>
-                        <?php foreach ($grades as $grade) : ?>
-
-                        <?php endforeach ?>
-                    </select>
-                    </div>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Subject</label>
-                            <div class="row row-cols-5">
-                                <?php foreach ($subjects as $subject) : ?>
-                                    <div class="col">
-                                        <input type="checkbox" name="subjects[]" value="<?= $subject['subject_id'] ?>">
-                                        <?= $subject['subject'] ?>
-                                    </div>
-                                <?php endforeach ?>
 
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Grade</label>
-                            <div class="row row-cols-5">
-                                <?php foreach ($grades as $grade) : ?>
-                                    <div class="col">
-                                        <input type="checkbox" name="grades[]" value="<?= $grade['grade_id'] ?>">
-                                        <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?>
-                                    </div>
-                                <?php endforeach ?>
+
+                            <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label"> Khoi Hoc</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <?php foreach ($grades as $grade) : ?>
+                                         
+
+                                            <option name="grades[]" value ="<?= $grade['grade_id']?>">  <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
 
                             </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label"> Lop</label>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <?php foreach ($classes as $class ):?>
+                                         
+
+                                            <option name="classes[]" value ="<?= $class['ID_Class']?>">  <?= $class['ClassName'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+
+
+                            
                         </div>
+
 
 
                         <button type="submit" class="btn btn-primary">Save Change</button>
