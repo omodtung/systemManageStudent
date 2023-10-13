@@ -12,14 +12,17 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $fname = '';
     $lname  = '';
     $uname  = '';
-    $pass = '';
-    $flname = '';
-    $lopChuNhiem = '';
+    // $pass = '';
+    // $flname = '';
+    // $lopChuNhiem = '';
+
+    $gioiTinh = '';
     if (isset($_GET['fname'])) $fname =  $_GET['fname'];
 
     if (isset($_GET['lname'])) $lname  = $_GET['lname'];
 
     if (isset($_GET['uname'])) $uname = $_GET['uname'];
+
 
 ?>
     <html lang="en">
@@ -48,14 +51,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     </head>
 
     <body>
-      <?php
-      include "inc/navbar.php";
-      ?>
+    <?php 
+        include "inc/navBar.php";
+     ?>
 
       <div class="container mt-5">
-        <a href="teacher-add.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+        <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/teacher-add.php">
+        <form method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php" enctype="multipart/form-data">
           <h3> Site ADD teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert danger" role="alert">
@@ -99,7 +102,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                   Full Name
                 </label>
-                <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>">
+                <!-- <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>"> -->
               </div>
               <div class="col">
                 <label class="form-lable">
@@ -115,7 +118,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
               PassWord
             </label>
-            <input type="text" class="form-control" placeholder="PassWord" value="<?= $pass ?>" name="pass">
+            <input type="text" class="form-control" name="pass" id="passInput">
 
             <!-- chon BirthDate -->
             <section class="container">
@@ -125,7 +128,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                   <label for="date" class="col-sm-1 col-form-label">Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date" id="datepicker">
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" name="birthdate">
                       <span class="input-group-append">
                         <span class="input-group-text bg-white">
                           <i class="fa fa-calendar"></i>
@@ -138,6 +141,26 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                 </script>
             </section>
+          
+            <label for="avatar">Teacher Avatar:</label>
+            <input type="file" name="avatar" id="avatar" accept="image/*" onchange="previewImage();">
+            <img id="imagePreview" src="" alt="Image Preview" style="display:none; width:150px; height:150px;"/>
+
+            <script>
+            function previewImage() {
+                var file = document.getElementById("avatar").files[0];
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    document.getElementById("imagePreview").style.display = "block";
+                    document.getElementById("imagePreview").src = reader.result;
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
+            </script>
+
+          
             <script type="text/javascript">
               $(function() {
                 $('#datepicker').datepicker();
@@ -152,11 +175,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+              <input class="form-check-input" type="radio" id="inlineCheckbox1" value="M" name ="gender">
               <label class="form-check-label" for="inlineCheckbox1">Nam</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+              <input class="form-check-input" type="radio" id="inlineCheckbox2" value="F" name="gender">
               <label class="form-check-label" for="inlineCheckbox2">Nu</label>
             </div>
 
@@ -165,25 +188,68 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>">
 
             <h3> Mon Hoc</h3>
-            i
+
+            <!-- 
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <select name="subjects[]">
+                <?php foreach ($subjects as $subject) : ?>
+                  <option value="<?= $subject['subject_id'] ?>"><?= $subject['subject'] ?></option>
+                <?php endforeach ?>
+              </select>
+            </div>
 
 
 
 
 
 
-
-
-
-
-
+            <div class="mb-3">
+              <label class="form-label">Grade</label>
+              <select name="grades[]">
+                <?php foreach ($grades as $grade) : ?>
+                  <option value="<?= $grade['grade_id'] ?>"><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                <?php endforeach ?>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Change</button>
         </form>
       </div>
 
 
 
+ -->
 
 
+            <div class="mb-3">
+              <label class="form-label">Subject</label>
+              <div class="row row-cols-5">
+                <?php foreach ($subjects as $subject) : ?>
+                  <div class="col">
+                    <input type="checkbox" name="subjects[]" value="<?= $subject['subject_id'] ?>">
+                    <?= $subject['subject'] ?>
+                  </div>
+                <?php endforeach ?>
+
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Grade</label>
+              <div class="row row-cols-5">
+                <?php foreach ($grades as $grade) : ?>
+                  <div class="col">
+                    <input type="checkbox" name="grades[]" value="<?= $grade['grade_id'] ?>">
+                    <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?>
+                  </div>
+                <?php endforeach ?>
+
+              </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Save Change</button>
+        </form>
+      </div>
     </body>
 
     </html>

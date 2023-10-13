@@ -4,7 +4,7 @@ session_start();
 include "../../DB_connection.php";
 
 function deleteTeacher($teacherId, $conn){
-    $sql = "UPDATE test.teachers SET active='0' WHERE id =:teacherId;";
+    $sql = "UPDATE teachers SET active='0' WHERE id =:teacherId;";
     // UPDATE test.teachers SET active='0' WHERE id =:teacherId;
 
     $stmt = $conn->prepare($sql);
