@@ -2,18 +2,20 @@
 
 
 session_start();
+
+print_r($_SESSION);
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
         include "../DB_connection.php";
         include "data/subject.php";
         include "data/grade.php";
         include "data/student.php";
-include "data/class.php";
+        include "data/class.php";
 
         $subjects = getAllSubjects($conn);
         $grades = getAllGrade($conn);
-$students = getAllStudents($conn);
-$classes = getAllClass($conn);
+        $students = getAllStudents($conn);
+        $classes = getAllClass($conn);
 
 
 
@@ -25,7 +27,7 @@ $classes = getAllClass($conn);
         // $flname = '';
         // $lopChuNhiem = '';
 
-        $gioiTinh = '';
+
         if (isset($_GET['fname'])) $fname =  $_GET['fname'];
 
         if (isset($_GET['lname'])) $lname  = $_GET['lname'];
@@ -137,7 +139,7 @@ $classes = getAllClass($conn);
                                     <label for="date" class="col-sm-1 col-form-label">Date</label>
                                     <div class="col-sm-4">
                                         <div class="input-group date" id="datepicker">
-                                            <input type="text" class="form-control" name = "birthdate">
+                                            <input type="text" class="form-control" name="birthdate">
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>
@@ -168,34 +170,34 @@ $classes = getAllClass($conn);
                             </label>
 
                         </div>
-                    
-
-
-              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1" >
-                <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
-
-                <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2" >
-                <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
-
-            </div>
 
 
 
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1">
+                            <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
+
+                            <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2">
+                            <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
+
+                        </div>
 
 
-                       
 
 
 
- 
- 
+
+
+
+
+
+
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="form-label">Hanh Kiem</label>
                                     <select class="form-select" aria-label="Default select example" name="hanhkiem">
-                                        
+
                                         <option selected value="kha">Kha</option>
                                         <option value="tot">Tot</option>
                                         <option value="tb">Trung Binh</option>
@@ -207,8 +209,8 @@ $classes = getAllClass($conn);
 
                                 <div class="col-md-3">
                                     <label class="form-label">Hoc Luc</label>
-                                    <select class="form-select" aria-label="Default select example" name = "hocluc">
-                                       
+                                    <select class="form-select" aria-label="Default select example" name="hocluc">
+
 
                                         <option selected value="gioi">Gioi</option>
                                         <option value="Tien Tien">TienTien</option>
@@ -222,13 +224,13 @@ $classes = getAllClass($conn);
                             </div>
 
                             <div class="row">
-                            <div class="col-md-3">
-                                <label class="form-label"> Khoi Hoc</label>
-                                    <select class="form-select" aria-label="Default select example">
+                                <div class="col-md-3">
+                                    <label class="form-label"> Khoi Hoc</label>
+                                    <select name = "grades" class="form-select" aria-label="Default select example">
                                         <?php foreach ($grades as $grade) : ?>
-                                         
 
-                                            <option name="grades[]" value ="<?= $grade['grade_id']?>">  <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+
+                                            <option  value="<?= $grade['grade_id'] ?>"> <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
                                         <?php endforeach ?>
                                     </select>
                                 </div>
@@ -237,17 +239,17 @@ $classes = getAllClass($conn);
 
                             <div class="col-md-3">
                                 <label class="form-label"> Lop</label>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <?php foreach ($classes as $class ):?>
-                                         
-
-                                            <option name="classes[]" value ="<?= $class['ID_Class']?>">  <?= $class['ClassName'] ?></option>
-                                        <?php endforeach ?>
-                                    </select>
-                                </div>
+                                <select name="classes" class="form-select" aria-label="Default select example">
+                                    <?php foreach ($classes as $class) : ?>
 
 
-                            
+                                        <option value="<?= $class['ID_Class'] ?>"> <?= $class['ClassName'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+
+
+
                         </div>
 
 

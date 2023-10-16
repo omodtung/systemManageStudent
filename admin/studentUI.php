@@ -71,7 +71,7 @@ $students = getAllStudents($conn);
                                         <td><?=  $student['HanhKiem'] ?></td>
                                         <td><?=  $student['HocLuc'] ?></td>
                                         <td><?=  $student['NgaySinh'] ?></td>
-                                        <td><?=  $student['GioiTinh'] ?></td>
+                                        <td><?=  $student['Gender'] ?></td>
                                         <td>
                                             <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a>
                                             <a href="" class="btn btn-danger">Delete</a>
