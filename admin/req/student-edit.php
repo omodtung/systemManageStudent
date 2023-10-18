@@ -12,7 +12,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         
         include "../data/grade.php";
         $id = $_GET['id'];
-        $hotenhs = $_POST['hotenhd'];
+        $hotenhs = $_POST['hotenhs'];
         //$lname = $_POST['lname'];
         $uname = $_POST['uname'];
         $brthday = $_POST['birthdate'];
@@ -48,7 +48,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         else{
         
         //$grades = implode(",", $_POST['grades']);
-        $sql = "UPDATE students SET hotenhs='$hotenhs',username='$uname',makhoi='$grade',ngaysinh='$brthday',gioitinh='$gender',diachi='$diachi',malop='$class' WHERE id = $id";
+        $sql = "UPDATE students SET hotenhs='$hotenhs',username='$uname',makhoi='$grade',ngaysinh='$brthday',gioitinh='$gender',diachi='$diachi',malop='$class',hanhkiem='$hanhkiem' WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         //header("Location: ../student-edit.php?idteach=$id&success=student Updated");

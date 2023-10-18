@@ -9,6 +9,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     include "../data/grade.php";
     include "../data/getteacher.php";
     include "../data/student.php";
+    include "../data/class.php";
     $subjects = getAllSubjects($conn);
     $grades = getAllGrade($conn);
     $student = getStudentUsingId($conn,$_GET['idstudent']);
@@ -183,10 +184,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
               </label>
 
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1" autocomplete="off" <?php echo ($student['gioitinh'] == "Nam") ? 'checked' : ''; ?>>
+                <input type="radio" class="btn-check" name="genderbtn" value="Nam" id="btnradio1" autocomplete="off" <?php echo ($student['gioitinh'] == "Nam") ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
 
-                <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2" autocomplete="off" <?php echo ($student['gioitinh'] == "Nữ") ? 'checked' : ''; ?>>
+                <input type="radio" class="btn-check" name="genderbtn" value="Nữ" id="btnradio2" autocomplete="off" <?php echo ($student['gioitinh'] == "Nữ") ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
 
             </div>
@@ -215,14 +216,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <label class="form-label">Grade</label>
                     
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-3">
                         <!-- <select name="grades[]" multiple>
                         <?php foreach ($grades as $grade) : ?>
                         <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['grade_id']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
                         <?php endforeach ?> -->
                         <select name="grade" >
                         <?php foreach ($grades as $grade) : ?>
-                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['grade_id']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['makhoi']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
                         <?php endforeach ?>
                     </select>
                     </div>

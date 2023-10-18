@@ -46,12 +46,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <th scope="col">student ID</th>
                                     <th scope="col">USER NAME</th>
                                     <th scope="col">Password</th>
-                                    <th scope="col">Fname</th>
-                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Full Name</th>
+                                    <!-- <th scope="col">Last Name</th> -->
                                     <th scope="col">HANH KIEM</th>
                                     <th scope="col"> hOC lUC</th>
                                     <th scope="col"> NGAY SINH </th>
                                     <th scope="col"> gIOI tINH </th>
+                                    <th scope="col"> Dia Chi </th>
                                     <th scope="col"> Action </th>
                                     
 
@@ -66,12 +67,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <td><?= $student['id'] ?></td>
                                         <td><?=  $student['username'] ?></td>
                                         <td><?=  $student['password'] ?></td>
-                                        <td><?=  $student['fname'] ?></td>
-                                        <td><?=  $student['lname'] ?></td>
-                                        <td><?=  $student['HanhKiem'] ?></td>
-                                        <td><?=  $student['scoretype'] ?></td>
-                                        <td><?=  $student['NgaySinh'] ?></td>
-                                        <td><?=  $student['Gender'] ?></td>
+                                        <td><?=  $student['hotenhs'] ?></td>
+                                        <!-- <td><?=  $student['lname'] ?></td> -->
+                                        <td><?=  $student['hanhkiem'] ?></td>
+                                        <td><?=  $student['HocLuc'] ?></td>
+                                        <td><?=  $student['ngaysinh'] ?></td>
+                                        <td><?=  $student['gioitinh'] ?></td>
+                                        <td><?=  $student['diachi'] ?></td>
                                         <td>
                                             <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editStudent.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?>>
@@ -149,7 +151,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         echo "<script type='text/javascript'>",
                             
                             "setTimeout(function (){",
-                                "$('#toasttext').html('Sucsessfully edited student ". $toaststudent['fname'] . " " . $toaststudent['lname'] ."');",
+                                "$('#toasttext').html('Sucsessfully edited student ". $toaststudent['username'] . " " . $toaststudent['hotenhs'] ."');",
                                 "$('#liveToast').toast('show');",     
                             "}, 500);",
                             "</script>"
