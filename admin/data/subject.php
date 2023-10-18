@@ -33,3 +33,25 @@ function getSubjectById($subject_id, $conn)
         return 0;
     }
 }
+
+
+function getSubjectBySubject_code ($subject_code, $conn)
+{
+     $sql = " SELECT * FROM subjects where subject_code=?";
+
+     $stmt = $conn->prepare($sql);
+     $stmt ->execute([$subject_code]);
+     if($stmt->rowCount() ==1 )
+     {
+        $subject = $stmt->fetch();
+        return $subject;
+
+     }else
+     {
+        
+        return 0 ;
+     }
+
+        
+    
+}

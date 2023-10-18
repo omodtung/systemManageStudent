@@ -27,9 +27,7 @@ $maGiaoVien ='';
     // $lopChuNhiem = '';
 
     $gioiTinh = '';
-    if (isset($_GET['fname'])) $fname =  $_GET['fname'];
-
-    if (isset($_GET['lname'])) $lname  = $_GET['lname'];
+    
 
     if (isset($_GET['uname'])) $uname = $_GET['uname'];
 
@@ -128,7 +126,7 @@ $maGiaoVien ='';
 
               PassWord
             </label>
-            <input type="text" class="form-control" name="pass" id="passInput">
+            <input type="text" class="form-control" name="pass">
 
             <!-- chon BirthDate -->
             <section class="container">
@@ -196,7 +194,7 @@ $maGiaoVien ='';
             <div class="mb-3">
               <label class="form-label">Subject</label>
               <div class="row row-cols-5">
-              <select name="subjects" class="form-select" aria-label="Default select example">
+              <select name="subjects[]" class="form-select" aria-label="Default select example" multiple>
                                     <?php foreach ($subjects as $subject) : ?>
 
 
@@ -209,7 +207,7 @@ $maGiaoVien ='';
             <div class="mb-3">
               <label class="form-label">Grade</label>
               <div class="row row-cols-5">
-              <select name="grades" class="form-select" aria-label="Default select example">
+              <select name="grades[]" class="form-select" aria-label="Default select example" multiple >
                                     <?php foreach ($grades as $grad) : ?>
 
 

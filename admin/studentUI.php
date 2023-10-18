@@ -46,12 +46,17 @@ $students = getAllStudents($conn);
                                     <th scope="col">student ID</th>
                                     <th scope="col">USER NAME</th>
                                     <th scope="col">Password</th>
-                                    <th scope="col">Fname</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">HANH KIEM</th>
-                                    <th scope="col"> hOC lUC</th>
-                                    <th scope="col"> NGAY SINH </th>
-                                    <th scope="col"> gIOI tINH </th>
+                                    <th scope="col">maHS</th>
+                                    <th scope="col">ma Khoi</th>
+                                    <th scope="col">ma Lop</th>
+                                    <th scope="col"> hoTen</th>
+                                    <th scope="col"> ngay sinh </th>
+                                    <th scope="col"> gioi Tinh </th>
+
+                                    <th scope="col"> Dia Chi</th>
+                                    <th scope="col"> Hanh Kiem </th>
+
+
                                     <th scope="col"> Action </th>
                                     
 
@@ -66,8 +71,8 @@ $students = getAllStudents($conn);
                                         <td><?= $student['id'] ?></td>
                                         <td><?=  $student['username'] ?></td>
                                         <td><?=  $student['password'] ?></td>
-                                        <td><?=  $student['fname'] ?></td>
-                                        <td><?=  $student['lname'] ?></td>
+                                        <td><?=  $student['mahs'] ?></td>
+                                        <td><?=  $student['makhoi'] ?></td>
                                         <td><?=  $student['HanhKiem'] ?></td>
                                         <td><?=  $student['HocLuc'] ?></td>
                                         <td><?=  $student['NgaySinh'] ?></td>
