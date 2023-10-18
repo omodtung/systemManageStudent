@@ -101,18 +101,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         </td>
 
                                         <td>
-<<<<<<< HEAD
-                                            <a href="#" class="btn btn-warning">Edit</a>
-                                            <a href="#" class="btn btn-danger deleteButton" data-teacherid=<?= $teacher['id'] ?>>Delete</a>
-=======
                                             <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
                                               Edit
                                             </button>
                                             <a href="" class="btn btn-danger">Delete</a>
->>>>>>> 3cbade3effcd40e637bd257c1d476cba6a4a1bd6
                                         </td>
-
                                     </tr>
 
 
@@ -229,33 +223,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     $("#navLinks li:nth-child(2) a").addClass('active')
                 });
             </script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-            <script>
-            $(document).ready(function() {
-                // Handle the click event of the "Delete" button
-                $('.deleteButton').click(function(e) {
-                    e.preventDefault(); // Prevent the default behavior of the anchor tag
-                    
-                    // Perform the AJAX request
-                    $.ajax({
-                        type: 'POST',
-                        url: 'req/teacher-delete.php', // Replace with the actual path to your PHP script
-                        data: {
-                            teachers: $(this).data('teacherid') // You need to pass the teacherId here
-                        },
-                        success: function(response) {
-                            // Handle the response from the server
-                            alert(response); // You can replace this with any other action you want
-                        },
-                        error: function() {
-                            alert('Failed to delete teacher');
-                        }
-                    });
-                });
-            });
-            </script>
-
         </body>
 
         </html>
@@ -269,4 +236,3 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     header("Location: ../login.php");
     exit;
 } ?>
-
