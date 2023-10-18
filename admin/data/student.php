@@ -2,7 +2,7 @@
 
  
 function getAllStudents($conn){
-   $sql = "SELECT * FROM students";
+   $sql = "SELECT students.*,avgscore.scoretype FROM students JOIN avgscore ON students.id=avgscore.ID_student WHERE status = 1";
    $stmt = $conn->prepare($sql);
    $stmt->execute();
 
@@ -17,7 +17,7 @@ function getAllStudents($conn){
 
 function getStudentUsingId( $conn , $idStudent)
 {
-  $sql = "SELECT * FROM students WHERE id =$idStudent";
+  $sql = "SELECT students.*,avgscore.HocLuc FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE id =$idStudent";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
@@ -30,6 +30,8 @@ function getStudentUsingId( $conn , $idStudent)
   }
 
 }
+
+
 
 
  ?>

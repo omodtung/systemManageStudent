@@ -9,7 +9,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/grade.php";
         include "data/student.php";
         $teachers =   getAllTeachers($conn);
-$students = getAllStudents($conn);
+        $students = getAllStudents($conn);
         //print_r($teachers);
 
 ?>
@@ -37,7 +37,7 @@ $students = getAllStudents($conn);
             ?>
                 <div class="container mt-5">
                     <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
-                    <a href="./req/encryptpasswords.php" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
                     <div class="table-responsive">
                         <table class="table table-success table-striped n-table">
                             <thead>
@@ -69,12 +69,15 @@ $students = getAllStudents($conn);
                                         <td><?=  $student['fname'] ?></td>
                                         <td><?=  $student['lname'] ?></td>
                                         <td><?=  $student['HanhKiem'] ?></td>
-                                        <td><?=  $student['HocLuc'] ?></td>
+                                        <td><?=  $student['scoretype'] ?></td>
                                         <td><?=  $student['NgaySinh'] ?></td>
-                                        <td><?=  $student['GioiTinh'] ?></td>
+                                        <td><?=  $student['Gender'] ?></td>
                                         <td>
-                                            <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a>
-                                            <a href="" class="btn btn-danger">Delete</a>
+                                            <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editStudent.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?>>
+                                              Edit
+                                            </button>
+                                            <a href="req/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
 
@@ -85,6 +88,95 @@ $students = getAllStudents($conn);
                             </tbody>
                         </table>
                     </div>
+                    <!-- Edit Student -->
+                    <script>
+                        function btnclick(_url){
+                            $.ajax({
+                                url : _url,
+                                type : 'post',
+                                success: function(data) {
+                                $('#modalbody').html(data);
+                                },
+                                error: function() {
+                                $('#modalbody').text('An error occurred');
+                                }
+                            });
+
+                            
+                        }
+
+                        
+                        function Save(){
+                            setTimeout(function (){
+                        
+                            $('#modalbody').html('');
+                                    
+                            }, 500);
+                        }
+
+                        
+
+                        function toastShow(){
+                            setTimeout(function (){
+                                $('#liveToast').toast('show');     
+                            }, 500);
+                        }
+                        
+                    </script>                        
+
+                    <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit student</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                </div>
+                                <div class="modal-body" id="modalbody">
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <?php
+                    
+                    if(isset($_GET['sucsess'])){
+                        
+                        $toaststudent = getStudentUsingId($conn,$_GET['sucsess']);
+                        echo "<script type='text/javascript'>",
+                            
+                            "setTimeout(function (){",
+                                "$('#toasttext').html('Sucsessfully edited student ". $toaststudent['fname'] . " " . $toaststudent['lname'] ."');",
+                                "$('#liveToast').toast('show');",     
+                            "}, 500);",
+                            "</script>"
+                        ;
+                        
+                    }
+                    
+                    
+                        
+                    
+                        
+                    ?>
+                    
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
+                            <div class="toast-header">
+                            <i class="fa-solid fa-database fa-spin"></i>
+                            <strong class="me-auto ms-1">System</strong>
+                            <small>now</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body" id="toasttext">
+                                Sucsessfully edited student
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Edit Student -->
                 </div>
             <?php } else { ?>
 

@@ -41,8 +41,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             ?>
                 <div class="container mt-5">
-                    <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
-                    <a href="./req/encryptpasswords.php" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    <div class="sticky-top">
+                        <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
+                        <a href="./req/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-success table-striped n-table">
                             <thead>
