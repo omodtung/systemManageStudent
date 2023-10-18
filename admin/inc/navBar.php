@@ -27,7 +27,7 @@
           <a class="nav-link" href="classUi.php">Class</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contact">?</a>
+          <a class="nav-link" href="TimesTableSystem.php">TimesTable</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#contact">Schedule</a>

@@ -8,10 +8,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     include "../data/subject.php";
     include "../data/grade.php";
     include "../data/getteacher.php";
+    include "../data/student.php";
+    include "../data/class.php";
     $subjects = getAllSubjects($conn);
     $grades = getAllGrade($conn);
-    $teacher = getTeacher($conn,$_GET['idteach']);
-    $id = $_GET['idteach'];
+    $student = getStudentUsingId($conn,$_GET['idstudent']);
+    $class = getAllClass($conn);
+    $id = $_GET['idstudent'];
     $fname = '';
     $lname  = '';
     $uname  = '';
@@ -23,8 +26,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if (isset($_GET['lname'])) $lname  = $_GET['lname'];
 
-    if (isset($_GET['uname'])) $uname = $_GET['uname'];
-
+    if (isset($_GET['username'])) $uname = $_GET['username'];
+    //print_r( $student);
     //if (isset($_GET['subjects'])) $teacher_subjects = $_GET['uname'];
 
 ?>
@@ -59,56 +62,85 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       ?>
 
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/teacher-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="req/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
 
             <div class="form-row">
-              <div class="col">
+                <div class="col">
                 <label class="form-lable">
 
-                  First Name
+                  User Name
                 </label>
-                <input type="text" class="form-control" placeholder="example Tung" value="<?= $teacher['fname'] ?>" name="fname">
-              </div>
-              <div class="col">
-                <label class="form-lable">
+                <input type="text" class="form-control" placeholder="example:tungdo" name="uname" value="<?= $student['username'] ?>">
 
-                  Last Name
-                </label>
-                <input type="text" class="form-control" placeholder="example Do" name="lname" value="<?= $teacher['lname'] ?>">
               </div>
-            </div>
-            <div class="form-row pt-4">
               <div class="col">
                 <label class="form-lable">
 
                   Full Name
                 </label>
-                <input type="text" class="form-control" disabled placeholder=" example :TungDo" name="flname" value="<?= $teacher['fname'] ?> <?= $teacher['lname'] ?>">
+                <input type="text" class="form-control" placeholder="example Do The Tung" value="<?= $student['hotenhs'] ?>" name="hotenhs">
               </div>
               <div class="col">
                 <label class="form-lable">
 
-                  User Name
+                  Address
                 </label>
-                <input type="text" class="form-control" placeholder="example:tungdo" name="uname" value="<?= $teacher['username'] ?>">
-
+                <input type="text" class="form-control" placeholder="example 22nd Roads" value="<?= $student['diachi'] ?>" name="diachi">
               </div>
+              <!-- <div class="col">
+                <label class="form-lable">
+
+                  Last Name
+                </label>
+                <input type="text" class="form-control" placeholder="example Do" name="lname" value="<?= $student['lname'] ?>">
+              </div> -->
+            </div>
+            <div class="form-row pt-4">
+              <div class="col">
+                <label class="form-lable">
+
+                  Hanh Kiem
+                </label>
+                <select class="form-select" name="hanhkiem" aria-label="Default select example">
+                  <option value="Tốt" <?php echo ($student['hanhkiem'] == "Tốt") ? 'selected' : ''; ?>>Tốt</option>
+                  <option value="Khá" <?php echo ($student['hanhkiem'] == "Khá") ? 'selected' : ''; ?>>Khá</option>
+                  <option value="Trung Bình" <?php echo ($student['hanhkiem'] == "Trung Bình") ? 'selected' : ''; ?>>Trung Bình</option>
+                  <option value="Yếu" <?php echo ($student['hanhkiem'] == "Yếu") ? 'selected' : ''; ?>>Yếu</option>
+                </select>
+                <!-- <input type="text" class="form-control" disable placeholder=" example :Tốt" name="hanhkiem" value="<?= $student['hanhkiem'] ?>"> -->
+              </div>
+              <div class="col">
+                <label class="form-lable">
+
+                  Hoc Luc
+                </label>
+                <select class="form-select" disabled aria-label="Default select example">
+                  <option value="1" <?php echo ($student['HocLuc'] == "Gioi") ? 'selected' : ''; ?>>Giỏi</option>
+                  <option value="2" <?php echo ($student['HocLuc'] == "Kha") ? 'selected' : ''; ?>>Khá</option>
+                  <option value="3" <?php echo ($student['HocLuc'] == "Trung Binh") ? 'selected' : ''; ?>>Trung Bình</option>
+                  <option value="4" <?php echo ($student['HocLuc'] == "Yeu") ? 'selected' : ''; ?>>Yếu</option>
+                  <option value="5" <?php echo ($student['HocLuc'] == "Kem") ? 'selected' : ''; ?>>Kém</option>
+                </select>
+                <!-- <input type="text" class="form-control" placeholder=" example :Giỏi" name="hocluc" value="<?= $student['HocLuc'] ?>"> -->
+              </div>
+              
+
             </div>
 
             <label class="form-lable pt-4">
 
               PassWord
             </label>
-            <input type="text" id="passtext" class="form-control" placeholder="PassWord" value="<?= $teacher['password'] ?>" name="pass" disabled>
+            <input type="text" id="passtext" class="form-control" placeholder="PassWord" value="<?= $student['password'] ?>" name="pass" disabled>
             <div class="pt-2 ms-2">
                 <script>
                     function Confirm(id){
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?idteach=' + id,
+                                url: 'req/resetpass.php?table=students&idstudent=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }
@@ -126,7 +158,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                   <label for="date" class="col-sm-1 col-form-label">Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date" id="datepicker">
-                      <input type="text" class="form-control" name="birthdate" value="<?php echo date("d/m/Y", strtotime($teacher['birthDate'])); ?>">
+                      <input type="text" class="form-control" name="birthdate" value="<?php echo date("d/m/Y", strtotime($student['ngaysinh'])); ?>">
                       <span class="input-group-append">
                         <span class="input-group-text bg-white">
                           <i class="fa fa-calendar"></i>
@@ -152,17 +184,17 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
               </label>
 
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1" autocomplete="off" <?php echo ($teacher['Gender'] == "M") ? 'checked' : ''; ?>>
+                <input type="radio" class="btn-check" name="genderbtn" value="Nam" id="btnradio1" autocomplete="off" <?php echo ($student['gioitinh'] == "Nam") ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
 
-                <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2" autocomplete="off" <?php echo ($teacher['Gender'] == "F") ? 'checked' : ''; ?>>
+                <input type="radio" class="btn-check" name="genderbtn" value="Nữ" id="btnradio2" autocomplete="off" <?php echo ($student['gioitinh'] == "Nữ") ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
 
             </div>
 
             </div>
             <!-- <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" <?php echo ($teacher['Gender'] == "M") ? 'checked' : ''; ?>>
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" <?php echo ($teacher['gioitinh'] == "M") ? 'checked' : ''; ?>>
               <label class="form-check-label" for="inlineCheckbox1">Nam</label>
               
             </div>
@@ -174,23 +206,26 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             
 
 
-            <h3> Lop Chu Nhiem </h3>
             
-            <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>">
-
-            <h3> Mon Hoc</h3>
+            <h3> Thuoc</h3>
             <div class="container">
                 <div class="row">
+                    
+
                     <div class="col-sm-1">
-                    <label class="form-label">Subject</label>
+                    <label class="form-label">Grade</label>
                     
                     </div>
-                    <div class="col-md-3">
-                        <select name="subjects[]" multiple>
-                            <?php foreach ($subjects as $subject) : ?>
-                            <option value="<?= $subject['subject_id'] ?>" <?php echo (in_array($subject['subject_id'],explode(",", $teacher['subjects']))) ? 'selected' : ''; ?>><?= $subject['subject'] ?></option>
-                            <?php endforeach ?>
-                        </select>
+                    <div class="col-sm-3">
+                        <!-- <select name="grades[]" multiple>
+                        <?php foreach ($grades as $grade) : ?>
+                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['grade_id']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <?php endforeach ?> -->
+                        <select name="grade" >
+                        <?php foreach ($grades as $grade) : ?>
+                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['makhoi']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <?php endforeach ?>
+                    </select>
                     </div>
 
                     <div class="col-sm-1">
@@ -198,9 +233,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     
                     </div>
                     <div class="col-sm-1">
-                        <select name="grades[]" multiple>
-                        <?php foreach ($grades as $grade) : ?>
-                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $teacher['grade']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <select name="class" >
+                        <?php foreach ($class as $cls) : ?>
+                        <option value="<?= $cls['classname'] ?>" <?php echo ($cls['classname'] == $student['malop']) ? 'selected' : ''; ?>><?= $cls['classname'] ?></option>
                         <?php endforeach ?>
                     </select>
                     </div>
@@ -211,7 +246,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?table=teachers&idteach=' + id,
+                                url: 'req/resetpass.php?idteach=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }
