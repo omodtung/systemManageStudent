@@ -22,18 +22,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Home - Su Pham Thuc Hanh High School</title>
+          
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-            <!-- <link rel="stylesheet" href="..css/style.css"> -->
+         
             <link rel="icon" href="..logo.png">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<style>
 
+
+
+</style>
         </head>
 
-        <body>
+        <body id="main-body">
             <?php
             include "inc/navBar.php";
             if ($teachers != 0) {
@@ -44,18 +49,25 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
                     <a href="./req/encryptpasswords.php" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
                     <div class="table-responsive">
-                        <table class="table table-success table-striped n-table">
-                            <thead>
+                        <!-- <table class="table table-success table-striped n-table"> -->
+                            <table class="table table-striped">
+                            <thead class="thead-dark" style="background-color:black; color:azure;">
                                 <tr>
 
                                     <th scope="col">Teacher ID</th>
                                     <th scope="col">USER NAME</th>
                                     <th scope="col">PASSWORD</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">SubJect</th>
-                                    <th scope="col"> Grade</th>
-                                    <th scope="col"> Action </th>
+                                    <th scope="col">Ho Ten</th>
+                                    <th scope="col">Ma Mon Hoc</th>
+                                    <!-- <th scope="col">Ma  khoi</th> -->
+                                    <th scope="col"> ngay sinh</th>
+                              
+                                    <th scope="col"> Gioi Tinh </th>
+                                    <th scope="col"> Dia chi </th>
+                                    <th scope="col"> Ma giao vien </th>
+                                    <th scope="col">Ma  khoi</th>
+                                    <th scope="col">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,27 +79,33 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <td><?= $teacher['id'] ?></td>
                                         <td><?= $teacher['username'] ?></td>
                                         <td><?= $teacher['password'] ?></td>
-                                        <td><?= $teacher['fname'] ?></td>
-                                        <td><?= $teacher['lname'] ?></td>
-                                        <td>
+                                        <td><?= $teacher['hoten'] ?></td>
+                                        <td><?= $teacher['mamonhoc'] ?></td>
+                                        <!-- <td><?= $teacher['makhoi'] ?></td> -->
+                                        <td><?= $teacher['ngaysinh'] ?></td>
+                                        <td><?= $teacher['gioitinh'] ?></td>
+                                        <td><?= $teacher['diachi'] ?></td>
+                                        <td><?= $teacher['magv'] ?></td>
+
+                                        <!-- <td>
                                             <?php
                                             $s = '';
-                                            $subjects  = str_split(trim($teacher['subjects']));
+                                            $subjects  = str_split(trim($teacher['mamonhoc']));
                                             foreach ($subjects as $subject) {
-                                                $s_temp = getSubjectById($subject, $conn);
-
+                                              //  $s_temp = getSubjectById($subject, $conn);
+                                                $s_temp = getSubjectBySubject_code($subject, $conn);
                                                 if ($s_temp != 0) {
-                                                    $s .= $s_temp['subject_code'] . ',';
+                                                    $s .= $s_temp['subject'] . ',';
                                                 }
                                             }
 
                                             echo $s;
                                             ?>
-                                        </td>
+                                        </td>  -->
                                         <td>
                                             <?php
                                             $g = '';
-                                            $grades  = str_split(trim($teacher['grade']));
+                                            $grades  = str_split(trim($teacher['makhoi']));
                                             foreach ($grades as $grade) {
                                                 $s_temp = getGradeById($grade, $conn);
 
@@ -106,8 +124,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                               Edit
                                             </button>
                                             <a href="" class="btn btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
+                                           
+                                        
+
+
+                                     <button type="button" class="btn btn-info">Info</button></td>
+                                   
 
 
                                 <?php } ?>
@@ -205,6 +227,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                     <!-- End Edit Teaccher -->
+
+
+
+                   
                 </div>
             <?php } else { ?>
 
