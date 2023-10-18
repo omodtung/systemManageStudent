@@ -12,6 +12,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $subjects = getAllSubjects($conn);
     $grades = getAllGrade($conn);
     $student = getStudentUsingId($conn,$_GET['idstudent']);
+    $class = getAllClass($conn);
     $id = $_GET['idstudent'];
     $fname = '';
     $lname  = '';
@@ -76,17 +77,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
               <div class="col">
                 <label class="form-lable">
 
-                  First Name
+                  Full Name
                 </label>
-                <input type="text" class="form-control" placeholder="example Tung" value="<?= $student['fname'] ?>" name="fname">
+                <input type="text" class="form-control" placeholder="example Do The Tung" value="<?= $student['hotenhs'] ?>" name="hotenhs">
               </div>
               <div class="col">
+                <label class="form-lable">
+
+                  Address
+                </label>
+                <input type="text" class="form-control" placeholder="example 22nd Roads" value="<?= $student['diachi'] ?>" name="diachi">
+              </div>
+              <!-- <div class="col">
                 <label class="form-lable">
 
                   Last Name
                 </label>
                 <input type="text" class="form-control" placeholder="example Do" name="lname" value="<?= $student['lname'] ?>">
-              </div>
+              </div> -->
             </div>
             <div class="form-row pt-4">
               <div class="col">
@@ -94,13 +102,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                   Hanh Kiem
                 </label>
-                <select class="form-select" aria-label="Default select example">
-                  <option value="1" <?php echo ($student['HanhKiem'] == "Tốt") ? 'selected' : ''; ?>>Tốt</option>
-                  <option value="2" <?php echo ($student['HanhKiem'] == "Khá") ? 'selected' : ''; ?>>Khá</option>
-                  <option value="3" <?php echo ($student['HanhKiem'] == "Trung Bình") ? 'selected' : ''; ?>>Trung Bình</option>
-                  <option value="4" <?php echo ($student['HanhKiem'] == "Yếu") ? 'selected' : ''; ?>>Yếu</option>
+                <select class="form-select" name="hanhkiem" aria-label="Default select example">
+                  <option value="Tốt" <?php echo ($student['hanhkiem'] == "Tốt") ? 'selected' : ''; ?>>Tốt</option>
+                  <option value="Khá" <?php echo ($student['hanhkiem'] == "Khá") ? 'selected' : ''; ?>>Khá</option>
+                  <option value="Trung Bình" <?php echo ($student['hanhkiem'] == "Trung Bình") ? 'selected' : ''; ?>>Trung Bình</option>
+                  <option value="Yếu" <?php echo ($student['hanhkiem'] == "Yếu") ? 'selected' : ''; ?>>Yếu</option>
                 </select>
-                <!-- <input type="text" class="form-control" disable placeholder=" example :Tốt" name="hanhkiem" value="<?= $student['HanhKiem'] ?>"> -->
+                <!-- <input type="text" class="form-control" disable placeholder=" example :Tốt" name="hanhkiem" value="<?= $student['hanhkiem'] ?>"> -->
               </div>
               <div class="col">
                 <label class="form-lable">
@@ -149,7 +157,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                   <label for="date" class="col-sm-1 col-form-label">Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date" id="datepicker">
-                      <input type="text" class="form-control" name="birthdate" value="<?php echo date("d/m/Y", strtotime($student['NgaySinh'])); ?>">
+                      <input type="text" class="form-control" name="birthdate" value="<?php echo date("d/m/Y", strtotime($student['ngaysinh'])); ?>">
                       <span class="input-group-append">
                         <span class="input-group-text bg-white">
                           <i class="fa fa-calendar"></i>
@@ -198,7 +206,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
             
-            <h3> Mon Hoc</h3>
+            <h3> Thuoc</h3>
             <div class="container">
                 <div class="row">
                     
@@ -208,9 +216,25 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     
                     </div>
                     <div class="col-sm-1">
-                        <select name="grades[]" multiple>
+                        <!-- <select name="grades[]" multiple>
                         <?php foreach ($grades as $grade) : ?>
                         <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['grade_id']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <?php endforeach ?> -->
+                        <select name="grade" >
+                        <?php foreach ($grades as $grade) : ?>
+                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['grade_id']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    </div>
+
+                    <div class="col-sm-1">
+                    <label class="form-label">Grade</label>
+                    
+                    </div>
+                    <div class="col-sm-1">
+                        <select name="class" >
+                        <?php foreach ($class as $cls) : ?>
+                        <option value="<?= $cls['classname'] ?>" <?php echo ($cls['classname'] == $student['malop']) ? 'selected' : ''; ?>><?= $cls['classname'] ?></option>
                         <?php endforeach ?>
                     </select>
                     </div>

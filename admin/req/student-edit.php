@@ -12,39 +12,43 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         
         include "../data/grade.php";
         $id = $_GET['id'];
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
+        $hotenhs = $_POST['hotenhd'];
+        //$lname = $_POST['lname'];
         $uname = $_POST['uname'];
         $brthday = $_POST['birthdate'];
         $gender = $_POST['genderbtn'];
         $hanhkiem = $_POST['hanhkiem'];
         $hocluc = $_POST['hocluc'];
-        
-        
+        $grade = $_POST['grade'];
+        $diachi = $_POST['diachi'];
+        $class = $_POST['class'];
         $grades = "";
         $brthday = date("Y-m-d", strtotime($brthday));
 
 
-        if(!isset($_POST['fname']) || empty($fname)){
+        if(!isset($_POST['hotenhs']) || empty($hotenhs)){
             header("Location: ../student-edit.php?idteach=$id&error=Name is Empty!");
         }
-        else if(!isset($_POST['lname']) || empty($lname)){
-            header("Location: ../student-edit.php?idteach=$id&error=Name is Empty!");
-        }
+        // else if(!isset($_POST['lname']) || empty($lname)){
+        //     header("Location: ../student-edit.php?idteach=$id&error=Name is Empty!");
+        // }
         else if(!isset($_POST['uname']) || empty($uname)){
             header("Location: ../student-edit.php?idteach=$id&error=Username is Empty!");
         }
         else if(!isset($_POST['hanhkiem']) || empty($_POST['hanhkiem'])){
             header("Location: ../student-edit.php?idteach=$id&error=Hanh Kiem is Empty!");
         }
-        else if(!isset($_POST['hocluc']) || empty($_POST['hocluc'])){
-            header("Location: ../student-edit.php?idteach=$id&error=Hoc Luc is Empty!");
+        else if(!isset($_POST['diachi']) || empty($_POST['diachi'])){
+            header("Location: ../student-edit.php?idteach=$id&error=Address is Empty!");
         }
+        // else if(!isset($_POST['hocluc']) || empty($_POST['hocluc'])){
+        //     header("Location: ../student-edit.php?idteach=$id&error=Hoc Luc is Empty!");
+        // }
 
         else{
         
-        $grades = implode(",", $_POST['grades']);
-        $sql = "UPDATE students SET fname='$fname',lname='$lname',username='$uname',grade='$grades',NgaySinh='$brthday',Gender='$gender' WHERE id = $id";
+        //$grades = implode(",", $_POST['grades']);
+        $sql = "UPDATE students SET hotenhs='$hotenhs',username='$uname',makhoi='$grade',ngaysinh='$brthday',gioitinh='$gender',diachi='$diachi',malop='$class' WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         //header("Location: ../student-edit.php?idteach=$id&success=student Updated");
