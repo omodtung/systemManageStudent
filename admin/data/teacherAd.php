@@ -28,3 +28,7 @@ function findNameDocNhat($uname, $conn){
    	return 1;
    }
 }
+
+
+
+

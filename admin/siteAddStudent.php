@@ -18,7 +18,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $classes = getAllClass($conn);
 
 
-
+$id = '';
 
         $flname = '';
         $diaChi= '';
@@ -70,7 +70,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             ?>
 
             <div class="container mt-5" style="background-color:beige;">
-                <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+                <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
                 <form method="post" class="shadow p-3 mt-5 form-w" action="req/addStudent.php">
                     <h3> Site ADD Student</h3>
@@ -123,6 +123,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 <input type="text" class="form-control" placeholder="example:tungdo" name="maHocSinh" value="<?= $mahocsinh?>">
                             </div>
 
+                            <div class="col">
+                                <label class="form-lable">
+
+                                     ID
+                                </label>
+                                <input type="number" class="form-control" placeholder="example:tungdo" name="id" value="<?= $id?>">
+                            </div>
 
 
                             
@@ -136,21 +143,17 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 </label>
                                 <input type="text" class="form-control" placeholder="example:tungdo" name="diaChi" value="<?= $diaChi ?>">
                             </div>
+                            <div class="col">
 
+                            <label class="form-lable">
 
-                            
-                            
+PassWord
+</label>
+<input type="text" class="form-control" name="pass" id="passInput">
+                            </div>
                         </div>
 
-                        <div class="form-row">
-                        <label class="form-lable">
-
-                            PassWord
-                        </label>
-                        <input type="text" class="form-control" name="pass" id="passInput">
-
-
-                        </div>
+                        
                         <!-- chon BirthDate -->
                         <section class="container">
                             <h3 class="pt-4 pb-2">BirthDate</h3>

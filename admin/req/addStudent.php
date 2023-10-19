@@ -13,34 +13,37 @@ if (
     if ($_SESSION['role'] == 'Admin') {
 
         if (
-            isset($_POST['fname']) &&
-            isset($_POST['lname']) &&
-            isset($_POST['uname'])
+            isset($_POST['flname']) &&
+            isset($_POST['maHocSinh']) &&
+            isset($_POST['uname']) &&
+            isset($_POST['birthdate']) &&
+            isset($_POST['genderbtn']) && isset($_POST['hanhkiem'])
+            && isset($_POST['grades']) && isset($_POST['classes'])
 
-            
+
 
 
 
         ) {
             include '../../DB_connection.php';
             include "../data/teacherAd.php";
+            include "../data/student.php";
 
             // print_r($_POST);
             // die();
-
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $uname = $_POST['uname'];
+$id = $_POST["id"];
+            $flname = $_POST['flname'];
             $pass = $_POST['pass'];
-
+            $uname = $_POST['uname'];
             $birthdate = $_POST['birthdate'];
 
             $hanhkiem = $_POST['hanhkiem'];
-            $hocluc = $_POST['hocluc'];
             $gender =   $_POST['genderbtn'];
             $grades = $_POST['grades'];
-
-
+            $diaChi = $_POST['diaChi'];
+            $mahocsinh = $_POST['maHocSinh'];
+            $status = 1;
+            // $counting = countStatusExist($conn);
 
             // foreach ($_POST['grades'] as $grade) {
             //     $grades .= $grade;
@@ -53,12 +56,12 @@ if (
             //     $classes .= $class;
 
             // }
-            $data = 'uname=' . $uname . '&fname=' . $fname . '&lname=' . $lname;
-            if (empty($fname)) {
-                $thongBao = " first Name is require";
+            $data = 'uname=' . $uname . '&flname=' . $flname . '&mahocSinh=' . $mahocsinh;
+            if (empty($flname)) {
+                $thongBao = " full Name is require";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-            } else if (empty($lname)) {
+            } else if (empty($mahocsinh)) {
                 $thongBao = " last Name is require";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
@@ -70,55 +73,39 @@ if (
                 $thongBao = " pass is require";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-
-
-
-            } 
-            
-            else if(empty($birthdate))
-            {
-                $thongbao= " BirthDate is required";
+            } else if (empty($birthdate)) {
+                $thongbao = " BirthDate is required";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-
-            }
-
-            else if (empty($hanhkiem))
-            {
-                $thongbao= " hanhkiem is required";
+            } else if (empty($hanhkiem)) {
+                $thongbao = " hanhkiem is required";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-            }
-            else if (empty($gender))
-            {
-                $thongbao= "gender is required";
+            } else if (empty($gender)) {
+                $thongbao = "gender is required";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-            }
-            else if (empty($grades))
-            {
-                $thongbao= " grades is required";
+            } else if (empty($grades)) {
+                $thongbao = " grades is required";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-            }
-
-            else if (empty($classes))
-            {
-                $thongbao= " classes is required";
+            } else if (empty($classes)) {
+                $thongbao = " classes is required";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-            }
-            else {
+            } else {
                 //chuyen doi hashing pass 
                 $pass = password_hash($pass, PASSWORD_DEFAULT);
 
 
-                $sql = "INSERT INTO students (`username`, `password`, `fname`, `lname`, `HanhKiem`, `HocLuc`, `NgaySinh`, `Gender`, `grade_id`, `ID_CLASS`)  VALUES(?,?,?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO `students`(`id`,`username`, `password`, `mahs`, `makhoi`, `malop`, `hotenhs`, `ngaysinh`, `gioitinh`, `diachi`,`hanhkiem`,`status`)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-
+                $sql2 = "INSERT INTO `avgscore` (`student_id`, `Toan`, `Vat Ly`, `Hoa Hoc`, `Ngu Van`, `Lich Su`, `Dia Ly`, `Tieng Anh`, `GDCD`, `Cong Nghe`, `Tin Hoc`, `The Duc`, `Sinh Hoc`) VALUES (?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$uname, $pass, $fname, $lname, $hanhkiem, $hocluc, $birthdate, $gender, $grades, $classes]);
+                $stmt->execute([$id,$uname, $pass, $mahocsinh, $grades, $classes, $flname, $birthdate, $gender, $diaChi, $hanhkiem, $status]);
 
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->execute([$id, 0, 0, 0,0, 0, 0, 0,0,0,0,0,0]);
 
 
 
@@ -129,8 +116,8 @@ if (
             }
         } else {
             $thongBao = " xay Ra loi 144442232324";
-              header("Location: ../siteAddStudent.php?error=$thongBao");
-           
+            header("Location: ../siteAddStudent.php?error=$thongBao");
+
             exit;
         }
     } else {
