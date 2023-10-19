@@ -9,47 +9,39 @@ if (
     if ($_SESSION['role'] == 'Admin') {
 
         if (
-            isset($_POST['fname']) &&
-            isset($_POST['lname']) &&
+            isset($_POST['flname']) &&
             isset($_POST['uname']) &&
             isset($_POST['pass']) &&
+            isset($_POST['idGV']) &&
             isset($_POST['subjects']) &&
-            // isset($_POST['birthDate']) &&
-            isset($_POST['grades']))
+            isset($_POST['grades']) &&
+            isset($_POST['diaChi']) &&
+            isset($_POST['birthdate']) &&
+            isset($_POST['genderbtn']))
             {
             include '../../DB_connection.php';
             include "../data/teacherAd.php";
 
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
+            $flname = $_POST['flname'];
             $uname = $_POST['uname'];
             $birthdate = $_POST['birthdate'];
             $pass = $_POST['pass'];
-            $gender = $_POST['gender'];
+            $gender = $_POST['genderbtn'];
+            $idGV = $_POST['idGV'];
+            $diaChi = $_POST['diaChi'];
             
             $target_dir = "uploads/"; 
             $file_name = uniqid("teacher_").'.'.pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
-            $target_file = $target_dir . $file_name;
+            $target_file = $target_dir . $file_name .'jpg';
 
             move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-        
-            $grades = "";
-            foreach ($_POST['grades'] as $grade) {
-                $grades .= $grade;
-            }
-            // $lopChuNhiem = '';
 
-            $subjects = "";
-            foreach ($_POST['subjects'] as $subject) {
-                $subjects .= $subject;
-            }
-           $data = 'uname=' . $uname . '&fname=' . $fname . '&lname=' . $lname. '&birthdate'. $birthdate ;
-            if (empty($fname)) {
+            $grades = $_POST['grades'];
+            $subjects = $_POST['subjects'];
+            
+            $data = 'uname=' . $uname . '&fname=' . $flname . '&birthdate'. $birthdate ;
+            if (empty($flname)) {
                 $thongBao = " first Name is require";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
-                exit;
-            } else if (empty($lname)) {
-                $thongBao = " last Name is require";
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
             } else if (!findNameDocNhat($uname, $conn)) {
@@ -60,22 +52,17 @@ if (
                 $thongBao = " pass is require";
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
-            // } else if (empty($birthdate)) {
-            //     $thongBao = " birthdate is require";
-            //     header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
-            //     exit;
+            
             } else {
                 //chuyen doi hashing pass 
                $pass = password_hash($pass, PASSWORD_DEFAULT);
 
 
-                $sql = "INSERT INTO teachers(username,password,fname, lname,subjects,grade, birthdate, gender, image) VALUES(?,?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO teachers(magv,username,password,hoten,mamonhoc,makhoi,ngaysinh,gioitinh,diachi,active,image) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
             
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$uname, $pass, $fname, $lname, $subjects, $grades, $birthdate, $gender, $target_file]);
-
-
+                $stmt->execute([$idGV, $uname, $pass, $flname, $subjects, $grades, $birthdate, $gender, $diaChi,1,$target_file]);
 
                 $thongBao = " Tao Thanh Cong";
                 header("Location: ../siteTeacherAdd.php?success=$thongBao");

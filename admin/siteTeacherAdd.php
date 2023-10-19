@@ -7,11 +7,21 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     include "../DB_connection.php";
     include "data/subject.php";
     include "data/grade.php";
+    include "data/teacherAd.php";
+
     $subjects = getAllSubjects($conn);
+    $teacher = getAllTeachers($conn);
+
     $grades = getAllGrade($conn);
     $fname = '';
     $lname  = '';
     $uname  = '';
+    $birthdate = '';
+$diaChi = '';
+
+$flname = '';
+$maGiaoVien ='';
+
     // $pass = '';
     // $flname = '';
     // $lopChuNhiem = '';
@@ -58,7 +68,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       <div class="container mt-5">
         <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php" enctype="multipart/form-data">
+        <form method="post" class="shadow p-3 mt-5 form-w" enctype="multipart/form-data" action="req/addTeacher.php">
           <h3> Site ADD teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert danger" role="alert">
@@ -81,28 +91,28 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
           <div class="mb-3">
 
             <div class="form-row">
-              <div class="col">
+              <!-- <div class="col">
                 <label class="form-lable">
 
                   First Name
                 </label>
                 <input type="text" class="form-control" placeholder="example Tung" value="<?= $fname ?>" name="fname">
-              </div>
+              </div> -->
               <div class="col">
                 <label class="form-lable">
 
-                  Last Name
+                Dia Chi
                 </label>
-                <input type="text" class="form-control" placeholder="example Do" name="lname" value="<?= $lname ?>">
+                <input type="text" class="form-control" placeholder="example Do" name="diaChi" value="<?= $diaChi ?>">
               </div>
             </div>
             <div class="form-row">
               <div class="col">
                 <label class="form-lable">
 
-                  Full Name
+                HO Ten 
                 </label>
-                <!-- <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>"> -->
+                <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>">
               </div>
               <div class="col">
                 <label class="form-lable">
@@ -120,34 +130,41 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             </label>
             <input type="text" class="form-control" name="pass" id="passInput">
 
-            <!-- chon BirthDate -->
+            <!-- chon BirthDate and Upload Image -->
             <section class="container">
-              <h3 class="pt-4 pb-2">BirthDate</h3>
-              <form>
-                <div class="row form-group">
-                  <label for="date" class="col-sm-1 col-form-label">Date</label>
-                  <div class="col-sm-4">
-                    <div class="input-group date" id="datepicker">
-                      <input type="text" class="form-control" name="birthdate">
-                      <span class="input-group-append">
-                        <span class="input-group-text bg-white">
-                          <i class="fa fa-calendar"></i>
-                        </span>
-                      </span>
+                <h3 class="pt-4 pb-2">BirthDate</h3>
+                <!-- <form id="uploadForm" method="post" enctype="multipart/form-data" action="req/addTeacher.php"> -->
+                    <div class="row form-group">
+                        <label for="date" class="col-sm-1 col-form-label">Date</label>
+                        <div class="col-sm-4">
+                            <div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control" name="birthdate">
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Add the file input next to the birth date input -->
+                        <div class="col-sm-3">
+                            <label for="image" class="form-label">Upload Image</label>
+                            <input type="file" name="image" accept="image/*" onchange="previewImage();">
+                            <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; display: none;">
+                          </div>
                     </div>
-                  </div>
-                </div>
-
-
-                </script>
+                    </div>
+                    <!-- Image preview container -->
+                    
+                <!-- </form> -->
             </section>
-          
-            <label for="avatar">Teacher Avatar:</label>
-            <input type="file" name="avatar" id="avatar" accept="image/*" onchange="previewImage();">
-            <img id="imagePreview" src="" alt="Image Preview" style="display:none; width:150px; height:150px;"/>
 
-            <script>
-            function previewImage() {
+            <script type="text/javascript">
+                $(function() {
+                    $('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+                });
+
+                function previewImage() {
                 var file = document.getElementById("avatar").files[0];
                 var reader = new FileReader();
                 reader.onloadend = function() {
@@ -159,13 +176,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 }
             }
             </script>
-
-          
-            <script type="text/javascript">
-              $(function() {
-                $('#datepicker').datepicker();
-              });
-            </script>
             <!-- chon Gioi Tinh -->
             <div class="col">
               <label class="form-lable">
@@ -173,75 +183,58 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 Gioi Tinh
               </label>
 
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="inlineCheckbox1" value="M" name ="gender">
-              <label class="form-check-label" for="inlineCheckbox1">Nam</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="inlineCheckbox2" value="F" name="gender">
-              <label class="form-check-label" for="inlineCheckbox2">Nu</label>
-            </div>
+
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1">
+                            <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
+
+                            <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2">
+                            <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
+
+                        </div>
 
 
-            <h3> Lop Chu Nhiem </h3>
-            <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>">
+            </div>
+         
+
+
+            <h3> Ma Giao Vien </h3>
+           
+            <input type="text" class="form-control" placeholder="example:tungdo" name="idGV" value="<?= $maGiaoVien ?>">
+           
 
             <h3> Mon Hoc</h3>
 
-            <!-- 
-            <div class="mb-3">
-              <label class="form-label">Subject</label>
-              <select name="subjects[]">
-                <?php foreach ($subjects as $subject) : ?>
-                  <option value="<?= $subject['subject_id'] ?>"><?= $subject['subject'] ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
+           
 
 
 
-
-
-
-            <div class="mb-3">
-              <label class="form-label">Grade</label>
-              <select name="grades[]">
-                <?php foreach ($grades as $grade) : ?>
-                  <option value="<?= $grade['grade_id'] ?>"><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Save Change</button>
-        </form>
-      </div>
-
-
-
- -->
+ 
 
 
             <div class="mb-3">
               <label class="form-label">Subject</label>
               <div class="row row-cols-5">
-                <?php foreach ($subjects as $subject) : ?>
-                  <div class="col">
-                    <input type="checkbox" name="subjects[]" value="<?= $subject['subject_id'] ?>">
-                    <?= $subject['subject'] ?>
-                  </div>
-                <?php endforeach ?>
+              <select name="subjects" class="form-select" aria-label="Default select example">
+                                    <?php foreach ($subjects as $subject) : ?>
+
+
+                                        <option value="<?= $subject['subject_id'] ?>"> <?= $subject['subject'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
 
               </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Grade</label>
               <div class="row row-cols-5">
-                <?php foreach ($grades as $grade) : ?>
-                  <div class="col">
-                    <input type="checkbox" name="grades[]" value="<?= $grade['grade_id'] ?>">
-                    <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?>
-                  </div>
-                <?php endforeach ?>
+              <select name="grades" class="form-select" aria-label="Default select example">
+                                    <?php foreach ($grades as $grad) : ?>
+
+
+                                        <option value="<?= $grad['grade_id'] ?>"> <?= $grad['grade'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
 
               </div>
             </div>
