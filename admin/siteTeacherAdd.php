@@ -64,7 +64,7 @@ $maGiaoVien ='';
      ?>
 
       <div class="container mt-5">
-        <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+        <a href="teacherNewUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
         <form method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
           <h3> Site ADD teacher</h3>
