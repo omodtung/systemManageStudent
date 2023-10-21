@@ -176,7 +176,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         }
                     </script>
 
-                    <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <!-- <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -192,7 +192,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <?php
 
                     if (isset($_GET['sucsess'])) {
@@ -258,6 +258,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     $("#navLinks li:nth-child(2) a").addClass('active')
                 });
             </script>
+
+            <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit teacher</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                </div>
+                                <div class="modal-body" id="modalbody">
+
+                                </div>
+                                <div class="modal-footer">
+
+
+                                </div>
+                            </div>
+                        </div>
+            </div>
         </body>
 
         </html>

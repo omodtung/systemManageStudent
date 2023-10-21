@@ -105,6 +105,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <input type="text" class="form-control" placeholder="example:tungdo" name="uname" value="<?= $teacher['username'] ?>">
 
               </div>
+              <div class="col">
+                <label class="form-lable">
+
+                  Address
+                </label>
+                <input type="text" class="form-control" placeholder="example 22nd Roads" value="<?= $teacher['diachi'] ?>" name="diachi">
+              </div>
             </div>
 
             <label class="form-lable pt-4">
@@ -191,19 +198,19 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <h3> Mon Hoc</h3>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     <label class="form-label">Subject</label>
                     
                     </div>
                     <div class="col-md-3">
                         <select name="subjects[]" multiple>
                             <?php foreach ($subjects as $subject) : ?>
-                            <option value="<?= $subject['subject_id'] ?>" <?php echo (in_array($subject['subject_code'],explode(",", $teacher['mamonhoc']))) ? 'selected' : ''; ?>><?= $subject['subject'] ?></option>
+                            <option value="<?= $subject['subject_code'] ?>" <?php echo (in_array($subject['subject_code'],explode(",", $teacher['mamonhoc']))) ? 'selected' : ''; ?>><?= $subject['subject'] ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
 
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     <label class="form-label">Grade</label>
                     
                     </div>

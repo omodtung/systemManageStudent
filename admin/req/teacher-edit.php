@@ -47,7 +47,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         $stmt->execute();
         //header("Location: ../teacher-edit.php?idteach=$id&success=Teacher Updated");
         //$_SESSION['sucsess'] = $id;
-        header("Location: ../teacherUI.php?sucsess=$id");
+        header("Location: ../teacherNewUI.php?sucsess=$id");
         }
     }
 }

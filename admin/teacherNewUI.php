@@ -144,7 +144,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                     <th scope="col">Teacher ID</th>
                                     <th scope="col">USER NAME</th>
-                                    <th scope="col">PASSWORD</th>
+                                    <th scope="col" style="width:20%">PASSWORD</th>
                                     <th scope="col">Ho Ten</th>
                                     <th scope="col">Ma Mon Hoc</th>
                                     <!-- <th scope="col">Ma  khoi</th> -->
@@ -166,7 +166,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <!-- <th scope="row">1</th> -->
                                         <td><?= $teacher['id'] ?></td>
                                         <td><?= $teacher['username'] ?></td>
-                                        <td><?= $teacher['password'] ?></td>
+                                        <td style="width:20%" class="overflow-x-auto"><?= $teacher['password'] ?></td>
                                         <td><?= $teacher['hoten'] ?></td>
                                         <td><?= $teacher['mamonhoc'] ?></td>
                                         <!-- <td><?= $teacher['makhoi'] ?></td> -->
@@ -262,7 +262,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         }
                     </script>
 
-                    <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <!-- <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -278,7 +278,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <?php
 
                     if (isset($_GET['sucsess'])) {
@@ -287,14 +287,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         echo "<script type='text/javascript'>",
 
                         "setTimeout(function (){",
-                        "$('#toasttext').html('Sucsessfully edited teacher " . $toastteacher['fname'] . " " . $toastteacher['lname'] . "');",
+                        "$('#toasttext').html('Sucsessfully edited teacher " . $toastteacher['hoten'] . " " . $toastteacher['username'] . "');",
                         "$('#liveToast').toast('show');",
                         "}, 500);",
                         "</script>";
                     }
 
 
-
+                    if (isset($_GET['error'])){
+                      ?>
+                          <script type="text/javascript">
+                              $(document).ready(function() {
+                                  btnclick('./inc/editTeacher.php?idteach=<?= $_GET['idteach'] ?>&error=<?= $_GET['error'] ?>');
+                                  $('#modalform').modal('show');
+                              });
+                          </script>
+                      <?php
+                    }
 
 
                     ?>
@@ -339,6 +348,25 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   </section>
   <!-- Scripts -->
   <script src="../js/script.js"></script>
+
+                    <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit teacher</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                </div>
+                                <div class="modal-body" id="modalbody">
+
+                                </div>
+                                <div class="modal-footer">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
         </body>
 
         </html>
