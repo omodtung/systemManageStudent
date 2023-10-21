@@ -208,7 +208,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     }
 
 
-
+                    if (isset($_GET['error'])){
+                        ?>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    btnclick('./inc/editTeacher.php?idteach=<?= $_GET['idteach'] ?>&error=<?= $_GET['error'] ?>');
+                                    $('#modalform').modal('show');
+                                });
+                            </script>
+                        <?php
+                    }
 
 
                     ?>
