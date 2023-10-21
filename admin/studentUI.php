@@ -10,6 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/student.php";
         $teachers =   getAllTeachers($conn);
         $students = getAllStudents($conn);
+      
         //print_r($teachers);
 
 ?>
@@ -38,8 +39,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <div class="container mt-5">
                     <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
                     <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
-                    <div class="table-responsive">
-                        <table class="table table-success table-striped n-table">
+                    <div class="table table-striped">
+                        <table class="thead-dark">
                             <thead>
                                 <tr>
 

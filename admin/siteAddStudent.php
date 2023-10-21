@@ -3,7 +3,7 @@
 
 session_start();
 
-print_r($_SESSION);
+// print_r($_SESSION);
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
         include "../DB_connection.php";
@@ -18,21 +18,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $classes = getAllClass($conn);
 
 
+$id = '';
 
+        $flname = '';
+        $diaChi= '';
+        $mahocsinh='';
 
-        $fname = '';
-        $lname  = '';
-        $uname  = '';
+        $uname = '';
+
         // $pass = '';
         // $flname = '';
         // $lopChuNhiem = '';
 
 
-        if (isset($_GET['fname'])) $fname =  $_GET['fname'];
+        // if (isset($_GET['fname'])) $fname =  $_GET['fname'];
 
-        if (isset($_GET['lname'])) $lname  = $_GET['lname'];
+        // if (isset($_GET['lname'])) $lname  = $_GET['lname'];
 
-        if (isset($_GET['uname'])) $uname = $_GET['uname'];
+        // if (isset($_GET['uname'])) $uname = $_GET['uname'];
 
 
 ?>
@@ -61,13 +64,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <!-- ------------------------date import code upper -->
         </head>
 
-        <body>
+        <body >
             <?php
             include "inc/navBar.php";
             ?>
 
-            <div class="container mt-5">
-                <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+            <div class="container mt-5" style="background-color:beige;">
+                <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
                 <form method="post" class="shadow p-3 mt-5 form-w" action="req/addStudent.php">
                     <h3> Site ADD Student</h3>
@@ -92,28 +95,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <div class="mb-3">
 
                         <div class="form-row">
-                            <div class="col">
-                                <label class="form-lable">
-
-                                    First Name
-                                </label>
-                                <input type="text" class="form-control" placeholder="example Tung" value="<?= $fname ?>" name="fname">
-                            </div>
-                            <div class="col">
-                                <label class="form-lable">
-
-                                    Last Name
-                                </label>
-                                <input type="text" class="form-control" placeholder="example Do" name="lname" value="<?= $lname ?>">
-                            </div>
-                        </div>
+                        
                         <div class="form-row">
                             <div class="col">
                                 <label class="form-lable">
 
                                     Full Name
                                 </label>
-                                <!-- <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>"> -->
+                                <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>">
                             </div>
                             <div class="col">
                                 <label class="form-lable">
@@ -125,12 +114,46 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             </div>
                         </div>
 
-                        <label class="form-lable">
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="form-lable">
 
-                            PassWord
-                        </label>
-                        <input type="text" class="form-control" name="pass" id="passInput">
+                                     Ma hs
+                                </label>
+                                <input type="text" class="form-control" placeholder="example:tungdo" name="maHocSinh" value="<?= $mahocsinh?>">
+                            </div>
 
+                            <div class="col">
+                                <label class="form-lable">
+
+                                     ID
+                                </label>
+                                <input type="number" class="form-control" placeholder="example:tungdo" name="id" value="<?= $id?>">
+                            </div>
+
+
+                            
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="form-lable">
+
+                                     Dia Chi
+                                </label>
+                                <input type="text" class="form-control" placeholder="example:tungdo" name="diaChi" value="<?= $diaChi ?>">
+                            </div>
+                            <div class="col">
+
+                            <label class="form-lable">
+
+PassWord
+</label>
+<input type="text" class="form-control" name="pass" id="passInput">
+                            </div>
+                        </div>
+
+                        
                         <!-- chon BirthDate -->
                         <section class="container">
                             <h3 class="pt-4 pb-2">BirthDate</h3>
@@ -169,7 +192,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 Gioi Tinh
                             </label>
 
-                        </div>
+                       
 
 
 
@@ -184,7 +207,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
-
+                        </div>
 
 
 
@@ -207,7 +230,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                 </div>
 
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <label class="form-label">Hoc Luc</label>
                                     <select class="form-select" aria-label="Default select example" name="hocluc">
 
@@ -219,7 +242,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
-                                </div>
+                                </div> -->
 
                             </div>
 
@@ -231,7 +254,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
                                             <option  value="<?= $grade['grade_id'] ?>"> <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
-                                        <?php endforeach ?>
+                                        <?php endforeach ?>0
                                     </select>
                                 </div>
 
@@ -243,7 +266,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <?php foreach ($classes as $class) : ?>
 
 
-                                        <option value="<?= $class['ID_Class'] ?>"> <?= $class['ClassName'] ?></option>
+                                        <option value="<?= $class['classname'] ?>"> <?= $class['classname'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                             </div>

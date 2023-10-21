@@ -31,6 +31,37 @@ function getStudentUsingId( $conn , $idStudent)
 
 }
 
+
+function getAllStudentNotavg($conn){
+  $sql = "SELECT * FROM students Where status =1";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+
+  if ($stmt->rowCount() >= 1) {
+   
+    $students= $stmt->fetchAll();
+
+    return $students;
+  }else {
+      return 0;
+  }
+}
+
+// function countStatusExist($conn)
+// {
+//   $sql = "SELECT COUNT(*) FROM students Where status =1";
+//   $stmt = $conn->prepare($sql);
+//   $stmt->execute();
+
+//   if ($stmt->rowCount() >= 1) {
+//     $count = $stmt->fetchColumn();
+//     return $count+1;
+// } else {
+//     return 0;
+// }
+// }
+
+
 // function findNameDocNhat($uname, $conn){
 //    $sql = "SELECT username FROM students
 //            WHERE username=?";

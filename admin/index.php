@@ -31,7 +31,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       <div class="container mt-6">
         <div class="container text-center">
           <div class="row row-cols-5">
-            <a href="teacherUI.php" class="col btn btn-dark m-2 py-3">
+            <a href="teacherNewUI.php" class="col btn btn-dark m-2 py-3">
               <i class="fa fa-user-md fs-1" aria-hidden="true"></i><br>
               Teachers
             </a>
@@ -77,6 +77,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         </div>
 
       </div>
+
+
+
+
+      
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
       <script>
