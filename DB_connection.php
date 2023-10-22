@@ -3,6 +3,7 @@
 $sName = "localhost";
 $uName = "root";
 $pass  = "";
+
 $db_name = "schema3";
 
 try {

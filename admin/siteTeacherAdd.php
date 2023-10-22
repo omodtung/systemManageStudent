@@ -151,7 +151,7 @@ $maGiaoVien ='';
                             <label for="image" class="form-label">Upload Image</label>
                             <input type="file" name="image" accept="image/*" onchange="previewImage();">
                             <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; display: none;">
-                          </div>
+                        </div>
                     </div>
                     </div>
                     <!-- Image preview container -->

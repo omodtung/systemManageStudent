@@ -1,6 +1,7 @@
 <?php
     include("../../DB_connection.php");
-    $id = $_GET['idteach'];
+    
+    $id = ($_GET['table'] == 'teachers') ? $_GET['idteach'] : $_GET['idstudent'];
     $pass = password_hash("123456789",PASSWORD_BCRYPT);
     $sql = "UPDATE teachers SET password='$pass' WHERE id = $id";
     $stmt = $conn->prepare($sql);

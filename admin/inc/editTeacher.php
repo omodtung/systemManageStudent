@@ -211,7 +211,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?idteach=' + id,
+                                url: 'req/resetpass.php?table=teachers&idteach=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }

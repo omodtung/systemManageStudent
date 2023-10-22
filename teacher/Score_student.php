@@ -64,6 +64,11 @@
         exit();
     }
     ?>
+    <form method="POST" action="score_pdf.php">
+    <input type="hidden" name="student_id" value="<?= $student_id ?>">
+    <button type="submit" class="btn btn-primary mt-3">Export Scores to PDF</button>
+    </form>
+
 
     <!-- Include Bootstrap JS (Optional) -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

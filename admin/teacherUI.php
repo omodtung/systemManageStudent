@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include "../DB_connection.php"; // Include your database connection
+
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
@@ -10,30 +13,35 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/getteacher.php";
 
         $teachers =   getAllTeachers($conn);
-        
+
 
         //print_r($teachers);
 
 ?>
- <!DOCTYPE html>
+        <!DOCTYPE html>
         <html lang="en">
 
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Home - Su Pham Thuc Hanh High School</title>
+
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-            <!-- <link rel="stylesheet" href="..css/style.css"> -->
+
             <link rel="icon" href="..logo.png">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+            <style>
 
+
+
+            </style>
         </head>
 
-        <body>
+        <body id="main-body">
             <?php
             include "inc/navBar.php";
             if ($teachers != 0) {
@@ -41,21 +49,30 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             ?>
                 <div class="container mt-5">
-                    <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
-                    <a href="./req/encryptpasswords.php" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    <div class="sticky-top">
+                        <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
+                        <a href="./req/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-success table-striped n-table">
-                            <thead>
+                        <!-- <table class="table table-success table-striped n-table"> -->
+                        <table class="table table-striped">
+                            <thead class="thead-dark" style="background-color:black; color:azure;">
                                 <tr>
 
                                     <th scope="col">Teacher ID</th>
                                     <th scope="col">USER NAME</th>
                                     <th scope="col">PASSWORD</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">SubJect</th>
-                                    <th scope="col"> Grade</th>
-                                    <th scope="col"> Action </th>
+                                    <th scope="col">Ho Ten</th>
+                                    <th scope="col">Ma Mon Hoc</th>
+                                    <!-- <th scope="col">Ma  khoi</th> -->
+                                    <th scope="col"> ngay sinh</th>
+
+                                    <th scope="col"> Gioi Tinh </th>
+                                    <th scope="col"> Dia chi </th>
+                                    <th scope="col"> Ma giao vien </th>
+                                    <th scope="col">Ma khoi</th>
+                                    <th scope="col">Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,27 +84,33 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <td><?= $teacher['id'] ?></td>
                                         <td><?= $teacher['username'] ?></td>
                                         <td><?= $teacher['password'] ?></td>
-                                        <td><?= $teacher['fname'] ?></td>
-                                        <td><?= $teacher['lname'] ?></td>
-                                        <td>
+                                        <td><?= $teacher['hoten'] ?></td>
+                                        <td><?= $teacher['mamonhoc'] ?></td>
+                                        <!-- <td><?= $teacher['makhoi'] ?></td> -->
+                                        <td><?= $teacher['ngaysinh'] ?></td>
+                                        <td><?= $teacher['gioitinh'] ?></td>
+                                        <td><?= $teacher['diachi'] ?></td>
+                                        <td><?= $teacher['magv'] ?></td>
+
+                                        <!-- <td>
                                             <?php
                                             $s = '';
-                                            $subjects  = str_split(trim($teacher['subjects']));
+                                            $subjects  = str_split(trim($teacher['mamonhoc']));
                                             foreach ($subjects as $subject) {
-                                                $s_temp = getSubjectById($subject, $conn);
-
+                                                //  $s_temp = getSubjectById($subject, $conn);
+                                                $s_temp = getSubjectBySubject_code($subject, $conn);
                                                 if ($s_temp != 0) {
-                                                    $s .= $s_temp['subject_code'] . ',';
+                                                    $s .= $s_temp['subject'] . ',';
                                                 }
                                             }
 
                                             echo $s;
                                             ?>
-                                        </td>
+                                        </td>  -->
                                         <td>
                                             <?php
                                             $g = '';
-                                            $grades  = str_split(trim($teacher['grade']));
+                                            $grades  = str_split(trim($teacher['makhoi']));
                                             foreach ($grades as $grade) {
                                                 $s_temp = getGradeById($grade, $conn);
 
@@ -103,14 +126,19 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <td>
                                             <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
-                                              Edit
+                                                Edit
                                             </button>
-                                            <a href="" class="btn btn-danger">Delete</a>
+                                            <button type="button" class="btn btn-danger" onclick="btndeleteclick('./req/teacher-delete.php?idteach=<?= $teacher['id'] ?>');">Delete</button>
+
+
+
+
+                                            <button type="button" class="btn btn-info">Info</button>
                                         </td>
-                                    </tr>
 
 
-                                <?php } ?>
+
+                                    <?php } ?>
 
 
                             </tbody>
@@ -118,39 +146,56 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </div>
                     <!-- Edit Teacher -->
                     <script>
-                        function btnclick(_url){
+                        function btnclick(_url) {
                             $.ajax({
-                                url : _url,
-                                type : 'post',
+                                url: _url,
+                                type: 'post',
                                 success: function(data) {
-                                $('#modalbody').html(data);
+                                    $('#modalbody').html(data);
+                                    
                                 },
                                 error: function() {
-                                $('#modalbody').text('An error occurred');
+                                    $('#modalbody').text('An error occurred');
                                 }
                             });
 
-                            
+
                         }
 
-                        
-                        function Save(){
-                            setTimeout(function (){
-                        
-                            $('#modalbody').html('');
+                        function btndeleteclick(_url) {
+                            $.ajax({
+                                url: _url,
+                                type: 'post',
+                                success: function(data) {
+                                    $('#modalbody').html(data);
+                                    location.reload();
                                     
+                                },
+                                error: function() {
+                                    $('#modalbody').text('An error occurred');
+                                }
+                            });
+
+
+                        }
+
+
+                        function Save() {
+                            setTimeout(function() {
+
+                                $('#modalbody').html('');
+
                             }, 500);
                         }
 
-                        
 
-                        function toastShow(){
-                            setTimeout(function (){
-                                $('#liveToast').toast('show');     
+
+                        function toastShow() {
+                            setTimeout(function() {
+                                $('#liveToast').toast('show');
                             }, 500);
                         }
-                        
-                    </script>                        
+                    </script>
 
                     <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -160,44 +205,42 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
                                 </div>
                                 <div class="modal-body" id="modalbody">
-                                    
+
                                 </div>
                                 <div class="modal-footer">
-                                    
-                                    
+
+
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                     <?php
-                    
-                    if(isset($_GET['sucsess'])){
-                        
-                        $toastteacher = getTeacher($conn,$_GET['sucsess']);
+
+                    if (isset($_GET['sucsess'])) {
+
+                        $toastteacher = getTeacher($conn, $_GET['sucsess']);
                         echo "<script type='text/javascript'>",
-                            
-                            "setTimeout(function (){",
-                                "$('#toasttext').html('Sucsessfully edited teacher ". $toastteacher['fname'] . " " . $toastteacher['lname'] ."');",
-                                "$('#liveToast').toast('show');",     
-                            "}, 500);",
-                            "</script>"
-                        ;
-                        
+
+                        "setTimeout(function (){",
+                        "$('#toasttext').html('Sucsessfully edited teacher " . $toastteacher['fname'] . " " . $toastteacher['lname'] . "');",
+                        "$('#liveToast').toast('show');",
+                        "}, 500);",
+                        "</script>";
                     }
-                    
-                    
-                        
-                    
-                        
+
+
+
+
+
                     ?>
-                    
+
                     <div class="toast-container position-fixed bottom-0 end-0 p-3">
                         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
                             <div class="toast-header">
-                            <i class="fa-solid fa-database fa-spin"></i>
-                            <strong class="me-auto ms-1">System</strong>
-                            <small>now</small>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                <i class="fa-solid fa-database fa-spin"></i>
+                                <strong class="me-auto ms-1">System</strong>
+                                <small>now</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                             </div>
                             <div class="toast-body" id="toasttext">
                                 Sucsessfully edited teacher
@@ -205,6 +248,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                     <!-- End Edit Teaccher -->
+
+
+
+
                 </div>
             <?php } else { ?>
 

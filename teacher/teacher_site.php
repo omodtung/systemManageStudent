@@ -87,5 +87,79 @@
             }
         }
     </script>
+
+    <form method="POST" action="">
+        <!-- Larger "Select Grade" text using Bootstrap classes -->
+        <label class="h4">Select teacher information:</label>
+        <select name="selected_teacher_grade" onchange="this.form.submit()" class="form-control">
+            <option value="" disabled selected>Select a teacher</option>
+            <option value="1">Khối 10</option>
+            <option value="2">Khối 11</option>
+            <option value="3">Khối 12</option>
+        
+        </select>
+    </form>
+    
+    <?php
+        if (isset($_POST["selected_teacher_grade"])) {
+            $selected_teacher_grade = $_POST["selected_teacher_grade"];
+            $query = "SELECT * FROM teachers WHERE makhoi = :selected_teacher_grade";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':selected_teacher_grade', $selected_teacher_grade, PDO::PARAM_STR);
+            $stmt->execute();
+            $name_teachers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        if (isset($_POST["selected_teacher_grade"])) {
+            $selected_teacher_grade = $_POST["selected_teacher_grade"];
+            $query = "SELECT magv, hoten, mamonhoc, makhoi, ngaysinh, gioitinh, diachi FROM teachers WHERE makhoi = :selected_teacher_grade";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':selected_teacher_grade', $selected_teacher_grade, PDO::PARAM_STR);
+            $stmt->execute();
+            $teachers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            if (!empty($teachers)) {
+                echo '<table class="table table-bordered mt-3">';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th>Mã Giáo Viên</th>';
+                echo '<th>Tên Giáo Viên</th>';
+                echo '<th>Mã môn học </th>';
+                echo '<th>Mã khối</th>';
+                echo '<th>Ngày sinh</th>';
+                echo '<th>Giới Tính</th>';
+                echo '<th>Địa Chỉ</th>';
+
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
+                foreach ($teachers as $teacher) {
+                    echo '<tr>';
+                    echo '<td>' . $teacher['magv'] . '</td>';
+                    echo '<td>' . $teacher['hoten'] . '</td>';
+                    echo '<td>' . $teacher['mamonhoc'] . '</td>';
+                    echo '<td>' . $teacher['makhoi'] . '</td>';
+                    echo '<td>' . $teacher['ngaysinh'] . '</td>';
+                    echo '<td>' . $teacher['gioitinh'] . '</td>';
+                    echo '<td>' . $teacher['diachi'] . '</td>';
+
+                    echo '<td>';
+                    echo '<button type="button" onclick="window.location.href=\'TeacherInfo.php?teacher_info=' . $teacher['magv'] . '\'">';
+                    echo 'View More';
+                    echo '</button>';
+                    echo '</td>';
+                    
+                    echo '</tr>';
+                }
+                echo '</tbody>';
+                echo '</table>';
+            } else {
+                echo '<p>No teachers available for the selected grade.</p>';
+            }
+        }
+        
+
+        
+    ?>
+
 </body>
 </html>
