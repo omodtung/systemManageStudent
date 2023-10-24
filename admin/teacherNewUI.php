@@ -69,7 +69,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         <span class="tooltip">Edit</span>
       </li>
       <li>
-        <a href="#">
+        <a href="./req/encryptpasswords.php?table=teachers">
           <i class="bx bx-chat"></i>
           <span class="link_name">Encrypt All Passwords</span>
         </a>
@@ -93,6 +93,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         <a href="#">
           <i class="bx bx-cart-alt"></i>
           <span class="link_name">Delete Teacher</span>
+        </a>
+        <span class="tooltip">Delete</span>
+      </li>
+      <li>
+        <a target="_blank" rel="noopener noreferrer" href="./req/exportteacher.php">
+          <i class="bx bx-export"></i>
+          <span class="link_name">Export All Teachers</span>
         </a>
         <span class="tooltip">Delete</span>
       </li>
@@ -144,7 +151,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                     <th scope="col">Teacher ID</th>
                                     <th scope="col">USER NAME</th>
-                                    <th scope="col" style="width:20%">PASSWORD</th>
+                                    <!-- <th scope="col" style="width:20%">PASSWORD</th> -->
                                     <th scope="col">Ho Ten</th>
                                     <th scope="col">Ma Mon Hoc</th>
                                     <!-- <th scope="col">Ma  khoi</th> -->
@@ -166,7 +173,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <!-- <th scope="row">1</th> -->
                                         <td><?= $teacher['id'] ?></td>
                                         <td><?= $teacher['username'] ?></td>
-                                        <td style="width:20%" class="overflow-x-auto"><?= $teacher['password'] ?></td>
+                                        <!-- <td><?= substr($teacher['password'],5) ?>...</td> -->
                                         <td><?= $teacher['hoten'] ?></td>
                                         <td><?= $teacher['mamonhoc'] ?></td>
                                         <!-- <td><?= $teacher['makhoi'] ?></td> -->
