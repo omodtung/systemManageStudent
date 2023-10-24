@@ -144,7 +144,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                     <th scope="col">Teacher ID</th>
                                     <th scope="col">USER NAME</th>
-                                    <th scope="col" style="width:20%">PASSWORD</th>
+                                    <!-- <th scope="col" style="width:20%">PASSWORD</th> -->
                                     <th scope="col">Ho Ten</th>
                                     <th scope="col">Ma Mon Hoc</th>
                                     <!-- <th scope="col">Ma  khoi</th> -->
@@ -166,7 +166,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <!-- <th scope="row">1</th> -->
                                         <td><?= $teacher['id'] ?></td>
                                         <td><?= $teacher['username'] ?></td>
-                                        <td style="width:20%" class="overflow-x-auto"><?= $teacher['password'] ?></td>
+                                        <!-- <td style="width:20%" class="overflow-x-auto"><?= $teacher['password'] ?></td> -->
                                         <td><?= $teacher['hoten'] ?></td>
                                         <td><?= $teacher['mamonhoc'] ?></td>
                                         <!-- <td><?= $teacher['makhoi'] ?></td> -->
