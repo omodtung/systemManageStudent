@@ -55,6 +55,7 @@ if (isset($_POST['uname']) &&
                     {
                         $id=$user['admin_id'];
                         $_SESSION['admin_id']=$id;
+						$_SESSION['admin_name']=array($user['fname'],$user['lname']);
                         header("Location: ../admin/index.php");
                         exit;
                     }

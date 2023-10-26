@@ -119,9 +119,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       </li>
       <li class="profile">
         <div class="profile_details">
-          <img src="../img/profile.jpeg" alt="profile image">
+          
           <div class="profile_content">
-            <div class="name">Anna Jhon</div>
+            <div class="name"><?= $_SESSION['admin_name'][0] ?> <?= $_SESSION['admin_name'][1] ?></div>
             <div class="designation">Admin</div>
           </div>
         </div>
@@ -223,7 +223,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
-                                            <button type="button" class="btn btn-info">Info</button>
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
                                         </td>
 
 
@@ -245,6 +245,21 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 },
                                 error: function() {
                                     $('#modalbody').text('An error occurred');
+                                }
+                            });
+
+
+                        }
+
+                        function btnclickinfo(_url) {
+                            $.ajax({
+                                url: _url,
+                                type: 'post',
+                                success: function(data) {
+                                    $('#modalbodyinfo').html(data);
+                                },
+                                error: function() {
+                                    $('#modalbodyinfo').text('An error occurred');
                                 }
                             });
 
@@ -364,6 +379,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
                                 </div>
                                 <div class="modal-body" id="modalbody">
+
+                                </div>
+                                <div class="modal-footer">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="modalinfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Teacher Info</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                </div>
+                                <div class="modal-body" id="modalbodyinfo">
 
                                 </div>
                                 <div class="modal-footer">
