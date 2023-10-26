@@ -29,6 +29,28 @@ function findNameDocNhat($uname, $conn){
    }
 }
 
+function findTeacherWithApproximateName( $searchName , $conn)
+{
+  $similarityThreshold = 0.8;
+  
+  $sql = "SELECT * FROM teachers";
+$result = $conn->query($sql);
+$people = [];
+while ($row = $result->fetch_assoc()) {
+  $similarity = similar_text($row[""], $searchName);
+
+  if ($similarity >= $similarityThreshold) {
+    $people[] = $row;
+  }
+}
+
+// Return the array of people found.
+return $people;
+
+
+}
 
 
 
+
+?>
