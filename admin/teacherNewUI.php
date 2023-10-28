@@ -76,11 +76,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <ul class="nav-list">
                     <li>
                         <i class="bx bx-search"></i>
-
-                       
-                            <input type="text" id="live_search" autocomplete="off" placeholder="search .. ">
-                          
-
+                        <input type="text" placeholder="Search...">
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
@@ -150,7 +146,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <div class="profile_details">
                             <img src="../img/profile.jpeg" alt="profile image">
                             <div class="profile_content">
-                                <div class="name">Anna Jhon</div>
+                                <div class="name"><?= $_SESSION['admin_name'][0] ?> <?= $_SESSION['admin_name'][1] ?></div>
                                 <div class="designation">Admin</div>
                             </div>
                         </div>
@@ -253,13 +249,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
-                                                <button type="button" class="btn btn-info">Info</button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
                                             </td>
-                                            <div id ="searchresult"></div>
+                                            <div id="searchresult"></div>
 
                                         </tr>
 
-                                        <?php } ?>
+                                    <?php } ?>
 
 
 
@@ -283,6 +279,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
                             }
+
+                            function btnclickinfo(_url) {
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    success: function(data) {
+                                        $('#modalbodyinfo').html(data);
+                                    },
+                                    error: function() {
+                                        $('#modalbodyinfo').text('An error occurred');
+                                    }
+                                });
+
+
+                            }
+
+                            
 
 
                             function Save() {
@@ -407,6 +420,26 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 </div>
             </div>
 
+            <div class="modal fade" id="modalinfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Teacher Info</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                        </div>
+                        <div class="modal-body" id="modalbodyinfo">
+
+                        </div>
+                        <div class="modal-footer">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <!-- import ajax live searching -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script type="text/javascript">
@@ -422,7 +455,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 },
                                 success: function(data) {
                                     $("#searchresult").html(data);
-                                     $("searchresult").css("display","block");
+                                    $("searchresult").css("display", "block");
                                 }
 
                             });
