@@ -56,12 +56,19 @@
                     echo '<td>' . $score['hotenhs'] . '</td>';
                     echo '<td>' . number_format($score['diem_tb'], 2) . '</td>';
                 
+                    // echo '<td>';
+                    // echo '<button type="button" onclick="window.location.href=\'Score_student.php?student_id=' . $score['mahs'] . '\'">';
+                    // echo 'View More';
+                    // echo '</button>';
+                    // echo '</td>';
+
                     echo '<td>';
-                    echo '<button type="button" onclick="window.location.href=\'Score_student.php?student_id=' . $score['mahs'] . '\'">';
-                    echo 'View More';
-                    echo '</button>';
+                    echo '<button type="button" onclick="window.location.href=\'Score_student.php?student_id=' . $score['mahs'] . '\'">View More</button>';
+                    echo '&nbsp;'; 
+                    echo '<button type="button" onclick="deleteRequest(event, \'' . $score['mahs'] . '\')">DeleteRequest</button>';
                     echo '</td>';
 
+                    
                     echo '</tr>';
                 }
                 echo '</tbody>';
@@ -86,6 +93,26 @@
                 link.innerHTML = 'View More';
             }
         }
+
+        function deleteRequest(event, studentId) {
+            event.preventDefault();  // Prevent the default behavior (form submission/redirect)
+
+            if (confirm('Thầy/Cô muốn đề xuất xóa học sinh này?')) {
+                // Send AJAX request to a PHP script to handle the database update
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'handle_delete_request.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    if (this.status == 200 && this.responseText == 'success') {
+                        alert('Yêu cầu xóa học sinh đã được gửi.');
+                    } else {
+                        alert('Không thể gửi yêu cầu xóa học sinh.');
+                    }
+                };
+                xhr.send('student_id=' + studentId);
+            }
+        }
+
     </script>
 
     <form method="POST" action="">
@@ -160,6 +187,42 @@
 
         
     ?>
+
+    <form action="upload_scores.php" method="post" enctype="multipart/form-data">
+        Chọn excel file điểm học sinh:
+        <input type="file" name="studentScoresFile" id="studentScoresFile">
+        <button type="button" name="submit" onclick="uploadFile()">Upload</button>
+    </form>
+    
+    <script>
+        function uploadFile() {
+            var fileInput = document.getElementById('studentScoresFile');
+            var file = fileInput.files[0];
+            if (!file) {
+                alert('Please select a file first.');
+                return;
+            }
+
+            var formData = new FormData();
+            formData.append('studentScoresFile', file);
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'upload_scores.php', true);
+            
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    if (this.responseText.trim() == 'success') {
+                        alert('File uploaded successfully!');
+                    } else {
+                        alert('File uploaded successfully!');
+                    }
+                }
+            };
+            
+            xhr.send(formData);
+        }
+    </script>
+
 
 </body>
 </html>

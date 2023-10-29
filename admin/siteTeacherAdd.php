@@ -17,10 +17,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $lname  = '';
     $uname  = '';
     $birthdate = '';
-$diaChi = '';
+    $diaChi = '';
 
-$flname = '';
-$maGiaoVien ='';
+    $flname = '';
+    $maGiaoVien ='';
 
     // $pass = '';
     // $flname = '';
