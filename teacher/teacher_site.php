@@ -6,6 +6,97 @@
     <title>Student Scores</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f7f8fc;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #f9748f;
+        }
+
+        .navbar-brand {
+            color: white !important;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #f9748f;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px -5px #f9748f;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #fd868c;
+        }
+
+        /* Table Styles */
+        table {
+            margin-top: 20px;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f9748f;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        /* Styles for select dropdowns */
+        select.form-control {
+            padding: 18px 50px 18px 25px; /* Increased padding */
+            font-size: 18px; /* Larger font size */
+            border-radius: 25px; 
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            appearance: none; /* Remove default appearance */
+            background-color: #fff;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        select.form-control:hover {
+            border-color: #f9748f;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        select.form-control:focus {
+            border-color: #fd868c;
+            box-shadow: 0 0 0 0.25rem rgba(249, 116, 143, 0.5);
+            outline: none;
+        }
+
+        label.h4 {
+            margin-bottom: 15px; /* Add spacing below the label */
+        }
+
+
+    </style>
 </head>
 <body>
     <form method="POST" action="">

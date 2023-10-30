@@ -7,6 +7,47 @@
     
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f5f7;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .table {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            border: none;
+            color: white;
+            box-shadow: 0 4px 6px rgba(255, 193, 7, 0.1);
+        }
+
+        .modal-content {
+            border-radius: 8px;
+        }
+    </style>
+
 </head>
 <body>
     <?php
