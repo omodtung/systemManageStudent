@@ -10,8 +10,10 @@ try {
     echo "Error connecting to the database: " . $e->getMessage();
     exit;
 }
-
-echo '<a href="./req/exportteacher.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary btn_add_teacher">Export Search Result</a>';
+if(isset($_GET["student"])) {
+    echo '<a href="./req/exportteacher.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+}
+else echo '<a href="./req/exportteacher.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
 
 // Try to execute the query
 try {

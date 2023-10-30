@@ -17,6 +17,9 @@ $excelData[] = array('ID', 'magv', 'username', 'hoten','mamonhoc','makhoi','ngay
 if(isset($_GET["searched"]) && $_GET["searched"] != ""){
     $sql = "SELECT * FROM teachers WHERE hoten LIKE '". $_GET['searched'] ."%' ORDER BY id ASC";
 }
+else if(isset($_GET["studentsearched"]) && $_GET["studentsearched"] != ""){
+    $sql = "SELECT * FROM students WHERE hotenhs LIKE '". $_GET['searched'] ."%' ORDER BY id ASC";
+}
 else{
     $sql = "SELECT * FROM teachers ORDER BY id ASC"; 
 }
