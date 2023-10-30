@@ -76,7 +76,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <ul class="nav-list">
                     <li>
                         <i class="bx bx-search"></i>
-                        <input type="text" placeholder="Search...">
+                        <input  id="live_search" type="text" placeholder="Search...">
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
@@ -455,7 +455,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 },
                                 success: function(data) {
                                     $("#searchresult").html(data);
-                                    $("searchresult").css("display", "block");
+                                    $("#searchresult").css("display", "block");
                                 }
 
                             });
