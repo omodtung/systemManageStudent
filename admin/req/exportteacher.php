@@ -1,5 +1,7 @@
 <?php 
  
+
+
 // Load the database configuration file 
 include_once '../../DB_connection.php'; 
  
@@ -12,8 +14,14 @@ $fileName = "teachers-data_" . date('Y-m-d') . ".xlsx";
 // Define column names 
 $excelData[] = array('ID', 'magv', 'username', 'hoten','mamonhoc','makhoi','ngaysinh', 'gioitinh', 'diachi', 'STATUS'); 
  
-// Fetch records from database and store in an array 
-$sql = "SELECT * FROM teachers ORDER BY id ASC"; 
+if(isset($_GET["searched"]) && $_GET["searched"] != ""){
+    $sql = "SELECT * FROM teachers WHERE hoten LIKE '". $_GET['searched'] ."%' ORDER BY id ASC";
+}
+else{
+    $sql = "SELECT * FROM teachers ORDER BY id ASC"; 
+}
+
+
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 if($stmt->rowCount() > 0){ 

@@ -5,11 +5,13 @@ $pdo = null;
 
 // Try to connect to the database
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=test7", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=test3", "root", "");
 } catch (PDOException $e) {
     echo "Error connecting to the database: " . $e->getMessage();
     exit;
 }
+
+echo '<a href="./req/exportteacher.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary btn_add_teacher">Export Search Result</a>';
 
 // Try to execute the query
 try {
@@ -19,7 +21,7 @@ try {
 
     // If there are any results, display them in a table
     if (count($rows) > 0) {
-        echo '<table class="table table-striped">';
+        echo '<table class="table table-striped" id="searchresult">';
         echo '<thead>';
         echo '<tr>';
         echo '<th scope="col">Teacher ID</th>';
