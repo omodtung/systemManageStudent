@@ -46,7 +46,7 @@ $id = $_POST["id"];
             // $counting = countStatusExist($conn);
 
             // foreach ($_POST['grades'] as $grade) {
-            //     $grades .= $grade;
+            //     $grades .= $grade;+
             // }
             // $lopChuNhiem = '';
 

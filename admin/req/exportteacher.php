@@ -18,6 +18,7 @@ if(isset($_GET["searched"]) && $_GET["searched"] != ""){
     $sql = "SELECT * FROM teachers WHERE hoten LIKE '". $_GET['searched'] ."%' ORDER BY id ASC";
 }
 else if(isset($_GET["studentsearched"]) && $_GET["studentsearched"] != ""){
+    $fileName = "students-data_" . date('Y-m-d') . ".xlsx"; 
     $excelData[] = array('id', 'username', 'mahs', 'makhoi','malop','hotenhs','hanhkiem','HocLuc','ngaysinh', 'gioitinh', 'diachi', 'STATUS'); 
     $sql = "SELECT * FROM students JOIN avgscore ON students.id = avgscore.student_id WHERE hotenhs LIKE '". $_GET['studentsearched'] ."%' ORDER BY id ASC";
 }
