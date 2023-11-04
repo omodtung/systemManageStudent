@@ -82,7 +82,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Edit</span>
                     </li>
                     <li>
-                        <a href="./req/encryptpasswords.php?table=teachers">
+                        <a href="./req/encryptpasswords.php?table=students">
                             <i class="bx bx-chat"></i>
                             <span class="link_name">Encrypt All Passwords</span>
                         </a>
@@ -150,8 +150,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                 ?>
                     <div class="container mt-5">
-                        <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
-                        <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                        <!-- <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
+                        <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a> -->
                         <div class="table table-striped">
                             <table class="thead-dark">
                                 <thead>
