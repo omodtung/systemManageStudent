@@ -47,13 +47,8 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 
         else{
         
-        //$grades = implode(",", $_POST['grades']);
-        $sql = "UPDATE students SET hotenhs='$hotenhs',username='$uname',makhoi='$grade',ngaysinh='$brthday',gioitinh='$gender',diachi='$diachi',malop='$class',hanhkiem='$hanhkiem' WHERE id = $id";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        //header("Location: ../student-edit.php?idteach=$id&success=student Updated");
-        $_SESSION['sucsess'] = $id;
-        header("Location: ../studentUI.php");
+        include("../req/student-edit.php");
+        header("Location: ../studentUI.php?sucsess=$id");
         }
     }
 }

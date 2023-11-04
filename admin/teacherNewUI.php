@@ -334,9 +334,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </div> -->
                         <?php
 
-                        if (isset($_GET['sucsess'])) {
-
-                            $toastteacher = getTeacher($conn, $_GET['sucsess']);
+                        if (isset($_SESSION['success'])) {
+                            echo("HERE");
+                            $toastteacher = getTeacher($conn, $_SESSION["success"]);
                             echo "<script type='text/javascript'>",
 
                             "setTimeout(function (){",
@@ -344,8 +344,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             "$('#liveToast').toast('show');",
                             "}, 500);",
                             "</script>";
+                            //$_SESSION["success"] = "";
+                            unset($_SESSION['success']);
+                            
                         }
-
+                        else{
+                            
+                        }
+                        
 
                         if (isset($_GET['error'])) {
                         ?>

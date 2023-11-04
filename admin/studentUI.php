@@ -259,9 +259,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         
                         <?php
 
-                        if (isset($_GET['sucsess'])) {
+                        if (isset($_SESSION['sucsess'])) {
 
-                            $toaststudent = getStudentUsingId($conn, $_GET['sucsess']);
+                            $toaststudent = getStudentUsingId($conn, $_SESSION['sucsess']);
                             echo "<script type='text/javascript'>",
 
                             "setTimeout(function (){",
@@ -269,6 +269,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             "$('#liveToast').toast('show');",
                             "}, 500);",
                             "</script>";
+                            unset($_SESSION['sucsess']);
                         }
 
                         if (isset($_GET['error'])) {
