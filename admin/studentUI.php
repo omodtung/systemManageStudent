@@ -65,6 +65,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <li>
                         <i class="bx bx-search"></i>
                         <input type="text"id="live_search" placeholder="Search...">
+                        <input type="text" id="live_search" placeholder="Search...">
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
@@ -198,7 +199,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                 <a href="req/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
-
+                                        <div id="searchresult"></div>
 
                                     <?php } ?>
 
@@ -365,7 +366,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         var input = $(this).val();
                         if (input != "") {
                             $.ajax({
-                                url: "livesearch.php",
+                                url: "livesearch.php?student=1",
                                 method: "POST",
                                 data: {
                                     input: input
