@@ -62,7 +62,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       ?>
 
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/student-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
 
