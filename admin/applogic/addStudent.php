@@ -95,17 +95,7 @@ $id = $_POST["id"];
                 exit;
             } else {
                 //chuyen doi hashing pass 
-                $pass = password_hash($pass, PASSWORD_DEFAULT);
-
-
-                $sql = "INSERT INTO `students`(`id`,`username`, `password`, `mahs`, `makhoi`, `malop`, `hotenhs`, `ngaysinh`, `gioitinh`, `diachi`,`hanhkiem`,`status`)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-
-                $sql2 = "INSERT INTO `avgscore` (`student_id`) VALUES (?)";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([$id,$uname, $pass, $mahocsinh, $grades, $classes, $flname, $birthdate, $gender, $diaChi, $hanhkiem, $status]);
-
-                $stmt2 = $conn->prepare($sql2);
-                $stmt2->execute([$id]);
+                include("../req/addStudent.php");
 
 
 

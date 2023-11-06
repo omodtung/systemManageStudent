@@ -164,10 +164,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                 ?>
                     <div class="container mt-5">
-                        <div class="sticky-top">
+                        <!-- <div class="sticky-top">
                             <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
                             <a href="./req/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
-                        </div>
+                        </div> -->
                         <div class="table-responsive">
                             <!-- <table class="table table-success table-striped n-table"> -->
                             <table class="table table-striped">
@@ -334,9 +334,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </div> -->
                         <?php
 
-                        if (isset($_GET['sucsess'])) {
-
-                            $toastteacher = getTeacher($conn, $_GET['sucsess']);
+                        if (isset($_SESSION['success'])) {
+                            
+                            $toastteacher = getTeacher($conn, $_SESSION["success"]);
                             echo "<script type='text/javascript'>",
 
                             "setTimeout(function (){",
@@ -344,8 +344,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             "$('#liveToast').toast('show');",
                             "}, 500);",
                             "</script>";
+                            //$_SESSION["success"] = "";
+                            unset($_SESSION['success']);
+                            
                         }
-
+                        else{
+                            
+                        }
+                        
 
                         if (isset($_GET['error'])) {
                         ?>

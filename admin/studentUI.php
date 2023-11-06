@@ -65,7 +65,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <li>
                         <i class="bx bx-search"></i>
                         <input type="text"id="live_search" placeholder="Search...">
-                        <input type="text" id="live_search" placeholder="Search...">
+                  
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
@@ -83,7 +83,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Edit</span>
                     </li>
                     <li>
-                        <a href="./req/encryptpasswords.php?table=teachers">
+                        <a href="./req/encryptpasswords.php?table=students">
                             <i class="bx bx-chat"></i>
                             <span class="link_name">Encrypt All Passwords</span>
                         </a>
@@ -151,8 +151,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                 ?>
                     <div class="container mt-5">
-                        <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
-                        <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                        <!-- <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
+                        <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a> -->
                         <div class="table table-striped">
                             <table class="thead-dark">
                                 <thead>
@@ -260,9 +260,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         
                         <?php
 
-                        if (isset($_GET['sucsess'])) {
+                        if (isset($_SESSION['sucsess'])) {
 
-                            $toaststudent = getStudentUsingId($conn, $_GET['sucsess']);
+                            $toaststudent = getStudentUsingId($conn, $_SESSION['sucsess']);
                             echo "<script type='text/javascript'>",
 
                             "setTimeout(function (){",
@@ -270,6 +270,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             "$('#liveToast').toast('show');",
                             "}, 500);",
                             "</script>";
+                            unset($_SESSION['sucsess']);
                         }
 
                         if (isset($_GET['error'])) {
