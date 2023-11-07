@@ -2,7 +2,7 @@
 <?php  
 
 function getSchedule($conn,$idsche){
-   $sql = "SELECT * FROM schedule WHERE id = $idsche";
+   $sql = "SELECT * FROM schedule WHERE ID_Schedule = $idsche";
    $stmt = $conn->prepare($sql);
    $stmt->execute();
 
@@ -42,6 +42,19 @@ function getAllSchedules($conn){
 
 function getScheduleFrom($conn,$idteach){
   $sql = "SELECT * FROM schedule WHERE TeacherId = $idteach";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+
+  if ($stmt->rowCount() >= 1) {
+    $schedules = $stmt->fetchAll();
+    return $schedules;
+  }else {
+    return 0;
+  }
+}
+
+function getScheduleFromId($conn,$id){
+  $sql = "SELECT * FROM schedule WHERE ID_Schedule = $id";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 
