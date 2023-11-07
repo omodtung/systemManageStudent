@@ -8,10 +8,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "data/subject.php";
         include "data/grade.php";
         include "data/getteacher.php";
-        include "data/student.php";
+        include "data/schedule.php";
         //$teachers =   getAllTeachers($conn);
         
-        $students = getAllStudents($conn);
+        $schedules = getAllSchedules($conn);
 
     }
 }
@@ -24,6 +24,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+
+    <link rel="stylesheet" href="../css/style2.css">        
     <link rel="icon" href="..logo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,9 +50,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
-                        <a href="siteTeacherAdd.php">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalformadd" onclick="btnclickadd('./inc/addSchedule.php')">
                             <i class="bx bx-grid-alt"></i>
-                            <span class="link_name"> ADD Teacher </span>
+                            <span class="link_name"> ADD Schedule </span>
                         </a>
                         <span class="tooltip">ADD</span>
                     </li>
@@ -131,7 +138,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <th scope="col">Ho Ten</th>
                                     <th scope="col">Start Time</th>
                                     <th scope="col"> End Time </th>
+                                    <th scope="col"> Work Date </th>
                                     <th scope="col"> Class </th>
+                                    <th scope="col"> Action </th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
@@ -140,10 +149,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 <tr>
                                     
                                     <td><?= $schedule['ID_Schedule'] ?></td>
-                                    <td><?= $schedule['fname'] ?></td>
-                                    <td><?= $schedule['lname'] ?></td>
+                                    <td><?= $schedule['TeacherId'] ?></td>
+                                    <td><?= $schedule['HoTen'] ?></td>
+                                    <td><?= $schedule['StartTime'] ?></td>
+                                    <td><?= $schedule['EndTime'] ?></td>
+                                    <td><?= $schedule['WorkDate'] ?></td>
+                                    <td><?= $schedule['Class'] ?></td>
 
                                     <td>
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editSchedule.php?id=<?= $schedule['ID_Schedule'] ?>')" data-bs-id=<?= $schedule['ID_Schedule'] ?>>
+                                                    Edit
+                                                </button>
+                                        <a href="applogic/deleteschedule.php?id=<?= $schedule['ID_Schedule'] ?>" class="btn btn-danger">Delete</a>
                                         <a href="" class="btn btn-primary">Detail</a>
                                     </td>
                                 </tr>
@@ -155,6 +172,112 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </div>
                 </div>
             </section>
+            <div class="modal fade" id="modalformadd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Schedule</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                    </div>
+                                    <div class="modal-body" id="modalbodyadd">
+
+                                    </div>
+                                    <div class="modal-footer">
+
+
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+
+            <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Schedule</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                    </div>
+                                    <div class="modal-body" id="modalbody">
+
+                                    </div>
+                                    <div class="modal-footer">
+
+
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+                <script>
+                            function btnclick(_url) {
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    success: function(data) {
+                                        $('#modalbody').html(data);
+                                    },
+                                    error: function() {
+                                        $('#modalbody').text('An error occurred');
+                                    }
+                                });
+
+
+                            }
+
+                            function btnclickinfo(_url) {
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    success: function(data) {
+                                        $('#modalbodyinfo').html(data);
+                                    },
+                                    error: function() {
+                                        $('#modalbodyinfo').text('An error occurred');
+                                    }
+                                });
+
+
+                            }
+
+                            function btnclickadd(_url) {
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    success: function(data) {
+                                        $('#modalbodyadd').html(data);
+                                    },
+                                    error: function() {
+                                        $('#modalbodyadd').text('An error occurred');
+                                    }
+                                });
+
+
+                            }
+
+
+                            function Save() {
+                                setTimeout(function() {
+
+                                    $('#modalbody').html('');
+
+                                }, 500);
+                            }
+
+
+
+                            function toastShow() {
+                                setTimeout(function() {
+                                    $('#liveToast').toast('show');
+                                }, 500);
+                            }
+
+                    $(document).ready(function() {
+                        $("#navLinks li:nth-child(2) a").addClass('active')
+                    });
+                </script>
+            <script src="../js/script.js"></script>
 </body>
 
 </html>
