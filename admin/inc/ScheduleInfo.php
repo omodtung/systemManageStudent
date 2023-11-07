@@ -13,7 +13,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $teachers = getAllTeachers($conn);
         $thissche = getScheduleFrom($conn,$_GET["id"]);
         
-        $allsche = getAllSchedules($conn);
+        //$allsche = getAllSchedules($conn);
 
 
         function convertTimeToMinutes(string $timeString): int
