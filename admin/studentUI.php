@@ -65,6 +65,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <li>
                         <i class="bx bx-search"></i>
                         <input type="text"id="live_search" placeholder="Search...">
+                        <input type="text" id="live_search" placeholder="Search...">
                         <span class="tooltip">Search</span>
                     </li>
                     <li>

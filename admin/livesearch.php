@@ -5,7 +5,7 @@ $pdo = null;
 
 // Try to connect to the database
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=test3", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=test7", "root", "");
 } catch (PDOException $e) {
     echo "Error connecting to the database: " . $e->getMessage();
     exit;
