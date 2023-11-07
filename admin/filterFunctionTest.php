@@ -4,12 +4,16 @@ session_start();
 include "../DB_connection.php";
 include "data/teacherAd.php";
 include "data/grade.php";
+include "data/class.php";
+include "data/subject.php";
 
 $teachers = getAllTeachers($conn);
-
+$subjects = getAllSubjects($conn);
+$classes = getAllClass($conn);
 ?>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +23,7 @@ $teachers = getAllTeachers($conn);
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#myInput").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
                 $("#myTable tbody tr").filter(function() {
@@ -27,86 +31,116 @@ $teachers = getAllTeachers($conn);
                 });
             });
         });
+
+        $(document).ready(function() {
+            $("#subjects").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tbody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
     </script>
 
     <style>
 
     </style>
 </head>
+
 <body>
 
-<h2>Filterable Table</h2>
-<p>Type something in the input field to search the table for first names, last names or emails:</p>  
-<input id="myInput" type="text" placeholder="Search..">
-<br><br>
+    <h2>Filterable Table</h2>
+    <p>Type something in the input field to search the table for first names, last names or emails:</p>
+    <input id="myInput" type="text" placeholder="Search..">
 
-<table class="table table-striped"   id="myTable" >
-    <thead class="thead-dark" style="background-color:black; color:azure;">
-        <tr>
+ 
+    <div class="col-md-3">
+    <label class="form-label"> Lop</label>
+    <select id="subjects" class="form-select" aria-label="Default select example" name=subjects >
 
-            <th scope="col">Teacher ID</th>
-            <th scope="col">USER NAME</th>
-            <th scope="col">PASSWORD</th>
-            <th scope="col">Ho Ten</th>
-            <th scope="col">Ma Mon Hoc</th>
-            <th scope="col"> ngay sinh</th>
+   
+        <?php foreach ($subjects as $subject) : ?>
+            <option value="<?= $subject['subject_code'] ?>"><?= $subject['subject_code'] ?></option>
+        <?php endforeach ?> 
 
-            <th scope="col"> Gioi Tinh </th>
-            <th scope="col"> Dia chi </th>
-            <th scope="col"> Ma giao vien </th>
-            <th scope="col">Ma khoi</th>
-            <th scope="col">Action</th>
+        
+    </select>
 
-        </tr>
-    </thead>
-    <tbody>
+  
+</div>
+    
+   
+    <br><br>
 
-        <?php foreach ($teachers as $teacher) {
+    <table class="table table-striped" id="myTable">
+        <thead class="thead-dark" style="background-color:black; color:azure;">
+            <tr>
 
-            $subjects = explode(',', trim($teacher['mamonhoc']));
-            $grades = explode(',', trim($teacher['makhoi']));
+                <th scope="col">Teacher ID</th>
+                <th scope="col">USER NAME</th>
+                <th scope="col">PASSWORD</th>
+                <th scope="col">Ho Ten</th>
+                <th scope="col">Ma Mon Hoc</th>
+                <th scope="col"> ngay sinh</th>
 
-            $s = '';
-            foreach ($subjects as $subject) {
-                $s .= $subject . ',';
-            }
+                <th scope="col"> Gioi Tinh </th>
+                <th scope="col"> Dia chi </th>
+                <th scope="col"> Ma giao vien </th>
+                <th scope="col">Ma khoi</th>
+                <th scope="col">Action</th>
 
-            $g = '';
-            foreach ($grades as $grade) {
-                $g .= $grade . ',';
-            }
+            </tr>
+        </thead>
+        <tbody>
+
+            <?php foreach ($teachers as $teacher) {
+
+                $subjects = explode(',', trim($teacher['mamonhoc']));
+                $grades = explode(',', trim($teacher['makhoi']));
+
+                $s = '';
+                foreach ($subjects as $subject) {
+                    $s .= $subject . ',';
+                }
+
+                $g = '';
+                foreach ($grades as $grade) {
+                    $g .= $grade . ',';
+                }
 
             ?>
 
-            <tr>
-                <td><?= $teacher['id'] ?></td>
-                <td><?= $teacher['username'] ?></td>
-                <td><?= $teacher['password'] ?></td>
-                <td><?= $teacher['hoten'] ?></td>
-                <td><?= $s ?></td>
-                <td><?= $g ?></td>
-                <td><?= $teacher['ngaysinh'] ?></td>
-                <td><?= $teacher['gioitinh'] ?></td>
-                <td><?= $teacher['diachi'] ?></td>
-                <td><?= $teacher['magv'] ?></td>
+                <tr>
+                    <td><?= $teacher['id'] ?></td>
+                    <td><?= $teacher['username'] ?></td>
+                    <td><?= $teacher['password'] ?></td>
+                    <td><?= $teacher['hoten'] ?></td>
+                    <td><?= $s ?></td>
+                    <td><?= $g ?></td>
+                    <td><?= $teacher['ngaysinh'] ?></td>
+                    <td><?= $teacher['gioitinh'] ?></td>
+                    <td><?= $teacher['diachi'] ?></td>
+                    <td><?= $teacher['magv'] ?></td>
 
-                <td>
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id="<?= $teacher['id'] ?>">
-                        Edit
-                    </button>
-                    <a href="" class="btn btn-danger">Delete</a>
-                    <button type="button" class="btn btn-info">Info</button>
-                </td>
-
-
-
-            </tr>
-
-        <?php } ?>
+                    <td>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id="<?= $teacher['id'] ?>">
+                            Edit
+                        </button>
+                        <a href="" class="btn btn-danger">Delete</a>
+                        <button type="button" class="btn btn-info">Info</button>
+                    </td>
 
 
-    </tbody>
-</table>
+
+                </tr>
+
+            <?php } ?>
+
+
+        </tbody>
+    </table>
 
 </body>
+
 </html>

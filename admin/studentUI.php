@@ -69,7 +69,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
-                        <a href="siteTeacherAdd.php">
+                        <a href="siteAddStudent.php">
                             <i class="bx bx-grid-alt"></i>
                             <span class="link_name"> ADD Teacher </span>
                         </a>
