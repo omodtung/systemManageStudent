@@ -154,6 +154,12 @@
         <button type="submit" class="btn btn-primary mt-3">Export Scores to PDF</button>
     </form>
 
+    <form method="POST" action="score_excel.php">
+        <input type="hidden" name="student_id" value="<?= $student_id ?>">
+        <button type="submit" class="btn btn-success mt-3">Export Scores to Excel</button>
+    </form>
+
+
     <!-- Include jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
