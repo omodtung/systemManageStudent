@@ -161,7 +161,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                     Edit
                                                 </button>
                                         <a href="applogic/deleteschedule.php?id=<?= $schedule['ID_Schedule'] ?>" class="btn btn-danger">Delete</a>
-                                        <a href="" class="btn btn-primary">Detail</a>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo('./inc/ScheduleInfo.php?id=<?= $schedule['TeacherId'] ?>')" data-bs-id=<?= $schedule['TeacherId'] ?>>
+                                                    Detail
+                                                </button>
                                     </td>
                                 </tr>
 
@@ -203,6 +205,27 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <div class="modal-footer">
 
 
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+
+            <div class="modal fade" id="modalforminfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Detail</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                                    </div>
+                                    <div class="modal-body" id="modalbodyinfo">
+
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    <div class="position-relative pt-5">
+                                
+                                        <button type="button" class="btn btn-primary position-absolute bottom-0 end-0" data-bs-dismiss="modal" id="Sucsessbtn" onclick="Save()">Close</button>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
