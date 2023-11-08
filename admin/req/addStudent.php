@@ -46,7 +46,7 @@ $id = $_POST["id"];
             // $counting = countStatusExist($conn);
 
             // foreach ($_POST['grades'] as $grade) {
-            //     $grades .= $grade;
+            //     $grades .= $grade;+
             // }
             // $lopChuNhiem = '';
 
@@ -100,12 +100,12 @@ $id = $_POST["id"];
 
                 $sql = "INSERT INTO `students`(`id`,`username`, `password`, `mahs`, `makhoi`, `malop`, `hotenhs`, `ngaysinh`, `gioitinh`, `diachi`,`hanhkiem`,`status`)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-                $sql2 = "INSERT INTO `avgscore` (`student_id`, `Toan`, `Vat Ly`, `Hoa Hoc`, `Ngu Van`, `Lich Su`, `Dia Ly`, `Tieng Anh`, `GDCD`, `Cong Nghe`, `Tin Hoc`, `The Duc`, `Sinh Hoc`) VALUES (?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql2 = "INSERT INTO `avgscore` (`student_id`) VALUES (?)";
                 $stmt = $conn->prepare($sql);
                 $stmt->execute([$id,$uname, $pass, $mahocsinh, $grades, $classes, $flname, $birthdate, $gender, $diaChi, $hanhkiem, $status]);
 
                 $stmt2 = $conn->prepare($sql2);
-                $stmt2->execute([$id, 0, 0, 0,0, 0, 0, 0,0,0,0,0,0]);
+                $stmt2->execute([$id]);
 
 
 

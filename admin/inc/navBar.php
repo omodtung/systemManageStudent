@@ -30,7 +30,7 @@
           <a class="nav-link" href="TimesTableSystem.php">TimesTable</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contact">Schedule</a>
+          <a class="nav-link" href="schedule.php">Schedule</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#contact">Course</a>

@@ -36,6 +36,8 @@
         }
         
         echo "Encrypted " . $count . " Password(s)";
+        
+        
         }
     
 

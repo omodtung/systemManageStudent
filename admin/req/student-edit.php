@@ -4,10 +4,10 @@
 session_start();
 
 
-if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
-{
-    if ($_SESSION['role']=='Admin')
-    {
+// if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
+// {
+//     if ($_SESSION['role']=='Admin')
+//     {
         include "../../DB_connection.php";
         
         include "../data/grade.php";
@@ -26,36 +26,36 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         $brthday = date("Y-m-d", strtotime($brthday));
 
 
-        if(!isset($_POST['hotenhs']) || empty($hotenhs)){
-            header("Location: ../student-edit.php?idteach=$id&error=Name is Empty!");
-        }
-        // else if(!isset($_POST['lname']) || empty($lname)){
-        //     header("Location: ../student-edit.php?idteach=$id&error=Name is Empty!");
+        // if(!isset($_POST['hotenhs']) || empty($hotenhs)){
+        //     header("Location: ../studentUI.php?idteach=$id&error=Name is Empty!");
         // }
-        else if(!isset($_POST['uname']) || empty($uname)){
-            header("Location: ../student-edit.php?idteach=$id&error=Username is Empty!");
-        }
-        else if(!isset($_POST['hanhkiem']) || empty($_POST['hanhkiem'])){
-            header("Location: ../student-edit.php?idteach=$id&error=Hanh Kiem is Empty!");
-        }
-        else if(!isset($_POST['diachi']) || empty($_POST['diachi'])){
-            header("Location: ../student-edit.php?idteach=$id&error=Address is Empty!");
-        }
-        // else if(!isset($_POST['hocluc']) || empty($_POST['hocluc'])){
-        //     header("Location: ../student-edit.php?idteach=$id&error=Hoc Luc is Empty!");
+        // else if(!isset($_POST['uname']) || empty($uname)){
+        //     header("Location: ../studentUI.php?idteach=$id&error=Username is Empty!");
         // }
+        // else if(!isset($_POST['hanhkiem']) || empty($_POST['hanhkiem'])){
+        //     header("Location: ../studentUI.php?idteach=$id&error=Hanh Kiem is Empty!");
+        // }
+        // else if(!isset($_POST['diachi']) || empty($_POST['diachi'])){
+        //     header("Location: ../studentUI.php?idteach=$id&error=Address is Empty!");
+        // }
+        // else if(!isset($_POST['birthdate']) || empty($_POST['birthdate'])){
+        //     header("Location: ../studentUI.php?idteach=$id&error=Address is Empty!");
+        // }
+        // // else if(!isset($_POST['hocluc']) || empty($_POST['hocluc'])){
+        // //     header("Location: ../student-edit.php?idteach=$id&error=Hoc Luc is Empty!");
+        // // }
 
-        else{
+        // else{
         
         //$grades = implode(",", $_POST['grades']);
         $sql = "UPDATE students SET hotenhs='$hotenhs',username='$uname',makhoi='$grade',ngaysinh='$brthday',gioitinh='$gender',diachi='$diachi',malop='$class',hanhkiem='$hanhkiem' WHERE id = $id";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         //header("Location: ../student-edit.php?idteach=$id&success=student Updated");
-        //$_SESSION['sucsess'] = $id;
-        header("Location: ../studentUI.php?sucsess=$id");
-        }
-    }
-}
+        $_SESSION['sucsess'] = $id;
+        header("Location: ../studentUI.php");
+//         }
+//     }
+// }
 
 ?>

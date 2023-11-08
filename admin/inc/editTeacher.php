@@ -12,18 +12,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $grades = getAllGrade($conn);
     $teacher = getTeacher($conn,$_GET['idteach']);
     $id = $_GET['idteach'];
-    $fname = '';
-    $lname  = '';
+    $hoten = '';
+    //$lname  = '';
     $uname  = '';
     $pass = '';
-    $flname = '';
+    //$flname = '';
     $lopChuNhiem = '';
     $teacher_subjects = '';
-    if (isset($_GET['fname'])) $fname =  $_GET['fname'];
+    if (isset($_GET['hoten'])) $hoten =  $_GET['hoten'];
 
-    if (isset($_GET['lname'])) $lname  = $_GET['lname'];
+    //if (isset($_GET['lname'])) $lname  = $_GET['lname'];
 
-    if (isset($_GET['uname'])) $uname = $_GET['uname'];
+    if (isset($_GET['username'])) $uname = $_GET['username'];
 
     //if (isset($_GET['subjects'])) $teacher_subjects = $_GET['uname'];
 
@@ -59,11 +59,21 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       ?>
 
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/teacher-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/teacher-edit.php?id=<?= $id ?>">
           
+          <?php if (isset($_GET['error'])) { ?>
+            <div class="alert alert-danger" role="alert">
+              <?= $_GET['error'] ?>
+
+            </div>
+
+
+
+          <?php } ?>
+
           <div class="mb-3">
 
-            <div class="form-row">
+            <!-- <div class="form-row">
               <div class="col">
                 <label class="form-lable">
 
@@ -78,14 +88,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 </label>
                 <input type="text" class="form-control" placeholder="example Do" name="lname" value="<?= $teacher['lname'] ?>">
               </div>
-            </div>
+            </div> -->
             <div class="form-row pt-4">
               <div class="col">
                 <label class="form-lable">
 
                   Full Name
                 </label>
-                <input type="text" class="form-control" disabled placeholder=" example :TungDo" name="flname" value="<?= $teacher['fname'] ?> <?= $teacher['lname'] ?>">
+                <input type="text" class="form-control" placeholder=" example :TungDo" name="hoten" value="<?= $teacher['hoten'] ?>">
               </div>
               <div class="col">
                 <label class="form-lable">
@@ -94,6 +104,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 </label>
                 <input type="text" class="form-control" placeholder="example:tungdo" name="uname" value="<?= $teacher['username'] ?>">
 
+              </div>
+              <div class="col">
+                <label class="form-lable">
+
+                  Address
+                </label>
+                <input type="text" class="form-control" placeholder="example 22nd Roads" value="<?= $teacher['diachi'] ?>" name="diachi">
               </div>
             </div>
 
@@ -126,7 +143,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                   <label for="date" class="col-sm-1 col-form-label">Date</label>
                   <div class="col-sm-4">
                     <div class="input-group date" id="datepicker">
-                      <input type="text" class="form-control" name="birthdate" value="<?php echo date("d/m/Y", strtotime($teacher['birthDate'])); ?>">
+                      <input type="text" class="form-control" name="birthdate" value="<?php echo date("d/m/Y", strtotime($teacher['ngaysinh'])); ?>">
                       <span class="input-group-append">
                         <span class="input-group-text bg-white">
                           <i class="fa fa-calendar"></i>
@@ -152,10 +169,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
               </label>
 
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1" autocomplete="off" <?php echo ($teacher['Gender'] == "M") ? 'checked' : ''; ?>>
+                <input type="radio" class="btn-check" name="genderbtn" value="Nam" id="btnradio1" autocomplete="off" <?php echo ($teacher['gioitinh'] == "Nam") ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
 
-                <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2" autocomplete="off" <?php echo ($teacher['Gender'] == "F") ? 'checked' : ''; ?>>
+                <input type="radio" class="btn-check" name="genderbtn" value="Nữ" id="btnradio2" autocomplete="off" <?php echo ($teacher['gioitinh'] == "Nữ") ? 'checked' : ''; ?>>
                 <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
 
             </div>
@@ -174,33 +191,33 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             
 
 
-            <h3> Lop Chu Nhiem </h3>
+            <!-- <h3> Lop Chu Nhiem </h3>
             
-            <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>">
+            <input type="text" class="form-control" placeholder="example:tungdo" name="lopCN" value="<?= $lopChuNhiem ?>"> -->
 
             <h3> Mon Hoc</h3>
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     <label class="form-label">Subject</label>
                     
                     </div>
                     <div class="col-md-3">
                         <select name="subjects[]" multiple>
                             <?php foreach ($subjects as $subject) : ?>
-                            <option value="<?= $subject['subject_id'] ?>" <?php echo (in_array($subject['subject_id'],explode(",", $teacher['subjects']))) ? 'selected' : ''; ?>><?= $subject['subject'] ?></option>
+                            <option value="<?= $subject['subject_code'] ?>" <?php echo (in_array($subject['subject_code'],explode(",", $teacher['mamonhoc']))) ? 'selected' : ''; ?>><?= $subject['subject'] ?></option>
                             <?php endforeach ?>
                         </select>
                     </div>
 
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     <label class="form-label">Grade</label>
                     
                     </div>
                     <div class="col-sm-1">
                         <select name="grades[]" multiple>
                         <?php foreach ($grades as $grade) : ?>
-                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $teacher['grade']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $teacher['makhoi']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
                         <?php endforeach ?>
                     </select>
                     </div>
