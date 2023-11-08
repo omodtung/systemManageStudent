@@ -1,1 +1,1 @@
-SELECT * FROM schema3.score;
+SELECT * FROM schema3.teachers;
