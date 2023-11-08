@@ -3,65 +3,45 @@
 
 session_start();
 
-// print_r($_POST);
-// die( );
-
-
 if (
     isset($_SESSION['admin_id']) &&
-    isset($_SESSION['role'])
-) {
+    isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
 
         if (
             isset($_POST['flname']) &&
-            isset($_POST['idGV']) &&
             isset($_POST['uname']) &&
             isset($_POST['pass']) &&
+            isset($_POST['idGV']) &&
             isset($_POST['subjects']) &&
-            isset($_POST['grades'])
-            && isset($_POST['birthdate']) && isset($_POST['genderbtn'])
-
-
-
-        ) {
+            isset($_POST['grades']) &&
+            isset($_POST['diaChi']) &&
+            isset($_POST['birthdate']) &&
+            isset($_POST['genderbtn']))
+            {
             include '../../DB_connection.php';
             include "../data/teacherAd.php";
 
-            $flname =  $_POST['flname'];
-
+            $flname = $_POST['flname'];
             $uname = $_POST['uname'];
+            $birthdate = $_POST['birthdate'];
             $pass = $_POST['pass'];
-
-            $birthdate  = $_POST['birthdate'];
             $gender = $_POST['genderbtn'];
-            $idgv  =  $_POST['idGV'];
+            $idGV = $_POST['idGV'];
+            $diaChi = $_POST['diaChi'];
+            
+            $target_dir = "uploads/"; 
+            $file_name = uniqid("teacher_").'.'.pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
+            $target_file = $target_dir . $file_name .'jpg';
 
+            move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
 
-            $diaChi= $_POST['diaChi'];
-
-
-            // print_r($_POST);
-            // die( );
-
-            $grades = "";
-            foreach ($_POST['grades'] as $grade) {
-                $grades .= $grade;
-            }
-            // $lopChuNhiem = '';
-
-            $subjects = "";
-            foreach ($_POST['subjects'] as $subject) {
-                $subjects .= $subject;
-            }
-            $data = 'uname=' . $uname . '&flname=' . $flname . '&idGV' . $idgv. '&pass' . $pass;
-
+            $grades = $_POST['grades'];
+            $subjects = $_POST['subjects'];
+            
+            $data = 'uname=' . $uname . '&fname=' . $flname . '&birthdate'. $birthdate ;
             if (empty($flname)) {
-                $thongBao = " ful Name is require";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
-                exit;
-            } else if (empty($idgv)) {
-                $thongBao = " idgv  is require";
+                $thongBao = " first Name is require";
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
             } else if (!findNameDocNhat($uname, $conn)) {
@@ -72,25 +52,22 @@ if (
                 $thongBao = " pass is require";
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
+            
             } else {
                 //chuyen doi hashing pass 
-                $pass = password_hash($pass, PASSWORD_DEFAULT);
+               $pass = password_hash($pass, PASSWORD_DEFAULT);
 
 
-                // $sql = "INSERT INTO teachers(username,password,fname, lname,subjects,grade) VALUES(?,?,?,?,?,?)";
-                $sql = "INSERT INTO `teachers` ( `magv`, `username`, `password`, `hoten`, `mamonhoc`, `makhoi`, `ngaysinh`, `gioitinh`, `diachi`) VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO teachers(magv,username,password,hoten,mamonhoc,makhoi,ngaysinh,gioitinh,diachi,active,image) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
+            
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$idgv, $uname, $pass, $flname, $subjects, $grades,$birthdate,$gender,$diaChi]);
-
-
-
-
+                $stmt->execute([$idGV, $uname, $pass, $flname, $subjects, $grades, $birthdate, $gender, $diaChi,1,$target_file]);
 
                 $thongBao = " Tao Thanh Cong";
                 header("Location: ../siteTeacherAdd.php?success=$thongBao");
-                exit;
-            }
+               exit;
+           }
         } else {
             $thongBao = " xay Ra loi 144442232324";
             header("Location: ../siteTeacherAdd.php?error=$thongBao");
@@ -99,9 +76,15 @@ if (
     } else {
         header("Location: ../../logout.php");
         exit;
+        
     }
-} else {
+}
+
+else {
 
     header("Location: ../../loguot.php");
     exit;
+   
 }
+
+?>

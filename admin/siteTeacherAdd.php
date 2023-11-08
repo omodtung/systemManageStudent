@@ -17,17 +17,19 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $lname  = '';
     $uname  = '';
     $birthdate = '';
-$diaChi = '';
+    $diaChi = '';
 
-$flname = '';
-$maGiaoVien ='';
+    $flname = '';
+    $maGiaoVien ='';
 
     // $pass = '';
     // $flname = '';
     // $lopChuNhiem = '';
 
     $gioiTinh = '';
-    
+    if (isset($_GET['fname'])) $fname =  $_GET['fname'];
+
+    if (isset($_GET['lname'])) $lname  = $_GET['lname'];
 
     if (isset($_GET['uname'])) $uname = $_GET['uname'];
 
@@ -64,9 +66,9 @@ $maGiaoVien ='';
      ?>
 
       <div class="container mt-5">
-        <a href="teacherNewUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+        <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
+        <form method="post" class="shadow p-3 mt-5 form-w" enctype="multipart/form-data" action="req/addTeacher.php">
           <h3> Site ADD teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert danger" role="alert">
@@ -126,34 +128,53 @@ $maGiaoVien ='';
 
               PassWord
             </label>
-            <input type="text" class="form-control" name="pass">
+            <input type="text" class="form-control" name="pass" id="passInput">
 
-            <!-- chon BirthDate -->
+            <!-- chon BirthDate and Upload Image -->
             <section class="container">
-              <h3 class="pt-4 pb-2">BirthDate</h3>
-              <form>
-                <div class="row form-group">
-                  <label for="date" class="col-sm-1 col-form-label">Date</label>
-                  <div class="col-sm-4">
-                    <div class="input-group date" id="datepicker">
-                    <input type="text" class="form-control" name="birthdate" >
-                      <span class="input-group-append">
-                        <span class="input-group-text bg-white">
-                          <i class="fa fa-calendar"></i>
-                        </span>
-                      </span>
+                <h3 class="pt-4 pb-2">BirthDate</h3>
+                <!-- <form id="uploadForm" method="post" enctype="multipart/form-data" action="req/addTeacher.php"> -->
+                    <div class="row form-group">
+                        <label for="date" class="col-sm-1 col-form-label">Date</label>
+                        <div class="col-sm-4">
+                            <div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control" name="birthdate">
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Add the file input next to the birth date input -->
+                        <div class="col-sm-3">
+                            <label for="image" class="form-label">Upload Image</label>
+                            <input type="file" name="image" accept="image/*" onchange="previewImage();">
+                            <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; display: none;">
+                        </div>
                     </div>
-                  </div>
-                </div>
-
-
-                
+                    </div>
+                    <!-- Image preview container -->
+                    
+                <!-- </form> -->
             </section>
-           
+
             <script type="text/javascript">
-              $(function() {
-                $('#datepicker').datepicker({dateFormat : 'yy-mm-dd'});
-              });
+                $(function() {
+                    $('#datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
+                });
+
+                function previewImage() {
+                var file = document.getElementById("avatar").files[0];
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    document.getElementById("imagePreview").style.display = "block";
+                    document.getElementById("imagePreview").src = reader.result;
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            }
             </script>
             <!-- chon Gioi Tinh -->
             <div class="col">
@@ -194,7 +215,7 @@ $maGiaoVien ='';
             <div class="mb-3">
               <label class="form-label">Subject</label>
               <div class="row row-cols-5">
-              <select name="subjects[]" class="form-select" aria-label="Default select example" multiple>
+              <select name="subjects" class="form-select" aria-label="Default select example">
                                     <?php foreach ($subjects as $subject) : ?>
 
 
@@ -207,7 +228,7 @@ $maGiaoVien ='';
             <div class="mb-3">
               <label class="form-label">Grade</label>
               <div class="row row-cols-5">
-              <select name="grades[]" class="form-select" aria-label="Default select example" multiple >
+              <select name="grades" class="form-select" aria-label="Default select example">
                                     <?php foreach ($grades as $grad) : ?>
 
 

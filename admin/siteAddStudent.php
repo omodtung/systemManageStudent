@@ -69,10 +69,11 @@ $id = '';
             include "inc/navBar.php";
             ?>
 
-            <div class="container mt-5" style="background-color:beige;">
-                <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+            <div class="container mt-5">
+                <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
                 <form method="post" class="shadow p-3 mt-5 form-w" action="req/addStudent.php">
+>>>>>>> 015250ccc0625011f9ab613295547b13083efdfc
                     <h3> Site ADD Student</h3>
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert danger" role="alert">
@@ -162,7 +163,11 @@ PassWord
                                     <label for="date" class="col-sm-1 col-form-label">Date</label>
                                     <div class="col-sm-4">
                                         <div class="input-group date" id="datepicker">
-                                            <input type="text" class="form-control" name="birthdate">
+<<<<<<< HEAD
+                                            <input type="text" class="form-control" name="birthdate"/>
+=======
+                                            <!-- <input type="text" class="form-control" name="birthdate">
+>>>>>>> 015250ccc0625011f9ab613295547b13083efdfc -->
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>

@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include "../DB_connection.php"; // Include your database connection
+
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
@@ -125,7 +128,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
                                                 Edit
                                             </button>
-                                            <a href="" class="btn btn-danger">Delete</a>
+                                            <button type="button" class="btn btn-danger" onclick="btndeleteclick('./req/teacher-delete.php?idteach=<?= $teacher['id'] ?>');">Delete</button>
 
 
 
@@ -149,6 +152,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 type: 'post',
                                 success: function(data) {
                                     $('#modalbody').html(data);
+                                    
+                                },
+                                error: function() {
+                                    $('#modalbody').text('An error occurred');
+                                }
+                            });
+
+
+                        }
+
+                        function btndeleteclick(_url) {
+                            $.ajax({
+                                url: _url,
+                                type: 'post',
+                                success: function(data) {
+                                    $('#modalbody').html(data);
+                                    location.reload();
+                                    
                                 },
                                 error: function() {
                                     $('#modalbody').text('An error occurred');
