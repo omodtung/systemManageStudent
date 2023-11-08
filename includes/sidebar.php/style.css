@@ -90,6 +90,7 @@ body{
 .sidebar .nav-list{
   margin-top: 20px;
   height: 100%;
+  padding-left: 0;
 }
 
 .sidebar li{
