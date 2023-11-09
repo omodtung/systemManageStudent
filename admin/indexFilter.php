@@ -1,30 +1,32 @@
 <?php
-include ("database.php");
-include ("getCategory.php");
-include ("filter-data.php");
+include("database.php");
+include("getCategory.php");
+include("filter-data.php");
 ?>
 
 <form method="post">
 
-<select name = "filterByCategory">
+  <select name="filterByCategory">
 
-<?php
-$getCategories =getCategory();
+    <?php
+    $getCategories = getCategory();
 
-foreach ($getCategories as $category)
-{
+    foreach ($getCategories as $category) {
 
-?>
-<option value="<?php echo $category['mamonhoc']; ?>" <?php echo  isset($_POST['filterByCategory']) &&$_POST['filterByCategory']==$category['mamonhoc']?'selected':''; ?>>
-     <?php echo $category['mamonhoc']; ?>
-    </option>
-  <?php } ?>
+    ?>
+      <option value="<?php echo $category['mamonhoc']; ?>" <?php echo  isset($_POST['filterByCategory']) && $_POST['filterByCategory'] == $category['mamonhoc'] ? 'selected' : ''; ?>>
+        <?php echo $category['mamonhoc']; ?>
+      </option>
+    <?php } ?>
 
 
-</select>
+  </select>
 
-<input type="submit" name="filter" >
+  <input type="submit" name="filter">
+
 </form>
+
+
 <?php
- include("display-data.php");
- ?>
+include("display-data.php");
+?>

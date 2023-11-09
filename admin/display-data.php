@@ -7,7 +7,7 @@ if(!empty($filterDataByCategory)) {
 
 <th scope="col">Teacher ID</th>
 <th scope="col">USER NAME</th>
-<th scope="col">PASSWORD</th>
+
 <th scope="col">Ho Ten</th>
 <th scope="col">Ma Mon Hoc</th>
 <th scope="col"> ngay sinh</th>
@@ -16,6 +16,7 @@ if(!empty($filterDataByCategory)) {
 <th scope="col"> Dia chi </th>
 <th scope="col"> Ma giao vien </th>
 
+<th scope="col"> Action </th>
 
 
     </tr>
@@ -27,7 +28,7 @@ foreach($filterDataByCategory as $teacher){
     <!--  -->
     <td><?= $teacher['id'] ?></td>
                     <td><?= $teacher['username'] ?></td>
-                    <td><?= $teacher['password'] ?></td>
+                  
                     <td><?= $teacher['hoten'] ?></td>
                     
 
@@ -36,6 +37,18 @@ foreach($filterDataByCategory as $teacher){
                     <td><?= $teacher['gioitinh'] ?></td>
                     <td><?= $teacher['diachi'] ?></td>
                     <td><?= $teacher['magv'] ?></td>
+                    <td>
+                                                <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
+                                                    Edit
+                                                </button>
+                                                <a href="" class="btn btn-danger">Delete</a>
+
+
+
+
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
+                                            </td>
 
 </tr>
 <?php

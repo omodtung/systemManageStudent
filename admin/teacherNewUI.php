@@ -27,7 +27,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <title>Home - Su Pham Thuc Hanh High School</title>
             <link rel="stylesheet" href="../css/style.css">
 
-
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="../css/style2.css">
 
             <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -108,11 +108,17 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Find</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="bx bx-folder"></i>
                             <span class="link_name">Filter Teacher</span>
                         </a>
-                        <span class="tooltip">Filter</span>
+                        <span class="tooltip">
+                            Filter
+
+
+                        </span>
+
+
                     </li>
                     <li>
                         <a href="#">
@@ -295,7 +301,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                             }
 
-                            
+
 
 
                             function Save() {
@@ -314,6 +320,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 }, 500);
                             }
                         </script>
+
+                        
 
                         <!-- <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -335,7 +343,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <?php
 
                         if (isset($_SESSION['success'])) {
-                            
+
                             $toastteacher = getTeacher($conn, $_SESSION["success"]);
                             echo "<script type='text/javascript'>",
 
@@ -346,12 +354,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             "</script>";
                             //$_SESSION["success"] = "";
                             unset($_SESSION['success']);
-                            
+                        } else {
                         }
-                        else{
-                            
-                        }
-                        
+
 
                         if (isset($_GET['error'])) {
                         ?>
@@ -450,34 +455,42 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
             <script type="text/javascript">
                 $(document).ready(function() {
-                    
-                        $("#live_search").keyup(function() {
-                            var input = $(this).val();
 
-                            if (input != "") {
-                                
-                                $.ajax({
-                                    url: "livesearch.php",
-                                    method: "POST",
-                                    data: {
-                                        input: input
-                                    },
-                                    success: function(data) {
-                                        $("#searchresult").html(data);
-                                        $("#searchresult").css("display", "block");
-                                    }
+                    $("#live_search").keyup(function() {
+                        var input = $(this).val();
 
-                                });
+                        if (input != "") {
 
-                            } else {
-                                $("#searchresult").css("display", "none");
-                            }
+                            $.ajax({
+                                url: "livesearch.php",
+                                method: "POST",
+                                data: {
+                                    input: input
+                                },
+                                success: function(data) {
+                                    $("#searchresult").html(data);
+                                    $("#searchresult").css("display", "block");
+                                }
 
-                        })
-                    
+                            });
+
+                        } else {
+                            $("#searchresult").css("display", "none");
+                        }
+
+                    })
+
                 })
             </script>
 
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <?php include("indexFilter.php"); ?>
+                    </div>
+                </div>
+            </div>
         </body>
 
         </html>
