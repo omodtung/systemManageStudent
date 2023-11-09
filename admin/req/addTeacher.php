@@ -1,6 +1,5 @@
 <?php
 
-
 session_start();
 
 if (
@@ -17,74 +16,62 @@ if (
             isset($_POST['grades']) &&
             isset($_POST['diaChi']) &&
             isset($_POST['birthdate']) &&
-            isset($_POST['genderbtn']))
-            {
+            isset($_POST['genderbtn'])) {
             include '../../DB_connection.php';
             include "../data/teacherAd.php";
 
             $flname = $_POST['flname'];
             $uname = $_POST['uname'];
             $birthdate = $_POST['birthdate'];
-            $pass = $_POST['pass'];
+            $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
             $gender = $_POST['genderbtn'];
             $idGV = $_POST['idGV'];
             $diaChi = $_POST['diaChi'];
-            
-            $target_dir = "uploads/"; 
-            $file_name = uniqid("teacher_").'.'.pathinfo($_FILES['avatar']['name'], PATHINFO_EXTENSION);
-            $target_file = $target_dir . $file_name .'jpg';
-
-            move_uploaded_file($_FILES['avatar']['tmp_name'], $target_file);
-
             $grades = $_POST['grades'];
             $subjects = $_POST['subjects'];
-            
-            $data = 'uname=' . $uname . '&fname=' . $flname . '&birthdate'. $birthdate ;
-            if (empty($flname)) {
-                $thongBao = " first Name is require";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
-                exit;
-            } else if (!findNameDocNhat($uname, $conn)) {
-                $thongBao = " Username Da Ton Tai Su Dung Username Khac";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
-                exit;
-            } else if (empty($pass)) {
-                $thongBao = " pass is require";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
-                exit;
-            
-            } else {
-                //chuyen doi hashing pass 
-               $pass = password_hash($pass, PASSWORD_DEFAULT);
 
+            $imageContent = null;
+            if(isset($_FILES['avatar']['tmp_name'])) {
+                $imageContent = file_get_contents($_FILES['avatar']['tmp_name']);
+            }
 
-                $sql = "INSERT INTO teachers(magv,username,password,hoten,mamonhoc,makhoi,ngaysinh,gioitinh,diachi,active,image) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO teachers (magv, username, password, hoten, mamonhoc, makhoi, ngaysinh, gioitinh, diachi, active, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([$idGV, $uname, $pass, $flname, $subjects, $grades, $birthdate, $gender, $diaChi,1,$target_file]);
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $idGV);
+            $stmt->bindParam(2, $uname);
+            $stmt->bindParam(3, $pass);
+            $stmt->bindParam(4, $flname);
+            $stmt->bindParam(5, $subjects);
+            $stmt->bindParam(6, $grades);
+            $stmt->bindParam(7, $birthdate);
+            $stmt->bindParam(8, $gender);
+            $stmt->bindParam(9, $diaChi);
+            $active = 1;
+            $stmt->bindParam(10, $active);
+            $stmt->bindParam(11, $imageContent, PDO::PARAM_LOB);
 
-                $thongBao = " Tao Thanh Cong";
+            if ($stmt->execute()) {
+                $thongBao = "Tao Thanh Cong";
                 header("Location: ../siteTeacherAdd.php?success=$thongBao");
-               exit;
-           }
+                exit;
+            } else {
+                $thongBao = "Database Error";
+                header("Location: ../siteTeacherAdd.php?error=$thongBao");
+                exit;
+            }
         } else {
-            $thongBao = " xay Ra loi 144442232324";
+            $thongBao = "Invalid Request";
             header("Location: ../siteTeacherAdd.php?error=$thongBao");
             exit;
         }
     } else {
         header("Location: ../../logout.php");
         exit;
-        
     }
-}
-
-else {
-
-    header("Location: ../../loguot.php");
+} else {
+    header("Location: ../../logout.php");
     exit;
-   
 }
 
 ?>

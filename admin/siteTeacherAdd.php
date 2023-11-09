@@ -132,32 +132,28 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             <!-- chon BirthDate and Upload Image -->
             <section class="container">
-                <h3 class="pt-4 pb-2">BirthDate</h3>
-                <!-- <form id="uploadForm" method="post" enctype="multipart/form-data" action="req/addTeacher.php"> -->
-                    <div class="row form-group">
-                        <label for="date" class="col-sm-1 col-form-label">Date</label>
-                        <div class="col-sm-4">
-                            <div class="input-group date" id="datepicker">
-                                <input type="text" class="form-control" name="birthdate">
-                                <span class="input-group-append">
-                                    <span class="input-group-text bg-white">
-                                        <i class="fa fa-calendar"></i>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                        <!-- Add the file input next to the birth date input -->
-                        <div class="col-sm-3">
-                            <label for="image" class="form-label">Upload Image</label>
-                            <input type="file" name="image" accept="image/*" onchange="previewImage();">
-                            <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; display: none;">
-                        </div>
+            <h3 class="pt-4 pb-2">BirthDate and Upload Image</h3>
+            <div class="row form-group">
+                <label for="date" class="col-sm-1 col-form-label">Date</label>
+                <div class="col-sm-4">
+                    <div class="input-group date" id="datepicker">
+                        <input type="text" class="form-control" name="birthdate">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
                     </div>
-                    </div>
-                    <!-- Image preview container -->
-                    
-                <!-- </form> -->
-            </section>
+                </div>
+                <!-- File input for the image -->
+                <div class="col-sm-3">
+                    <label for="avatar" class="form-label">Upload Image</label>
+                    <input type="file" name="avatar" accept="image/*" onchange="previewImage();">
+                    <img id="imagePreview" src="#" alt="Image Preview" style="max-width: 100%; display: none;">
+                </div>
+            </div>
+        </section>
+
 
             <script type="text/javascript">
                 $(function() {
