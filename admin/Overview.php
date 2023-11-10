@@ -4,15 +4,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
         include "../DB_connection.php";
-        include "data/teacherAd.php";
+        include "req/data/teacherAd.php";
         include "data/subject.php";
         include "data/grade.php";
         include "data/getteacher.php";
 
         $teachers =   getAllTeachers($conn);
 
-
-
+        $countFemale = countNumberTeacherFemale($conn);
+        $countMale = countNumberTeacherMale($conn);
+        $countTotalTeacher = countNumberTeacher($conn);
         //print_r($teachers);
 
 ?>
@@ -26,7 +27,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Home - Su Pham Thuc Hanh High School</title>
             <link rel="stylesheet" href="../css/style.css">
-
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="../css/style2.css">
 
@@ -87,11 +88,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">ADD</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="teacherNewUI.php">
                             <i class="bx bx-user"></i>
-                            <span class="link_name">Edit Teacher</span>
+                            <span class="link_name">View List Teacher</span>
                         </a>
-                        <span class="tooltip">Edit</span>
+                        <span class="tooltip">List Teacher</span>
                     </li>
                     <li>
                         <a href="./req/encryptpasswords.php?table=teachers">
@@ -135,7 +136,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Delete</span>
                     </li>
                     <li>
-                        <a href="Overview.php">
+                        <a href="#">
                             <i class="bx bx-cart-alt"></i>
                             <span class="link_name">View info</span>
                         </a>
@@ -169,228 +170,92 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
                 ?>
-                    <div class="container mt-5">
-                        <!-- <div class="sticky-top">
-                            <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
-                            <a href="./req/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
-                        </div> -->
-                        <div class="table-responsive">
-                            <!-- <table class="table table-success table-striped n-table"> -->
-                            <table class="table table-striped">
-                                <thead class="thead-dark" style="background-color:black; color:azure;">
-                                    <tr>
-
-                                        <th scope="col">Teacher ID</th>
-                                        <th scope="col">USER NAME</th>
-                                        <!-- <th scope="col" style="width:20%">PASSWORD</th> -->
-                                        <th scope="col">Ho Ten</th>
-                                        <th scope="col">Ma Mon Hoc</th>
-                                        <!-- <th scope="col">Ma  khoi</th> -->
-                                        <th scope="col"> ngay sinh</th>
-
-                                        <th scope="col"> Gioi Tinh </th>
-                                        <th scope="col"> Dia chi </th>
-                                        <th scope="col"> Ma giao vien </th>
-                                        <th scope="col">Ma khoi</th>
-                                        <th scope="col">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-
-                                    <?php foreach ($teachers as  $teacher) { ?>
-
-                                        <tr>
-                                            <!-- <th scope="row">1</th> -->
-                                            <td><?= $teacher['id'] ?></td>
-                                            <td><?= $teacher['username'] ?></td>
-                                            <!-- <td><?= substr($teacher['password'], 5) ?>...</td> -->
-                                            <td><?= $teacher['hoten'] ?></td>
-                                            <td><?= $teacher['mamonhoc'] ?></td>
-                                            <!-- <td><?= $teacher['makhoi'] ?></td> -->
-                                            <td><?= $teacher['ngaysinh'] ?></td>
-                                            <td><?= $teacher['gioitinh'] ?></td>
-                                            <td><?= $teacher['diachi'] ?></td>
-                                            <td><?= $teacher['magv'] ?></td>
-
-                                            <!-- <td>
-                                            <?php
-                                            $s = '';
-                                            $subjects  = str_split(trim($teacher['mamonhoc']));
-                                            foreach ($subjects as $subject) {
-                                                //  $s_temp = getSubjectById($subject, $conn);
-                                                $s_temp = getSubjectBySubject_code($subject, $conn);
-                                                if ($s_temp != 0) {
-                                                    $s .= $s_temp['subject'] . ',';
-                                                }
-                                            }
-
-                                            echo $s;
-                                            ?>
-                                        </td>  -->
-                                            <td>
-                                                <?php
-                                                $g = '';
-                                                $grades  = str_split(trim($teacher['makhoi']));
-                                                foreach ($grades as $grade) {
-                                                    $s_temp = getGradeById($grade, $conn);
-
-                                                    if ($s_temp != 0) {
-                                                        $g .= $s_temp['grade_code'] . ',';
-                                                    }
-                                                }
-
-                                                echo $g;
-                                                ?>
-                                            </td>
-
-                                            <td>
-                                                <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
-                                                    Edit
-                                                </button>
-                                                <a href="" class="btn btn-danger">Delete</a>
-
-
-
-
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
-                                            </td>
-                                            <div id="searchresult"></div>
-
-                                        </tr>
-
-                                    <?php } ?>
-
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- Edit Teacher -->
-                        <script>
-                            function btnclick(_url) {
-                                $.ajax({
-                                    url: _url,
-                                    type: 'post',
-                                    success: function(data) {
-                                        $('#modalbody').html(data);
-                                    },
-                                    error: function() {
-                                        $('#modalbody').text('An error occurred');
-                                    }
-                                });
-
-
-                            }
-
-                            function btnclickinfo(_url) {
-                                $.ajax({
-                                    url: _url,
-                                    type: 'post',
-                                    success: function(data) {
-                                        $('#modalbodyinfo').html(data);
-                                    },
-                                    error: function() {
-                                        $('#modalbodyinfo').text('An error occurred');
-                                    }
-                                });
-
-
-                            }
-
-
-
-
-                            function Save() {
-                                setTimeout(function() {
-
-                                    $('#modalbody').html('');
-
-                                }, 500);
-                            }
-
-
-
-                            function toastShow() {
-                                setTimeout(function() {
-                                    $('#liveToast').toast('show');
-                                }, 500);
-                            }
-                        </script>
-
-                        
-
-                        <!-- <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit teacher</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
-                                </div>
-                                <div class="modal-body" id="modalbody">
-
-                                </div>
-                                <div class="modal-footer">
-
-
-                                </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <h1 class="text-center">Dashboard</h1>
                             </div>
                         </div>
-                    </div> -->
-                        <?php
 
-                        if (isset($_SESSION['success'])) {
-
-                            $toastteacher = getTeacher($conn, $_SESSION["success"]);
-                            echo "<script type='text/javascript'>",
-
-                            "setTimeout(function (){",
-                            "$('#toasttext').html('Sucsessfully edited teacher " . $toastteacher['hoten'] . " " . $toastteacher['username'] . "');",
-                            "$('#liveToast').toast('show');",
-                            "}, 500);",
-                            "</script>";
-                            //$_SESSION["success"] = "";
-                            unset($_SESSION['success']);
-                        } else {
-                        }
-
-
-                        if (isset($_GET['error'])) {
-                        ?>
-                            <script type="text/javascript">
-                                $(document).ready(function() {
-                                    btnclick('./inc/editTeacher.php?idteach=<?= $_GET['idteach'] ?>&error=<?= $_GET['error'] ?>');
-                                    $('#modalform').modal('show');
-                                });
-                            </script>
-                        <?php
-                        }
-
-
-                        ?>
-
-                        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
-                                <div class="toast-header">
-                                    <i class="fa-solid fa-database fa-spin"></i>
-                                    <strong class="me-auto ms-1">System</strong>
-                                    <small>now</small>
-                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                                </div>
-                                <div class="toast-body" id="toasttext">
-                                    Sucsessfully edited teacher
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="card bg-success">
+                                    <div class="card-header">
+                                        <h3><a href="teacherNewUI.php" style="color:black;text-decoration: none;"> total Teacher</a></h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="badge badge-primary text-white"><?php echo $countTotalTeacher ?></span>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div class="col-4">
+                                <div class="card card-warning" style="background-color: red;">
+                                    <div class="card-header">
+                                        <h3><a href="teacherNewUI.php" style="color:black;text-decoration: none;"> Male Teacher</a></h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="badge badge-primary text-success-dark">
+                                            <?php echo $countMale ?>
+
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+
+                                <div class="card bg-warning">
+                                    <div class="card-header">
+                                        <h3><a href="teacherNewUI.php" style="color:black;text-decoration: none;"> feMale Teacher</a></h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <span class="badge badge-primary text-dark"> <?php echo $countFemale ?></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+                    <script>
+                        var xValues = ["Nam", "Nu", "Tong"];
+                        var yValues = [4, 6, 7];
+                        var barColors = ["red", "green", "blue"];
+
+                        new Chart("myChart", {
+                            type: "bar",
+                            data: {
+                                labels: xValues,
+                                datasets: [{
+                                    backgroundColor: barColors,
+                                    data: yValues
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: "World Wine Production 2018"
+                                }
+                            }
+                        });
+                    </script>
+
+
                         </div>
-                        <!-- End Edit Teaccher -->
 
 
-
-
+                       
                     </div>
+
+
+
                 <?php } else { ?>
 
                     <div class="alert alert-success" role="alert">

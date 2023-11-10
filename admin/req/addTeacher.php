@@ -58,7 +58,7 @@ if (
 
             if (empty($flname)) {
                 $thongBao = " ful Name is require";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
+                header("Location: ../siteTeacherAdd.php?error=$thongBao");
                 exit;
             } else if (empty($idgv)) {
                 $thongBao = " idgv  is require";
