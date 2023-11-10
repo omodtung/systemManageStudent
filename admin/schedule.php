@@ -35,6 +35,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+                function showResult(str) {
+                    if (str.length == 0) {
+                        document.getElementById("livesearch").innerHTML = "";
+                        document.getElementById("livesearch").style.border = "0px";
+                        return;
+                    }
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById("livesearch").innerHTML = this.responseText;
+                            document.getElementById("livesearch").style.border = "1px solid #A5ACB2";
+                        }
+                    }
+                    xmlhttp.open("GET", "livesearch.php?q=" + str, true);
+                    xmlhttp.send();
+                }
+            </script>
 </head>
 <body>
 <div class="sidebar">
@@ -92,9 +110,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Delete</span>
                     </li>
                     <li>
-                        <a target="_blank" rel="noopener noreferrer" href="./req/exportteacher.php">
+                        <a target="_blank" rel="noopener noreferrer" href="./req/export.php?schedule=1">
                             <i class="bx bx-export"></i>
-                            <span class="link_name">Export All Teachers</span>
+                            <span class="link_name">Export All Schedules</span>
                         </a>
                         <span class="tooltip">Delete</span>
                     </li>
@@ -165,6 +183,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                     Detail
                                                 </button>
                                     </td>
+                                    <div id="searchresult"></div>
                                 </tr>
 
 
@@ -301,6 +320,33 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     });
                 </script>
             <script src="../js/script.js"></script>
+            <!-- import ajax live searching -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $("#live_search").keyup(function() {
+                        var input = $(this).val();
+                        if (input != "") {
+                            $.ajax({
+                                url: "livesearch.php?schedule=1",
+                                method: "POST",
+                                data: {
+                                    input: input
+                                },
+                                success: function(data) {
+                                    $("#searchresult").html(data);
+                                    $("#searchresult").css("display", "block");
+                                }
+
+                            });
+
+                        } else {
+                            $("#searchresult").css("display", "none");
+                        }
+
+                    })
+                })
+            </script>
 </body>
 
 </html>

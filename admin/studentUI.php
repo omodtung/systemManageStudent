@@ -111,9 +111,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Delete</span>
                     </li>
                     <li>
-                        <a target="_blank" rel="noopener noreferrer" href="./req/exportteacher.php">
+                        <a target="_blank" rel="noopener noreferrer" href="./req/export.php?student=1">
                             <i class="bx bx-export"></i>
-                            <span class="link_name">Export All Teachers</span>
+                            <span class="link_name">Export All Students</span>
                         </a>
                         <span class="tooltip">Delete</span>
                     </li>
