@@ -71,7 +71,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         <form method="post" class="shadow p-3 mt-5 form-w" enctype="multipart/form-data" action="req/addTeacher.php">
           <h3> Site ADD teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
-            <div class="alert alert danger" role="alert">
+            <div class="alert alert-danger" role="alert">
               <?= $_GET['error'] ?>
 
             </div>

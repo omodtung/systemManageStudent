@@ -54,7 +54,7 @@ if (
             foreach ($_POST['subjects'] as $subject) {
                 $subjects .= $subject;
             }
-            $data = 'uname=' . $uname . '&flname=' . $flname . '&idGV' . $idgv. '&pass' . $pass;
+           $data = 'uname=' . $uname . '&flname=' . $flname . '&idGV' . $idgv. '&pass' . $pass;
 
             if (empty($flname)) {
                 $thongBao = " ful Name is require";

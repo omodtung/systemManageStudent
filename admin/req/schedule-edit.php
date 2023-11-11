@@ -29,6 +29,6 @@ session_start();
 
 
                 
-                $_SESSION['editsucsess'] = $teacherid;
+                $_SESSION['sucsess'] = $id;
                 header("Location: ../schedule.php");
                 exit;

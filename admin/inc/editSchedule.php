@@ -10,7 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "../data/class.php";
         $class = getAllClass($conn);
         $teachers = getAllTeachers($conn);
-        $thissche = getScheduleFrom($conn,$_GET["id"]);
+        $thissche = getSchedule($conn,$_GET["id"]);
 
 ?>
         <html lang="en">
