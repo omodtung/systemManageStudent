@@ -51,6 +51,37 @@ return $people;
 }
 
 
+function countNumberTeacherFemale($conn)
+{
+  $sql = "SELECT * FROM teachers where gioitinh='Nữ'";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$totalfemale = $stmt->rowCount();
 
+return $totalfemale;
 
+ 
+}
+function countNumberTeacherMale($conn)
+{
+  $sql = "SELECT * FROM teachers where gioitinh='Nam'";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$totalmale = $stmt->rowCount();
+
+return $totalmale;
+
+ 
+}
+function countNumberTeacher($conn)
+{
+  $sql = "SELECT * FROM teachers ";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$total = $stmt->rowCount();
+
+return $total;
+
+ 
+}
 ?>
