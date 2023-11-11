@@ -377,7 +377,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     });
                                 </script>
                             <?php
-                            
+                                
                             unset($_SESSION['openfilter']);
                             }
 
