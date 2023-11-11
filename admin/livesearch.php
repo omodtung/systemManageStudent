@@ -5,13 +5,13 @@ $pdo = null;
 
 // Try to connect to the database
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=test7", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=test3", "root", "");
 } catch (PDOException $e) {
     echo "Error connecting to the database: " . $e->getMessage();
     exit;
 }
 if(isset($_GET["student"])) {
-    echo '<a href="./req/exportteacher.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./req/export.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE hotenhs LIKE '{$input}%'";
@@ -62,7 +62,59 @@ if(isset($_GET["student"])) {
         echo "Error executing the query: " . $e->getMessage();
     }
 }
-else {echo '<a href="./req/exportteacher.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+else if(isset($_GET["schedule"])) {
+    echo '<a href="./req/export.php?schedulesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    try {
+        $input = $_POST['input'];
+        $query = "SELECT * FROM schedule WHERE HoTen LIKE '{$input}%'";
+        $rows = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    
+        // If there are any results, display them in a table
+        if (count($rows) > 0) {
+            echo '<table class="table table-striped" id="searchresult">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th scope="col">Schedule ID</th>';
+            echo '<th scope="col">Teacher ID</th>';
+            echo '<th scope="col">Ho Ten</th>';
+            echo '<th scope="col">Start Time</th>';
+            echo '<th scope="col">End Time</th>';
+            echo '<th scope="col">Work Date</th>';
+            echo '<th scope="col">Class</th>';
+            echo '<th scope="col">Action</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+    
+            foreach ($rows as $row) {
+                echo '<tr>';
+                echo '<td>' . $row['ID_Schedule'] . '</td>';
+                echo '<td>' . $row['TeacherId'] . '</td>';
+                echo '<td>' . $row['HoTen'] . '</td>';
+                echo '<td>' . $row['StartTime'] . '</td>';
+                echo '<td>' . $row['EndTime'] . '</td>';
+                echo '<td>' . $row['WorkDate'] . '</td>';
+                echo '<td>' . $row['Class'] . '</td>';
+                
+                
+                echo '<td>';
+                echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick(`./inc/editSchedule.php?id=' . $row["ID_Schedule"] . '`)" data-bs-id='. $row["ID_Schedule"] .'> Edit </button>';
+                echo '<a href="applogic/deleteschedule.php?id=' . $row['ID_Schedule'] .'" class="btn btn-danger">Delete</a>';
+                echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo(`./inc/ScheduleInfo.php?id='. $row["TeacherId"] .'`)" data-bs-id='. $row["TeacherId"] .'>Detail </button>';
+                echo '</td>';
+                echo '</tr>';
+            }
+    
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo '<h3>No schedules found.</h3>';
+        }
+    } catch (PDOException $e) {
+        echo "Error executing the query: " . $e->getMessage();
+    }
+}
+else {echo '<a href="./req/export.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
 
 // Try to execute the query
 try {
