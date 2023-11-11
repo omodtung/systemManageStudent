@@ -369,6 +369,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <?php
                         }
 
+                        if (isset($_SESSION['openfilter'])) {
+                            ?>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $('#modalfilter').modal('show');
+                                    });
+                                </script>
+                            <?php
+                            
+                            unset($_SESSION['openfilter']);
+                            }
+
 
                         ?>
 
@@ -484,7 +496,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             </script>
 
 
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <?php include("indexFilter.php"); ?>

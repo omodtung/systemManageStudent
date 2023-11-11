@@ -4,7 +4,7 @@ include("getCategory.php");
 include("filter-data.php");
 ?>
 
-<form method="post">
+<form method="post" action="applogic/rebound.php?indexFilter=1">
 
   <select name="filterByCategory">
 
