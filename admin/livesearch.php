@@ -5,7 +5,7 @@ $pdo = null;
 
 // Try to connect to the database
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=test3", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=test7", "root", "");
 } catch (PDOException $e) {
     echo "Error connecting to the database: " . $e->getMessage();
     exit;
@@ -119,7 +119,7 @@ else {echo '<a href="./req/export.php?searched=' . $_POST['input'] . '" class="b
 // Try to execute the query
 try {
     $input = $_POST['input'];
-    $query = "SELECT * FROM teachers WHERE hoten LIKE '{$input}%'";
+    $query = "SELECT * FROM teachers WHERE hoten LIKE '{$input}%'AND status=1";
     $rows = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
     // If there are any results, display them in a table
