@@ -277,7 +277,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         ?>
                             <script type="text/javascript">
                                 $(document).ready(function() {
-                                    btnclick('./inc/editTeacher.php?idteach=<?= $_GET['idteach'] ?>&error=<?= $_GET['error'] ?>');
+                                    btnclick('./inc/editStudent.php?idstudent=<?= $_GET['idstudent'] ?>&error=<?= $_GET['error'] ?>');
                                     $('#modalform').modal('show');
                                 });
                             </script>
