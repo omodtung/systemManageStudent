@@ -58,7 +58,7 @@ $maGiaoVien ='';
       <!-- ------------------------date import code upper -->
     </head>
 
-    <body>
+    <body >
     <?php 
         include "inc/navBar.php";
      ?>
@@ -66,7 +66,7 @@ $maGiaoVien ='';
       <div class="container mt-5">
         <a href="teacherNewUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
+        <form  method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
           <h3> Site ADD teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">

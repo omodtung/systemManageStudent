@@ -37,17 +37,21 @@ foreach($filterDataByCategory as $teacher){
                     <td><?= $teacher['gioitinh'] ?></td>
                     <td><?= $teacher['diachi'] ?></td>
                     <td><?= $teacher['magv'] ?></td>
-                    <td>
+                    <td style="display: inline-flex;">
                                                 <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
                                                     Edit
                                                 </button>
+
+
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
                                                 <a href="" class="btn btn-danger">Delete</a>
 
 
 
 
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
+
+
                                             </td>
 
 </tr>

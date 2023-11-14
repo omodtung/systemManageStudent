@@ -15,8 +15,8 @@ function getSchedule($conn,$idsche){
 }
 
 function findschedule($uname, $conn){
-   $sql = "SELECT username FROM schedule
-           WHERE username=?";
+   $sql = "SELECT HoTen FROM schedule
+           WHERE HoTen=?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$uname]);
 

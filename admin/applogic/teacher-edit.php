@@ -24,19 +24,19 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 
 
         if(!isset($_POST['hoten']) || empty($hoten)){
-            header("Location: ../teacherUI.php?idteach=$id&error=Name is Empty!");
+            header("Location: ../teacherNewUI.php?idteach=$id&error=Name is Empty!");
         }
         // else if(!isset($_POST['lname']) || empty($lname)){
         //     header("Location: ../teacher-edit.php?idteach=$id&error=Name is Empty!");
         // }
         else if(!isset($_POST['uname']) || empty($uname)){
-            header("Location: ../teacherUI.php?idteach=$id&error=Username is Empty!");
+            header("Location: ../teacherNewUI.php?idteach=$id&error=Username is Empty!");
         }
         else if(!isset($_POST['subjects']) || empty($_POST['subjects'])){
-            header("Location: ../teacherUI.php?idteach=$id&error=Subject(s) is Empty!");
+            header("Location: ../teacherNewUI.php?idteach=$id&error=Subject(s) is Empty!");
         }
         else if(!isset($_POST['grades']) || empty($_POST['grades'])){
-            header("Location: ../teacherUI.php?idteach=$id&error=Grade(s) is Empty!");
+            header("Location: ../teacherNewUI.php?idteach=$id&error=Grade(s) is Empty!");
         }
 
         else{

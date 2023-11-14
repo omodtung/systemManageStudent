@@ -3,7 +3,7 @@ define("teacherTable","teachers");
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$databasename = "test7";
+$databasename = "test3";
 
 
 $conn = mysqli_connect($hostname, $username, $password, $databasename);
