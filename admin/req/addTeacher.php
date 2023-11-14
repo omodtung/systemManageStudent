@@ -14,6 +14,8 @@ if (
     if ($_SESSION['role'] == 'Admin') {
 
         if (
+
+            
             isset($_POST['flname']) &&
             isset($_POST['idGV']) &&
             isset($_POST['uname']) &&
@@ -58,7 +60,7 @@ if (
 
             if (empty($flname)) {
                 $thongBao = " ful Name is require";
-                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
+                header("Location: ../siteTeacherAdd.php?error=$thongBao");
                 exit;
             } else if (empty($idgv)) {
                 $thongBao = " idgv  is require";

@@ -62,7 +62,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       ?>
 
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/student-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
 
@@ -223,7 +223,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <?php endforeach ?> -->
                         <select name="grade" >
                         <?php foreach ($grades as $grade) : ?>
-                        <option value="<?= $grade['grade_id'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['makhoi']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                        <option value="<?= $grade['grade_code'] ?>" <?php echo (in_array($grade['grade_id'],explode(",", $student['makhoi']))) ? 'selected' : ''; ?>><?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
                         <?php endforeach ?>
                     </select>
                     </div>
