@@ -108,7 +108,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         <div class="container mt-5">
             <div class="table-responsive">
                 <table class="table table-success table-striped n-table table-hover mx-auto align-middle">
-                    <thead class="table-dark">
+                    <thead class="table-dark" style="background-color:black; color:azure;">
                         <tr>
                             <th scope="col">Ho Ten</th>
                             <th scope="col">Lop</th>

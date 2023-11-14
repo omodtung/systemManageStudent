@@ -223,7 +223,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                     <script>
                         var xValues = ["Nam", "Nu", "Tong"];
-                        var yValues = [4, 6, 7];
+                        var yValues = [<?=$countMale?>, <?=$countFemale?>, <?=$countTotalTeacher?>];
                         var barColors = ["red", "green", "blue"];
 
                         new Chart("myChart", {
@@ -236,6 +236,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 }]
                             },
                             options: {
+                                scales: {
+                                    yAxes:[{
+                                        ticks: {
+                                            min:0
+                                        }
+                                    }],
+                                },
                                 legend: {
                                     display: false
                                 },
