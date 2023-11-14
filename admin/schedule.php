@@ -317,7 +317,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         }
 
         $(document).ready(function() {
-            $("#navLinks li:nth-child(2) a").addClass('active')
+            $("#navLinks li:nth-child(7) a").addClass('active')
         });
     </script>
 

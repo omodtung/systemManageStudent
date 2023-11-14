@@ -223,8 +223,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                     <script>
                         var xValues = ["Nam", "Nu", "Tong"];
-                        var yValues = [4, 6, 7];
-                        var barColors = ["red", "green", "blue"];
+                        var yValues = [<?=$countMale?>, <?=$countFemale?>, <?=$countTotalTeacher?>];
+                        var barColors = ["red", "yellow", "green"];
 
                         new Chart("myChart", {
                             type: "bar",
@@ -236,19 +236,68 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 }]
                             },
                             options: {
+                                scales: {
+        yAxes: [{
+            ticks: {
+            min:0
+            }
+        }],
+    },
+
+
+
                                 legend: {
                                     display: false
                                 },
                                 title: {
                                     display: true,
-                                    text: "World Wine Production 2018"
+                                    text: "Bảng Thống kê Giới Tính"
                                 }
                             }
                         });
                     </script>
 
 
+
+<canvas id="myChart2" style="width:50%;max-width:600px"></canvas>
+
+<script>
+var xzValues = ["Teacher", "TeacherFemale", "TeacherMAle"];
+var yzValues = [<?=$countTotalTeacher?>, <?=$countFemale?>, <?=$countMale?>];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797"
+ 
+];
+
+new Chart("myChart2", {
+  type: "pie",
+  data: {
+    labels: xzValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yzValues
+    }]
+  },
+
+ 
+  options: {
+
+ 
+    title: {
+      display: true,
+      text: "Bảng Thống Kê Môn Học"
+    }
+  }
+});
+</script>
+
+
+
                         </div>
+
+                        
 
 
                        
@@ -273,6 +322,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         $("#navLinks li:nth-child(2) a").addClass('active')
                     });
                 </script>
+
+
+
 
             </section>
             <!-- Scripts -->
