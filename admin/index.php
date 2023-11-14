@@ -41,7 +41,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             </a>
             <a href="" class="col btn btn-dark m-2 py-3">
               <i class="fa fa-pencil-square fs-1" aria-hidden="true"></i><br>
-
+              Score
             </a>
             <a href="classUi.php" class="col btn btn-dark m-2 py-3">
               <i class="fa fa-cubes fs-1" aria-hidden="true"></i><br>
@@ -49,7 +49,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             </a>
             <a href="" class="col btn btn-dark m-2 py-3">
               <i class="fa fa-columns fs-1" aria-hidden="true"></i><br>
-
+              TimesTable
             </a>
 
 
@@ -63,7 +63,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             </a>
             <a href="" class="col btn btn-dark m-2 py-3">
               <i class="fa fa-envelope fs-1" aria-hidden="true"></i><br>
-
+              Exam Online Test
             </a>
             <a href="" class="col btn btn-primary m-2 py-3 col-5">
               <i class="fa fa-cogs fs-1" aria-hidden="true"></i><br>
@@ -81,7 +81,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
 
-      
+
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
       <script>

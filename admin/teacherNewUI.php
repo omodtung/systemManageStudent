@@ -86,27 +86,15 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </a>
                         <span class="tooltip">ADD</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-user"></i>
-                            <span class="link_name">Edit Teacher</span>
-                        </a>
-                        <span class="tooltip">Edit</span>
-                    </li>
+
                     <li>
                         <a href="./req/encryptpasswords.php?table=teachers">
                             <i class="bx bx-chat"></i>
                             <span class="link_name">Encrypt All Passwords</span>
                         </a>
-                        <span class="tooltip">Encrypt</span>
+                        <spsuccessan class="tooltip">Encrypt</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-pie-chart-alt-2"></i>
-                            <span class="link_name"> Find Teaccher</span>
-                        </a>
-                        <span class="tooltip">Find</span>
-                    </li>
+
                     <li>
                         <a data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="bx bx-folder"></i>
@@ -120,13 +108,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-cart-alt"></i>
-                            <span class="link_name">Delete Teacher</span>
-                        </a>
-                        <span class="tooltip">Delete</span>
-                    </li>
+
                     <li>
                         <a target="_blank" rel="noopener noreferrer" href="./req/export.php?teacher=1">
                             <i class="bx bx-export"></i>
@@ -150,7 +132,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </li>
                     <li class="profile">
                         <div class="profile_details">
-                            <img src="../img/profile.jpeg" alt="profile image">
+                            <!-- <img src="../img/profile.jpeg" alt="profile image"> -->
                             <div class="profile_content">
                                 <div class="name"><?= $_SESSION['admin_name'][0] ?> <?= $_SESSION['admin_name'][1] ?></div>
                                 <div class="designation">Admin</div>
@@ -174,6 +156,19 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
                             <a href="./req/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
                         </div> -->
+
+                        <style>
+                            th {
+                                text-align: center;
+
+                            }
+
+                            td {
+                                text-align: center;
+
+
+                            }
+                        </style>
                         <div class="table-responsive">
                             <!-- <table class="table table-success table-striped n-table"> -->
                             <table class="table table-striped">
@@ -181,17 +176,17 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <tr>
 
                                         <th scope="col">Teacher ID</th>
-                                        <th scope="col">USER NAME</th>
+                                        <th scope="col">UserName</th>
                                         <!-- <th scope="col" style="width:20%">PASSWORD</th> -->
-                                        <th scope="col">Ho Ten</th>
-                                        <th scope="col">Ma Mon Hoc</th>
+                                        <th scope="col">Họ Tên</th>
+                                        <th scope="col">Mã Môn Học</th>
                                         <!-- <th scope="col">Ma  khoi</th> -->
-                                        <th scope="col"> ngay sinh</th>
+                                        <th scope="col"> ngày sinh</th>
 
-                                        <th scope="col"> Gioi Tinh </th>
-                                        <th scope="col"> Dia chi </th>
-                                        <th scope="col"> Ma giao vien </th>
-                                        <th scope="col">Ma khoi</th>
+                                        <th scope="col"> Giới Tính </th>
+                                        <th scope="col"> Địa Chỉ </th>
+                                        <th scope="col"> Mã Giáo Viên </th>
+                                        <th scope="col">Mã khối</th>
                                         <th scope="col">Action</th>
 
                                     </tr>
@@ -245,17 +240,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                 ?>
                                             </td>
 
-                                            <td>
+                                            <td style="display:inline-flex">
                                                 <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
                                                     Edit
                                                 </button>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
                                                 <a href="" class="btn btn-danger">Delete</a>
 
 
 
 
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
+
                                             </td>
                                             <div id="searchresult"></div>
 
@@ -321,7 +317,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             }
                         </script>
 
-                        
+
 
                         <!-- <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
@@ -370,16 +366,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         }
 
                         if (isset($_SESSION['openfilter'])) {
-                            ?>
-                                <script type="text/javascript">
-                                    $(document).ready(function() {
-                                        $('#modalfilter').modal('show');
-                                    });
-                                </script>
-                            <?php
-                                
+                        ?>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#modalfilter').modal('show');
+                                });
+                            </script>
+                        <?php
+
                             unset($_SESSION['openfilter']);
-                            }
+                        }
 
 
                         ?>
