@@ -20,9 +20,7 @@
         <li class="nav-item">
           <a class="nav-link" href="studentUI.php">Students</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">?</a>
-        </li>
+        
         <li class="nav-item">
           <a class="nav-link" href="classUi.php">Class</a>
         </li>
@@ -32,12 +30,8 @@
         <li class="nav-item">
           <a class="nav-link" href="schedule.php">Schedule</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">Course</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#contact">?</a>
-        </li>
+        
+        
         <li class="nav-item">
           <a class="nav-link" href="#contact">Settings</a>
         </li>
