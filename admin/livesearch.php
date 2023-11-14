@@ -14,7 +14,7 @@ if(isset($_GET["student"])) {
     echo '<a href="./req/export.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
-        $query = "SELECT * FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE hotenhs LIKE '{$input}%'";
+        $query = "SELECT * FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE hotenhs LIKE '{$input}%' AND status = 1";
         $rows = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
     
         // If there are any results, display them in a table
