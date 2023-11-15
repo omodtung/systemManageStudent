@@ -110,6 +110,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <table class="table table-success table-striped n-table table-hover mx-auto align-middle">
                     <thead class="table-dark" style="background-color:black; color:azure;">
                         <tr>
+                            <th scope="col">Ma</th>
                             <th scope="col">Ho Ten</th>
                             <th scope="col">Lop</th>
                             <th scope="col"> Action </th>
@@ -119,7 +120,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <?php foreach ($timetable as  $table) { ?>
 
                             <tr>
-
+                                <td><?= $table['mahs'] ?></td>
                                 <td><?= $table['hotenhs'] ?></td>
                                 <td><?= $table['malop'] ?></td>
 
@@ -282,7 +283,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 var input = $(this).val();
                 if (input != "") {
                     $.ajax({
-                        url: "livesearch.php?schedule=1",
+                        url: "livesearch.php?timetable=1",
                         method: "POST",
                         data: {
                             input: input
