@@ -53,6 +53,19 @@ function getScheduleFrom($conn,$idteach){
   }
 }
 
+function getScheduleFromClass($conn,$idclass){
+  $sql = "SELECT * FROM schedule WHERE Class = '$idclass'";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+
+  if ($stmt->rowCount() >= 1) {
+    $schedules = $stmt->fetchAll();
+    return $schedules;
+  }else {
+    return 0;
+  }
+}
+
 function getScheduleFromId($conn,$id){
   $sql = "SELECT * FROM schedule WHERE ID_Schedule = $id";
   $stmt = $conn->prepare($sql);

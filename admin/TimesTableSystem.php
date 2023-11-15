@@ -112,9 +112,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <tr>
                             <th scope="col">Ho Ten</th>
                             <th scope="col">Lop</th>
-                            <th scope="col">Start Time</th>
-                            <th scope="col"> End Time </th>
-                            <th scope="col"> Work Date </th>
                             <th scope="col"> Action </th>
                         </tr>
                     </thead>
@@ -125,12 +122,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                 <td><?= $table['hotenhs'] ?></td>
                                 <td><?= $table['malop'] ?></td>
-                                <td><?= $table['StartTime'] ?></td>
-                                <td><?= $table['EndTime'] ?></td>
-                                <td><?= $table['WorkDate'] ?></td>
 
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo('./inc/ScheduleInfo.php?id=<?= $table['id'] ?>')" data-bs-id=<?= $table['id'] ?>>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo('./inc/TimeTableinfo.php?id=<?= $table['malop'] ?>')" data-bs-id=<?= $table['malop'] ?>>
                                         Detail
                                     </button>
                                 </td>
