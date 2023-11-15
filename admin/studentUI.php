@@ -128,7 +128,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <a href="#">
                             <i class="bx bx-cog"></i>
                             <span class="link_name">Setting</span>
-                        </a>
+                        </a>M
                         <span class="tooltip">Settings</span>
                     </li>
                     <li class="profile">
