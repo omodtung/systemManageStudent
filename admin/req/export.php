@@ -25,11 +25,11 @@ else if(isset($_GET["studentsearched"]) && $_GET["studentsearched"] != ""){
 else if(isset($_GET["student"]) && $_GET["student"] != ""){
     $fileName = "students-data_" . date('Y-m-d') . ".xlsx"; 
     $excelData[] = array('id', 'username', 'mahs', 'makhoi','malop','hotenhs','hanhkiem','HocLuc','ngaysinh', 'gioitinh', 'diachi', 'STATUS'); 
-    $sql = "SELECT * FROM students ORDER BY id ASC"; 
+    $sql = "SELECT students.*,avgscore.HocLuc FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE status = 1 ORDER BY id ASC"; 
 }
 else if(isset($_GET["teacher"]) && $_GET["teacher"] != ""){
     $excelData[] = array('ID', 'magv', 'username', 'hoten','mamonhoc','makhoi','ngaysinh', 'gioitinh', 'diachi', 'STATUS'); 
-    $sql = "SELECT * FROM teachers ORDER BY id ASC"; 
+    $sql = "SELECT * FROM teachers WHERE status = 1 ORDER BY id ASC"; 
 }
 else if(isset($_GET["schedule"]) && $_GET["schedule"] != ""){
     $fileName = "schedules-data_" . date('Y-m-d') . ".xlsx"; 
