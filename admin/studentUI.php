@@ -21,7 +21,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Home - Su Pham Thuc Hanh High School</title>
-            
+
             <link rel="stylesheet" href="../css/style.css">
 
             <link rel="stylesheet" href="../css/style2.css">
@@ -64,8 +64,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <ul class="nav-list">
                     <li>
                         <i class="bx bx-search"></i>
-                        <input type="text"id="live_search" placeholder="Search...">
-                  
+                        <input type="text" id="live_search" placeholder="Search...">
+
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
@@ -97,7 +97,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Find</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="bx bx-folder"></i>
                             <span class="link_name">Filter Teacher</span>
                         </a>
@@ -179,7 +179,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                         <tr>
                                             <!-- <th scope="row">1</th> -->
-                                            <td><?= $student['id'] ?></td>
+                                            <td><?= $student['mahs'] ?></td>
                                             <td><?= $student['username'] ?></td>
                                             <!-- <td><?= $student['password'] ?></td> -->
                                             <td><?= $student['hotenhs'] ?></td>
@@ -257,7 +257,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             }
                         </script>
 
-                        
+
                         <?php
 
                         if (isset($_SESSION['sucsess'])) {
@@ -288,19 +288,38 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                         ?>
 
+                        <?php
+                        if (isset($_SESSION['openfilter1'])) {
+                        ?>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#modalfilter').modal('show');
+                                });
+                            </script>
+                        <?php
+
+                            unset($_SESSION['openfilter1']);
+                        }
+
+
+                        ?>
+
+
+
+
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
-                                            <div class="toast-header">
-                                                <i class="fa-solid fa-database fa-spin"></i>
-                                                <strong class="me-auto ms-1">System</strong>
-                                                <small>now</small>
-                                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                                            </div>
-                                            <div class="toast-body" id="toasttext">
-                                                Sucsessfully edited student
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
+                                <div class="toast-header">
+                                    <i class="fa-solid fa-database fa-spin"></i>
+                                    <strong class="me-auto ms-1">System</strong>
+                                    <small>now</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body" id="toasttext">
+                                    Sucsessfully edited student
+                                </div>
+                            </div>
+                        </div>
                         <!-- End Edit Student -->
                     </div>
                 <?php } else { ?>
@@ -324,23 +343,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <script src="../js/script.js"></script>
 
             <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit student</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
-                                    </div>
-                                    <div class="modal-body" id="modalbody">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit student</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                        </div>
+                        <div class="modal-body" id="modalbody">
 
-                                    </div>
-                                    <div class="modal-footer">
+                        </div>
+                        <div class="modal-footer">
 
 
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+
             <div class="modal fade" id="modalinfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-lg">
                     <div class="modal-content">
@@ -386,6 +405,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     })
                 })
             </script>
+            <!--  filter theo lop cho hoc sinh  -->
+            <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <?php include("req/IndexFilterStudentDAL.php"); ?>
+                    </div>
+                </div>
+            </div>
+
+
         </body>
 
         </html>

@@ -455,6 +455,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                 </div>
+                    <td><?= $teacher['hoten'] ?></td>
+              
             </div>
 
 
