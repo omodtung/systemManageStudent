@@ -119,7 +119,7 @@ else {echo '<a href="./req/export.php?searched=' . $_POST['input'] . '" class="b
 // Try to execute the query
 try {
     $input = $_POST['input'];
-    $query = "SELECT * FROM teachers WHERE hoten LIKE '{$input}%'AND status=1";
+    $query = "SELECT * FROM teachers WHERE hoten LIKE '{$input}%' AND status = 1";
     $rows = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
 
     // If there are any results, display them in a table

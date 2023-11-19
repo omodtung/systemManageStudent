@@ -71,7 +71,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <li>
                         <a href="siteAddStudent.php">
                             <i class="bx bx-grid-alt"></i>
-                            <span class="link_name"> ADD Teacher </span>
+                            <span class="link_name"> ADD Teacher</span>
                         </a>
                         <span class="tooltip">ADD</span>
                     </li>
@@ -93,7 +93,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <li>
                         <a data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="bx bx-folder"></i>
-                            <span class="link_name">Filter Teacher</span>
+                            <span class="link_name">Filter Lop</span>
                         </a>
                         <span class="tooltip">Filter</span>
                     </li>
@@ -105,13 +105,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </a>
                         <span class="tooltip">Export</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-cart-alt"></i>
-                            <span class="link_name">View info</span>
-                        </a>
-                        <span class="tooltip">View</span>
-                    </li>
+                   
                     <li>
                         <a href="#">
                             <i class="bx bx-cog"></i>

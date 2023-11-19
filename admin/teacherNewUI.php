@@ -163,7 +163,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                             }
 
-                            td {
+                
+            td {
                                 text-align: center;
 
 
