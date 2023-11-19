@@ -22,53 +22,18 @@ if (isset($_SESSION['student_id']) &&
 	<title>Student - Home</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="../css/style.css">
+
+  <link rel="stylesheet" href="../css/style3.css">
 	<link rel="icon" href="../logo.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style>
-.tableStyle {
-border-collapse: collapse;
-width: 100%;
-color: #333;
-font-family: Arial, sans-serif;
-font-size: 14px;
-text-align: center;
-border-radius: 10px;
-overflow: hidden;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-margin: auto;
-margin-top: 50px;
-margin-bottom: 50px;
-margin-left:50px;
-}
-th {
-background-color: #ff9800;
-color: #fff;
-font-weight: bold;
-padding: 10px;
-text-transform: uppercase;
-letter-spacing: 1px;
-border-top: 1px solid #fff;
-border-bottom: 1px solid #ccc;
-}
-tr:nth-child(even) td {
-background-color: #f2f2f2;
-}
-tr:hover td {
-background-color: #ffedcc;
-}
-td {
-background-color: #fff;
-padding: 10px;
-border-bottom: 1px solid #ccc;
-font-weight: bold;
-}
-</style>
-  </style>
+
 
 </head>
 <body>
+
+  <section class="home-section">
     <?php 
         include "inc/navbar.php";
      ?>
@@ -89,11 +54,11 @@ font-weight: bold;
             <li class="list-group-item">Giới tính: <?=$student['gioitinh']?></li>
             <li class="list-group-item">Địa Chỉ: <?=$student['diachi']?></li>
 
-            <li class="list-group-item">Grade: 
+            <li class="list-group-item">Khối: 
                  <?php 
                       $grade = $student['makhoi'];
                       $g = getGradeBycode($grade, $conn);
-                      echo $g['grade_code'].'-'.$g['grade'];
+                      echo $g['grade'];
                   ?>
             </li> 
           </ul>
@@ -103,19 +68,19 @@ font-weight: bold;
                     
                   
         <div>
-          <h2 >BẢNG ĐIỂM </h2>
+          <h2 style="text-align: center;">BẢNG ĐIỂM </h2>
         <table class="tableStyle">
-          <tr style="width:100%">
+          <tr style="width:100%" style="text-align: center">
             <th>Toán</th>
             <th>Vật Lý</th>
             <th>Hóa Học</th>
             <th>Ngữ Văn</th>
             <th>Lịch Sử</th>
             <th>Địa Lí</th>
-            <th>Tin Học</th>
             <th>Tiếng Anh</th>
             <th>GDCD</th>
             <th>Công Nghệ</th>
+            <th>Tin Học</th>
             <th>Thể Dục</th>       
             <th>Sinh Học</th>
           </tr>
@@ -135,23 +100,55 @@ font-weight: bold;
           </tr>
         </table>
 
-        </div>
 
+       
+        <table class="tableStyle">
+          <tr style="width:100%">
+            <th>Toán</th>
+            <th>Vật Lý</th>
+            <th>Hóa Học</th>
+            <th>Ngữ Văn</th>
+            <th>Lịch Sử</th>
+            <th>Địa Lí</th>
+            <th>Tin Học</th>
+            <th>Tiếng Anh</th>
+            <th>GDCD</th>
+            <th>Công Nghệ</th>
+            <th>Thể Dục</th>       
+            <th>Sinh Học</th>
+          </tr>
+          <tr>
+            <td><?=$student['Toan2']?></td>
+            <td><?=$student['VatLy2']?></td>
+            <td><?=$student['Hoa2']?></td>
+            <td><?=$student['NguVan2']?></td>
+            <td><?=$student['LichSu2']?></td>
+            <td><?=$student['DiaLi2']?></td>
+            <td><?=$student['TiengAnh2']?></td>
+            <td><?=$student['GDCD2']?></td>
+            <td><?=$student['CongNghe2']?></td>
+            <td><?=$student['TinHoc2']?></td>
+            <td><?=$student['TheDuc2']?></td>
+            <td><?=$student['SinhHoc2']?></td>
+          </tr>
+        </table>
+          
+        </div>
+         <script>
+        $(document).ready(function() {
+          $("#navLinks li:nth-child(1) a").addClass('active')
+        });
+      </script>  
      </div>
+     <a class="btn_pdf" href="info.php">Export to PDF</a>
      <?php 
         }else {
           header("Location: student.php");
           exit;
         }
      ?>
+     
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>	
-   <script>
-        $(document).ready(function(){
-             $("#navLinks li:nth-child(1) a").addClass('active');
-        });
-    </script>
-</body>
 </html>
 <?php 
 

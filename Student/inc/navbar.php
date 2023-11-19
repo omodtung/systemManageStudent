@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">
-      <img src="../img/sgu_ani.jpg" width="40" >
+      <img src="../sgu-logo.png" width="40">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,17 +12,21 @@
         <li class="nav-item">
           <a class="nav-link" 
              aria-current="page" 
-             href="index.php">Thông tin học sinh</a>
+             href="index.php">Infomation</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="grade.php">Chi tiết điểm</a>
+          <a class="nav-link" href="score.php">Point details</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="class.php">Danh sách học sinh</a>
+          <a class="nav-link" href="class.php">Student list</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="pass.php">Thời khóa biểu</a>
+          <a class="nav-link" href="timetable.php">Time table</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="pass.php">Change password</a>
+        </li>
+
       </ul>
       <ul class="navbar-nav me-right mb-2 mb-lg-0">
         <li class="nav-item">
