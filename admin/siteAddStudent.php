@@ -18,11 +18,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $classes = getAllClass($conn);
 
 
-$id = '';
+        $id = '';
 
         $flname = '';
-        $diaChi= '';
-        $mahocsinh='';
+        $diaChi = '';
+        $mahocsinh = '';
 
         $uname = '';
 
@@ -64,16 +64,16 @@ $id = '';
             <!-- ------------------------date import code upper -->
         </head>
 
-        <body >
+        <body>
             <?php
             include "inc/navBar.php";
             ?>
 
-            <div class="container mt-5" style="background-color:beige;">
+            <div class="container mt-5">
                 <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
                 <form method="post" class="shadow p-3 mt-5 form-w" action="req/addStudent.php">
-                    <h3> Site ADD Student</h3>
+                    <h3> Form Thêm Học Sinh</h3>
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert danger" role="alert">
                             <?= $_GET['error'] ?>
@@ -94,8 +94,8 @@ $id = '';
                     <?php } ?>
                     <div class="mb-3">
 
-                        <div class="form-row">
-                        
+
+
                         <div class="form-row">
                             <div class="col">
                                 <label class="form-lable">
@@ -118,98 +118,116 @@ $id = '';
                             <div class="col">
                                 <label class="form-lable">
 
-                                     Ma hs
+                                    Mã Hoc Sinh
                                 </label>
-                                <input type="text" class="form-control" placeholder="example:tungdo" name="maHocSinh" value="<?= $mahocsinh?>">
+                                <input type="text" class="form-control" placeholder="example:tungdo" name="maHocSinh" value="<?= $mahocsinh ?>">
                             </div>
 
-                            <div class="col">
+                            <!-- <div class="col">
                                 <label class="form-lable">
 
                                      ID
                                 </label>
-                                <input type="number" class="form-control" placeholder="example:tungdo" name="id" value="<?= $id?>">
-                            </div>
+                                <input type="number" class="form-control" placeholder="example:tungdo" name="id" value="<?= $id ?>">
+                            </div> -->
 
 
-                            
+
                         </div>
 
                         <div class="form-row">
                             <div class="col">
                                 <label class="form-lable">
 
-                                     Dia Chi
+                                    Địa Chỉ
                                 </label>
                                 <input type="text" class="form-control" placeholder="example:tungdo" name="diaChi" value="<?= $diaChi ?>">
                             </div>
                             <div class="col">
 
-                            <label class="form-lable">
+                                <label class="form-lable">
 
-PassWord
-</label>
-<input type="text" class="form-control" name="pass" id="passInput">
+                                    PassWord
+                                </label>
+                                <input type="text" class="form-control" name="pass" id="passInput">
                             </div>
                         </div>
 
-                        
+
+
+
+
+
+
+
+
                         <!-- chon BirthDate -->
-                        <section class="container">
-                            <h3 class="pt-4 pb-2">BirthDate</h3>
-                            <form>
+                        <div class="form-row">
+
+
+
+
+                            <div class="col">
+                                <label class="form-lable">
+
+                                    BirthDate
+                                </label>
+
                                 <div class="row form-group">
-                                    <label for="date" class="col-sm-1 col-form-label">Date</label>
-                                    <div class="col-sm-4">
-                                        <div class="input-group date" id="datepicker">
-                                            <input type="text" class="form-control" name="birthdate">
-                                            <span class="input-group-append">
-                                                <span class="input-group-text bg-white">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
+
+                                    <label for="date" class="col-sm-1 col-form-label"></label>
+
+                                    <div class="input-group date" id="datepicker">
+                                        <input type="text" class="form-control" name="birthdate">
+                                        <span class="input-group-append">
+                                            <span class="input-group-text bg-white">
+                                                <i class="fa fa-calendar"></i>
                                             </span>
-                                        </div>
+                                        </span>
                                     </div>
+
+
+
+
+                                </div>
+
+                            </div>
+                            <script type="text/javascript">
+                                $(function() {
+                                    $('#datepicker').datepicker();
+                                });
+                            </script>
+                            <!-- chon Gioi Tinh -->
+
+
+
+
+                            <div class="col" style="text-align: center; margin-top: 50px;">
+
+
+
+                                <label class="form-lable">
+
+                                    Gioi Tinh
+                                </label>
+
+                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+
+                                    <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1">
+                                    <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
+
+                                    <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2">
+                                    <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
+
                                 </div>
 
 
-                                </script>
-                        </section>
-
-                        <div>
 
 
+
+
+                            </div>
                         </div>
-                        <script type="text/javascript">
-                            $(function() {
-                                $('#datepicker').datepicker();
-                            });
-                        </script>
-                        <!-- chon Gioi Tinh -->
-                        <div class="col">
-                            <label class="form-lable">
-
-                                Gioi Tinh
-                            </label>
-
-                       
-
-
-
-                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                            <input type="radio" class="btn-check" name="genderbtn" value="M" id="btnradio1">
-                            <label class="btn btn-outline-primary rounded ms-5" for="btnradio1">Nam</label>
-
-                            <input type="radio" class="btn-check" name="genderbtn" value="F" id="btnradio2">
-                            <label class="btn btn-outline-primary rounded ms-2" for="btnradio2">Nu</label>
-
-                        </div>
-
-
-
-                        </div>
-
-
 
 
 
@@ -249,17 +267,17 @@ PassWord
                             <div class="row">
                                 <div class="col-md-3">
                                     <label class="form-label"> Khoi Hoc</label>
-                                    <select name = "grades" class="form-select" aria-label="Default select example">
+                                    <select name="grades" class="form-select" aria-label="Default select example">
                                         <?php foreach ($grades as $grade) : ?>
 
 
-                                            <option  value="<?= $grade['grade_id'] ?>"> <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
-                                        <?php endforeach ?>0
+                                            <option value="<?= $grade['grade_id'] ?>"> <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                                            <?php endforeach ?>0
                                     </select>
                                 </div>
 
                             </div>
-
+<div class="row">
                             <div class="col-md-3">
                                 <label class="form-label"> Lop</label>
                                 <select name="classes" class="form-select" aria-label="Default select example">
@@ -272,12 +290,17 @@ PassWord
                             </div>
 
 
+</div>
+
+
+
 
                         </div>
+<div style="text-align: right;">
+                        <button  type="submit" class="btn btn-primary">Save Change</button>
 
 
-
-                        <button type="submit" class="btn btn-primary">Save Change</button>
+</div>
                 </form>
             </div>
         </body>
