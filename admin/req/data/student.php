@@ -106,6 +106,19 @@ return $total;
  
 }
 
+function findNameDocNhatHs($uname, $conn){
+  $sql = "SELECT username FROM students
+          WHERE username=?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$uname]);
+
+  if ($stmt->rowCount() >= 1) {
+    return 0;
+  }else {
+    return 1;
+  }
+}
+
 // function countStatusExist($conn)
 // {
 //   $sql = "SELECT COUNT(*) FROM students Where status =1";

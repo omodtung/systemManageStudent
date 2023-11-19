@@ -42,7 +42,7 @@ if (
 
             $diaChi= $_POST['diaChi'];
 
-
+$status = 1;
             // print_r($_POST);
             // die( );
 
@@ -80,10 +80,10 @@ if (
 
 
                 // $sql = "INSERT INTO teachers(username,password,fname, lname,subjects,grade) VALUES(?,?,?,?,?,?)";
-                $sql = "INSERT INTO `teachers` ( `magv`, `username`, `password`, `hoten`, `mamonhoc`, `makhoi`, `ngaysinh`, `gioitinh`, `diachi`) VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO `teachers` ( `magv`, `username`, `password`, `hoten`, `mamonhoc`, `makhoi`, `ngaysinh`, `gioitinh`, `diachi`,`status`) VALUES ( ?,?, ?, ?, ?, ?, ?, ?, ?,?)";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$idgv, $uname, $pass, $flname, $subjects, $grades,$birthdate,$gender,$diaChi]);
+                $stmt->execute([$idgv, $uname, $pass, $flname, $subjects, $grades,$birthdate,$gender,$diaChi,$status]);
 
 
 
