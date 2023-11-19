@@ -1,22 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto');
 :root{
     --color-default:#004f83;
     --color-second:#0067ac;
     --color-white:#fff;
     --color-body:#e4e9f7;
     --color-light:#e0e0e0;
+
   }
   
 
 * { 
     margin: 0;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 .tableStyle {
     border-collapse: collapse;
     width: 100%;
     color: #333;
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     text-align: center;
     border-radius: 10px;
@@ -38,6 +41,7 @@
     border-bottom: 1px solid #ccc;
     padding: 15px 20px;
  text-align: center;
+ font-family: 'Montserrat', sans-serif;
     }
     tr:nth-child(even) td {
     background-color: #f2f2f2;
@@ -52,6 +56,7 @@
     font-weight: bold;
     padding: 15px 20px;
  text-align: center;
+     font-family: 'Montserrat', sans-serif;
     }
 
 
@@ -63,6 +68,8 @@
     .tableStyle_class {
         border: none;
         width: 100%;
+   
+   
     }
     .tableStyle_class th {
         background-color: #6495ED;
@@ -73,9 +80,6 @@
         padding: 5px;
     }
 
-
-
-    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
 .btn_pdf{
@@ -89,7 +93,7 @@
 }
 
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans|Roboto');
+
 
 
 .tableStyle_score{

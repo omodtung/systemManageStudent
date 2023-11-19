@@ -31,38 +31,36 @@ if (isset($_SESSION['student_id']) &&
 
   <style>
 
-
-</style>
+    </style>
 </head>
 <body>
+<?php 
+        include "inc/navbar.php";
+     ?>
 <table class="tableStyle_class">
     <thead>
         <tr >
             <th>ID</th>
             <th>Tên</th>
             <th>Mã lớp</th>
-            <th>Ngay Sinh</th>
-            <th>Gioi Tinh</th>
-            <th>Dia Chi</th>
-            <th>Hoc Luc</th>
-            <th>Hanh Kiem</th>
+            <th>Ngày Sinh</th>
+            <th>Giới Tính</th>
+            <th>Địa Chỉ</th>
+            <th>Học Lực</th>
+            <th>Hạnh Kiểm</th>
         </tr>
-<?php 
-        include "inc/navbar.php";
-     ?>
-    <?php 
-       foreach ($students as $student) {
-        echo "<tr>";
-        echo "<td>{$student['student_id']}</td>";
-        echo "<td>{$student['hotenhs']}</td>";
-        echo "<td>{$student['malop']}</td>";
-        echo "<td>{$student['ngaysinh']}</td>";
-        echo "<td>{$student['gioitinh']}</td>";
-        echo "<td>{$student['diachi']}</td>";
-        echo "</tr>";
-    }
-    ?>
-
+        <?php foreach ($students as $student) { ?>
+          <tr>
+                                        <td><?= $student['student_id'] ?></td>
+                                        <td><?= $student['hotenhs'] ?></td>
+                                        <td><?= $student['malop'] ?></td>
+                                        <td><?= $student['ngaysinh'] ?></td>
+                                        <td><?= $student['gioitinh'] ?></td>
+                                        <td><?= $student['diachi'] ?></td>
+                                        <td><?= $student['hanhkiem'] ?></td>
+                                        <td><?= $student['hocluc'] ?></td>
+                                    </tr>
+                                    <?php } ?>
     </thead>
     <tbody>
         </tbody>

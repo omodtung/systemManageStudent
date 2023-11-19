@@ -163,7 +163,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                             }
 
+<<<<<<< HEAD
                             td {
+=======
+                
+            td {
+>>>>>>> remotes/origin/HEAD
                                 text-align: center;
 
 
@@ -455,6 +460,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                 </div>
+                    <td><?= $teacher['hoten'] ?></td>
+              
             </div>
 
 

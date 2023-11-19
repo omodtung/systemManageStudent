@@ -68,7 +68,7 @@ if (isset($_SESSION['student_id']) &&
                     
                   
         <div>
-          <h2 style="text-align: center;">BẢNG ĐIỂM </h2>
+          <h2 style="text-align: center;">BẢNG ĐIỂM TRUNG BÌNH</h2>
         <table class="tableStyle">
           <tr style="width:100%" style="text-align: center">
             <th>Toán</th>

@@ -21,7 +21,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Home - Su Pham Thuc Hanh High School</title>
-            
+
             <link rel="stylesheet" href="../css/style.css">
 
             <link rel="stylesheet" href="../css/style2.css">
@@ -64,24 +64,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <ul class="nav-list">
                     <li>
                         <i class="bx bx-search"></i>
-                        <input type="text"id="live_search" placeholder="Search...">
-                  
+                        <input type="text" id="live_search" placeholder="Search...">
+
                         <span class="tooltip">Search</span>
                     </li>
                     <li>
                         <a href="siteAddStudent.php">
                             <i class="bx bx-grid-alt"></i>
-                            <span class="link_name"> ADD Teacher </span>
+                            <span class="link_name"> ADD Teacher</span>
                         </a>
                         <span class="tooltip">ADD</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-user"></i>
-                            <span class="link_name">Edit Teacher</span>
-                        </a>
-                        <span class="tooltip">Edit</span>
-                    </li>
+                   
                     <li>
                         <a href="./req/encryptpasswords.php?table=students">
                             <i class="bx bx-chat"></i>
@@ -90,45 +84,33 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Encrypt</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="ThongKeHocSinh.php">
                             <i class="bx bx-pie-chart-alt-2"></i>
-                            <span class="link_name"> Find Teaccher</span>
+                            <span class="link_name"> Thông kê</span>
                         </a>
-                        <span class="tooltip">Find</span>
+                        <span class="tooltip">Thống kê</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="bx bx-folder"></i>
-                            <span class="link_name">Filter Teacher</span>
+                            <span class="link_name">Filter Lop</span>
                         </a>
                         <span class="tooltip">Filter</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-cart-alt"></i>
-                            <span class="link_name">Delete Teacher</span>
-                        </a>
-                        <span class="tooltip">Delete</span>
-                    </li>
+                   
                     <li>
                         <a target="_blank" rel="noopener noreferrer" href="./req/export.php?student=1">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Students</span>
                         </a>
-                        <span class="tooltip">Delete</span>
+                        <span class="tooltip">Export</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-cart-alt"></i>
-                            <span class="link_name">View info</span>
-                        </a>
-                        <span class="tooltip">View</span>
-                    </li>
+                   
                     <li>
                         <a href="#">
                             <i class="bx bx-cog"></i>
                             <span class="link_name">Setting</span>
-                        </a>
+                        </a>M
                         <span class="tooltip">Settings</span>
                     </li>
                     <li class="profile">
@@ -179,7 +161,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                         <tr>
                                             <!-- <th scope="row">1</th> -->
-                                            <td><?= $student['id'] ?></td>
+                                            <td><?= $student['mahs'] ?></td>
                                             <td><?= $student['username'] ?></td>
                                             <!-- <td><?= $student['password'] ?></td> -->
                                             <td><?= $student['hotenhs'] ?></td>
@@ -257,7 +239,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             }
                         </script>
 
-                        
+
                         <?php
 
                         if (isset($_SESSION['sucsess'])) {
@@ -288,19 +270,38 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                         ?>
 
+                        <?php
+                        if (isset($_SESSION['openfilter1'])) {
+                        ?>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#modalfilter').modal('show');
+                                });
+                            </script>
+                        <?php
+
+                            unset($_SESSION['openfilter1']);
+                        }
+
+
+                        ?>
+
+
+
+
                         <div class="toast-container position-fixed bottom-0 end-0 p-3">
-                                        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
-                                            <div class="toast-header">
-                                                <i class="fa-solid fa-database fa-spin"></i>
-                                                <strong class="me-auto ms-1">System</strong>
-                                                <small>now</small>
-                                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                                            </div>
-                                            <div class="toast-body" id="toasttext">
-                                                Sucsessfully edited student
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
+                                <div class="toast-header">
+                                    <i class="fa-solid fa-database fa-spin"></i>
+                                    <strong class="me-auto ms-1">System</strong>
+                                    <small>now</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body" id="toasttext">
+                                    Sucsessfully edited student
+                                </div>
+                            </div>
+                        </div>
                         <!-- End Edit Student -->
                     </div>
                 <?php } else { ?>
@@ -324,23 +325,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <script src="../js/script.js"></script>
 
             <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit student</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
-                                    </div>
-                                    <div class="modal-body" id="modalbody">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit student</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                        </div>
+                        <div class="modal-body" id="modalbody">
 
-                                    </div>
-                                    <div class="modal-footer">
+                        </div>
+                        <div class="modal-footer">
 
 
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+
             <div class="modal fade" id="modalinfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-lg">
                     <div class="modal-content">
@@ -386,6 +387,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     })
                 })
             </script>
+            <!--  filter theo lop cho hoc sinh  -->
+            <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <?php include("req/IndexFilterStudentDAL.php"); ?>
+                    </div>
+                </div>
+            </div>
+
+
         </body>
 
         </html>

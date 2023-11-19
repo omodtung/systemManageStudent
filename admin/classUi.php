@@ -5,13 +5,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
         include "../DB_connection.php";
-        include "data/teacherAd.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "data/student.php";
-        include "data/class.php";
-        $teachers =   getAllTeachers($conn);
-        $students = getAllStudents($conn);
+       
+        include "req/data/class.php";
+       
 
         $classes = getAllClass($conn);
 
@@ -27,14 +23,64 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <title>Home - Su Pham Thuc Hanh High School</title>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
             <link rel="stylesheet" href="..css/style.css">
+                <link rel="stylesheet" href="../css/style2.css">
+                   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
             <link rel="icon" href="..logo.png">
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
             <title>Document</title>
         </head>
 
         <body>
+            <div class="sidebar">
+                <div class="logo_details">
+                    <i class="bx bxl-audible icon"></i>
+                    <div class="logo_name">Admin </div>
+                    <i class="bx bx-menu" id="btn"></i>
+                </div>
+                <ul class="nav-list">
+                    <li>
+                        <i class="bx bx-search"></i>
+                        <input type="text" id="live_search" placeholder="Search...">
+                        <span class="tooltip">Search</span>
+                    </li>
+                    <li>
+                        <a href="addClassSite.php">
+                            <i class="bx bx-grid-alt"></i>
+                            <span class="link_name"> ADD Class </span>
+                        </a>
+                        <span class="tooltip">ADD</span>
+                    </li>
+
+                   
+
+
+              
+                    <li>
+                        <a href="#">
+                            <i class="bx bx-cog"></i>
+                            <span class="link_name">Setting</span>
+                        </a>
+                        <span class="tooltip">Settings</span>
+                    </li>
+                    <li class="profile">
+                        <div class="profile_details">
+                            <!-- <img src="../img/profile.jpeg" alt="profile image"> -->
+                            <div class="profile_content">
+                                <div class="name"><?= $_SESSION['admin_name'][0] ?> <?= $_SESSION['admin_name'][1] ?></div>
+                                <div class="designation">Admin</div>
+                            </div>
+                        </div>
+                        <i class="bx bx-log-out" id="log_out"></i>
+                    </li>
+                </ul>
+            </div>
+        <section class="home-section">
             <?php
             include "inc/navBar.php";
             if ($classes != 0) {
@@ -43,12 +89,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             ?>
 
 
+
                 <div class="container mt-5">
-                    <a href="addClassSite.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
-                    <a href="./req/encryptpasswords.php" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    
+                   
                     <div class="table-responsive">
-                        <table class="table table-success table-striped n-table">
-                            <thead>
+                        <table class="table table-striped">
+                            <thead   class="thead-dark" style="background-color:black; color:azure;">
                                 <tr>
 
                                     <th scope="col">CLass ID</th>
@@ -64,8 +111,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                     <tr>
                                         <!-- <th scope="row">1</th> -->
-                                        <td><?= $class['ID_Class'] ?></td>
-                                        <td><?= $class['ClassName'] ?></td>
+                                        <td><?= $class['manamhoc'] ?></td>
+                                        <td><?= $class['classname'] ?></td>
 
                                         <td>
                                             <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a>
@@ -94,10 +141,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
             <script>
                 $(document).ready(function() {
-                    $("#navLinks li:nth-child(5) a").addClass('active')
+                    $("#navLinks li:nth-child(4) a").addClass('active')
                 });
             </script>
+        </section>
 
+                    <script src="../js/script.js"></script>
         </body>
 
         </html>

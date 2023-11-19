@@ -75,55 +75,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 </a>
                 <span class="tooltip">ADD</span>
             </li>
-            <li>
-                <a href="#">
-                    <i class="bx bx-user"></i>
-                    <span class="link_name">Edit Teacher</span>
-                </a>
-                <span class="tooltip">Edit</span>
-            </li>
-            <li>
-                <a href="./req/encryptpasswords.php?table=teachers">
-                    <i class="bx bx-chat"></i>
-                    <span class="link_name">Encrypt All Passwords</span>
-                </a>
-                <span class="tooltip">Encrypt</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bx bx-pie-chart-alt-2"></i>
-                    <span class="link_name"> Find Teaccher</span>
-                </a>
-                <span class="tooltip">Find</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bx bx-folder"></i>
-                    <span class="link_name">Filter Teacher</span>
-                </a>
-                <span class="tooltip">Filter</span>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bx bx-cart-alt"></i>
-                    <span class="link_name">Delete Teacher</span>
-                </a>
-                <span class="tooltip">Delete</span>
-            </li>
+            
+            
+          
+          
             <li>
                 <a target="_blank" rel="noopener noreferrer" href="./req/export.php?schedule=1">
                     <i class="bx bx-export"></i>
                     <span class="link_name">Export All Schedules</span>
                 </a>
-                <span class="tooltip">Delete</span>
+                <span class="tooltip">Export</span>
             </li>
-            <li>
-                <a href="#">
-                    <i class="bx bx-cart-alt"></i>
-                    <span class="link_name">View info</span>
-                </a>
-                <span class="tooltip">View</span>
-            </li>
+          
             <li>
                 <a href="#">
                     <i class="bx bx-cog"></i>
@@ -149,8 +112,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         ?>
         <div class="container mt-5">
             <div class="table-responsive">
-                <table class="table table-success table-striped n-table table-hover mx-auto align-middle">
-                    <thead class="table-dark">
+                <table class="table table-striped">
+                    <thead class="thead-dark" style="background-color:black; color:azure;">
                         <tr>
                             <th scope="col">Id Sche</th>
                             <th scope="col">Teacher ID</th>
@@ -317,7 +280,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         }
 
         $(document).ready(function() {
-            $("#navLinks li:nth-child(7) a").addClass('active')
+            $("#navLinks li:nth-child(6) a").addClass('active')
         });
     </script>
 
