@@ -10,7 +10,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
     {
         include "../../DB_connection.php";
         
-        include "../data/grade.php";
+        include_once "../data/grade.php";
         $id = $_GET['id'];
         $hotenhs = $_POST['hotenhs'];
         //$lname = $_POST['lname'];
@@ -18,7 +18,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         $brthday = $_POST['birthdate'];
         $gender = $_POST['genderbtn'];
         $hanhkiem = $_POST['hanhkiem'];
-        $hocluc = $_POST['hocluc'];
+        //$hocluc = $_POST['hocluc'];
         $grade = $_POST['grade'];
         $diachi = $_POST['diachi'];
         $class = $_POST['class'];

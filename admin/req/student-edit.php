@@ -1,7 +1,7 @@
 <?php
 
 
-session_start();
+//session_start();
 
 
 // if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
@@ -10,7 +10,7 @@ session_start();
 //     {
         include "../../DB_connection.php";
         
-        include "../data/grade.php";
+        include_once "../data/grade.php";
         $id = $_GET['id'];
         $hotenhs = $_POST['hotenhs'];
         //$lname = $_POST['lname'];
@@ -18,7 +18,7 @@ session_start();
         $brthday = $_POST['birthdate'];
         $gender = $_POST['genderbtn'];
         $hanhkiem = $_POST['hanhkiem'];
-        $hocluc = $_POST['hocluc'];
+        //$hocluc = $_POST['hocluc'];
         $grade = $_POST['grade'];
         $diachi = $_POST['diachi'];
         $class = $_POST['class'];

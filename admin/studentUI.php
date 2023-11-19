@@ -6,7 +6,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include "../DB_connection.php";
         include "data/teacherAd.php";
         include "data/subject.php";
-        include "data/grade.php";
+        include_once "data/grade.php";
         include "data/student.php";
         $teachers =   getAllTeachers($conn);
         $students = getAllStudents($conn);
