@@ -10,6 +10,7 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
+include("../DB_Mysqli.php");
 
 if(isset($_POST["filter"]))
 {
