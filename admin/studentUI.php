@@ -71,17 +71,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <li>
                         <a href="siteAddStudent.php">
                             <i class="bx bx-grid-alt"></i>
-                            <span class="link_name"> ADD Teacher </span>
+                            <span class="link_name"> ADD Teacher</span>
                         </a>
                         <span class="tooltip">ADD</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-user"></i>
-                            <span class="link_name">Edit Teacher</span>
-                        </a>
-                        <span class="tooltip">Edit</span>
-                    </li>
+                   
                     <li>
                         <a href="./req/encryptpasswords.php?table=students">
                             <i class="bx bx-chat"></i>
@@ -90,40 +84,28 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Encrypt</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="ThongKeHocSinh.php">
                             <i class="bx bx-pie-chart-alt-2"></i>
-                            <span class="link_name"> Find Teaccher</span>
+                            <span class="link_name"> Thông kê</span>
                         </a>
-                        <span class="tooltip">Find</span>
+                        <span class="tooltip">Thống kê</span>
                     </li>
                     <li>
                         <a data-toggle="modal" data-target=".bd-example-modal-lg">
                             <i class="bx bx-folder"></i>
-                            <span class="link_name">Filter Teacher</span>
+                            <span class="link_name">Filter Lop</span>
                         </a>
                         <span class="tooltip">Filter</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-cart-alt"></i>
-                            <span class="link_name">Delete Teacher</span>
-                        </a>
-                        <span class="tooltip">Delete</span>
-                    </li>
+                   
                     <li>
                         <a target="_blank" rel="noopener noreferrer" href="./req/export.php?student=1">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Students</span>
                         </a>
-                        <span class="tooltip">Delete</span>
+                        <span class="tooltip">Export</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="bx bx-cart-alt"></i>
-                            <span class="link_name">View info</span>
-                        </a>
-                        <span class="tooltip">View</span>
-                    </li>
+                   
                     <li>
                         <a href="#">
                             <i class="bx bx-cog"></i>

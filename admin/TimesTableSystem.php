@@ -107,7 +107,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         ?>
         <div class="container mt-5">
             <div class="table-responsive">
-                <table class="table table-success table-striped n-table table-hover mx-auto align-middle">
+                <table class="table table-striped">
                     <thead class="table-dark" style="background-color:black; color:azure;">
                         <tr>
                             <th scope="col">Ma</th>
@@ -227,7 +227,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         }
 
         $(document).ready(function() {
-            $("#navLinks li:nth-child(7) a").addClass('active')
+            $("#navLinks li:nth-child(5) a").addClass('active')
         });
     </script>
 

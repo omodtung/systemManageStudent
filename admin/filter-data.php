@@ -1,15 +1,15 @@
 <?php
 
-// try {
-//     $conn = new mysqli('localhost', 'root', '', 'test3');
+try {
+    $conn = new mysqli('localhost', 'root', '', 'test7');
 
-//     // Check connection for errors
-//     if ($conn->connect_error) {
-//         throw new Exception('Failed to connect to database: ' . $conn->connect_error);
-//     }
-// } catch (Exception $e) {
-//     die($e->getMessage());
-// }
+    // Check connection for errors
+    if ($conn->connect_error) {
+        throw new Exception('Failed to connect to database: ' . $conn->connect_error);
+    }
+} catch (Exception $e) {
+    die($e->getMessage());
+}
 include("../DB_Mysqli.php");
 
 if(isset($_POST["filter"]))

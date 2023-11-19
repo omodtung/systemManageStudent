@@ -47,6 +47,65 @@ function getAllStudentNotavg($conn){
   }
 }
 
+function countNumberStudentFemale($conn)
+{
+  $sql = "SELECT * FROM students where gioitinh='Nữ' AND status=1";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$totalfemale = $stmt->rowCount();
+
+return $totalfemale;
+
+ 
+}
+function countNumberStudentMale($conn)
+{
+  $sql = "SELECT * FROM students where gioitinh='Nam' AND status=1";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$totalmale = $stmt->rowCount();
+
+return $totalmale;
+
+ 
+}
+function countNumberStudent($conn)
+{
+  $sql = "SELECT * FROM students  where status=1 ";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$total = $stmt->rowCount();
+
+return $total;
+
+ 
+}
+
+
+function countHocLucGioi($conn)
+{
+  $sql = "SELECT * FROM avgscore where hocluc='Gioi' ";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$total = $stmt->rowCount();
+
+return $total;
+
+ 
+}
+
+function countHocLucKem($conn)
+{
+  $sql = "SELECT * FROM avgscore where hocluc='Kem'  ";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+$total = $stmt->rowCount();
+
+return $total;
+
+ 
+}
+
 // function countStatusExist($conn)
 // {
 //   $sql = "SELECT COUNT(*) FROM students Where status =1";
