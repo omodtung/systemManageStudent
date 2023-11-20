@@ -115,7 +115,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <td><?= $class['classname'] ?></td>
 
                                         <td>
-                                            <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a>
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editClass.php?id=<?= $class['classname'] ?>')" data-bs-id=<?= $class['classname'] ?>>Edit</a>
                                             <a href="" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
@@ -140,12 +140,89 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
             <script>
+        function btnclick(_url) {
+            $.ajax({
+                url: _url,
+                type: 'post',
+                success: function(data) {
+                    $('#modalbody').html(data);
+                },
+                error: function() {
+                    $('#modalbody').text('An error occurred');
+                }
+            });
+
+
+        }
+
+        function btnclickinfo(_url) {
+            $.ajax({
+                url: _url,
+                type: 'post',
+                success: function(data) {
+                    $('#modalbodyinfo').html(data);
+                },
+                error: function() {
+                    $('#modalbodyinfo').text('An error occurred');
+                }
+            });
+
+
+        }
+
+        function btnclickadd(_url) {
+            $.ajax({
+                url: _url,
+                type: 'post',
+                success: function(data) {
+                    $('#modalbodyadd').html(data);
+                },
+                error: function() {
+                    $('#modalbodyadd').text('An error occurred');
+                }
+            });
+
+
+        }
+
+
+        function Save() {
+            setTimeout(function() {
+
+                $('#modalbody').html('');
+
+            }, 500);
+        }
+
+
+
+        function toastShow() {
+            setTimeout(function() {
+                $('#liveToast').toast('show');
+            }, 500);
+        }
                 $(document).ready(function() {
                     $("#navLinks li:nth-child(4) a").addClass('active')
                 });
             </script>
         </section>
+            <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Class</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                    </div>
+                    <div class="modal-body" id="modalbody">
 
+                    </div>
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
                     <script src="../js/script.js"></script>
         </body>
 
