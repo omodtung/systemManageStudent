@@ -12,6 +12,11 @@ if (isset($_POST['score_id'], $_POST['diem15'], $_POST['diem45'], $_POST['thi'])
     $thi = $_POST['thi'];
     $dtb = $_POST['tbm'];
 
+    if (!is_numeric($diem15) || !is_numeric($diem45) || !is_numeric($thi) || !is_numeric($tbm)) {
+        header("Location: Score_student.php?error=score_cant_be_null&student_id=" . $_POST['student_id']);
+        exit();
+    }
+
     // SQL query to update the scores in the database
     $sql = "UPDATE score SET diem15 = ?, diem45 = ?, thi = ?, tbm = ? WHERE id_score = ?"; 
 
@@ -20,7 +25,7 @@ if (isset($_POST['score_id'], $_POST['diem15'], $_POST['diem45'], $_POST['thi'])
 
     // Execute the statement with the values
     $success = $stmt->execute([$diem15, $diem45, $thi, $dtb, $score_id]);
-
+    
     // Check if the update was successful
     if ($success) {
         echo "Scores updated successfully!";

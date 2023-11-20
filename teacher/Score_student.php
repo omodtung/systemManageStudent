@@ -49,6 +49,20 @@
     </style>
 
 </head>
+
+<script type="text/javascript">
+    // Check for URL parameters for errors
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+
+        // If there's an error, display an alert
+        if (error === 'score_cant_be_null') {
+            alert('Nhập thiếu cột điểm');
+        }
+    }
+</script>
+
 <body>
     <?php
     include "../DB_connection.php";

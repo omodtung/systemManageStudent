@@ -96,6 +96,24 @@
         }
 
 
+        .btn-logout {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #f9748f; /* or any color you prefer */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px -5px #f9748f; /* same as other buttons for consistency */
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            background-color: #fd868c; /* a slightly different color on hover */
+        }
+
     </style>
 </head>
 <body>
@@ -313,6 +331,8 @@
             xhr.send(formData);
         }
     </script>
+
+    <button type="button" onclick="window.location.href='../login.php'" class="btn-logout">Log Out</button>
 
 
 </body>
