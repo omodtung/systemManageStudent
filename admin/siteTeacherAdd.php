@@ -67,7 +67,7 @@ $maGiaoVien ='';
         <a href="teacherNewUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
         <form  method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
-          <h3> Site ADD teacher</h3>
+          <h3> Form Thêm Giáo Viên</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">
               <?= $_GET['error'] ?>
@@ -99,7 +99,7 @@ $maGiaoVien ='';
               <div class="col">
                 <label class="form-lable">
 
-                Dia Chi
+                Đia Chỉ
                 </label>
                 <input type="text" class="form-control" placeholder="example Do" name="diaChi" value="<?= $diaChi ?>">
               </div>
@@ -108,16 +108,16 @@ $maGiaoVien ='';
               <div class="col">
                 <label class="form-lable">
 
-                HO Ten 
+                Ho Tên
                 </label>
                 <input type="text" class="form-control" placeholder=" example :TungDo" name="flname" value="<?= $flname ?>">
               </div>
               <div class="col">
                 <label class="form-lable">
 
-                  User Name
+                User Name
                 </label>
-                <input type="text" class="form-control" placeholder="example:tungdo" name="uname" value="<?= $uname ?>">
+                <input type="text" class="form-control" placeholder="example:Tên Đăng Nhập" name="uname" value="<?= $uname ?>">
 
               </div>
             </div>
@@ -129,9 +129,10 @@ $maGiaoVien ='';
             <input type="text" class="form-control" name="pass">
 
             <!-- chon BirthDate -->
-            <section class="container">
-              <h3 class="pt-4 pb-2">BirthDate</h3>
-              <form>
+            <div class="row">
+            
+              <h3 class="pt-4 pb-2" style="display: 14px;"> Birth Date</h3>
+             <div   class="col-md-6 mt-md-0 mt-3">
                 <div class="row form-group">
                   <label for="date" class="col-sm-1 col-form-label">Date</label>
                   <div class="col-sm-4">
@@ -146,9 +147,9 @@ $maGiaoVien ='';
                   </div>
                 </div>
 
-
+             </div>
                 
-            </section>
+        
            
             <script type="text/javascript">
               $(function() {
@@ -156,10 +157,12 @@ $maGiaoVien ='';
               });
             </script>
             <!-- chon Gioi Tinh -->
+
+            <div class="col-md-6 mt-md-0 mt-3">
             <div class="col">
               <label class="form-lable">
 
-                Gioi Tinh
+                Giới Tính
               </label>
 
 
@@ -174,25 +177,28 @@ $maGiaoVien ='';
 
 
             </div>
+            </div>
          
+          </div>
 
-
-            <h3> Ma Giao Vien </h3>
+            <h3> Mã Giáo Viên </h3>
            
             <input type="text" class="form-control" placeholder="example:tungdo" name="idGV" value="<?= $maGiaoVien ?>">
            
 
-            <h3> Mon Hoc</h3>
-
+          
            
 
 
 
  
 
+<div class="row">
 
-            <div class="mb-3">
-              <label class="form-label">Subject</label>
+
+
+            <div class="col-md-6 mt-md-0 mt-3">
+              <label class="form-label">Môn Học</label>
               <div class="row row-cols-5">
               <select name="subjects[]" class="form-select" aria-label="Default select example" multiple>
                                     <?php foreach ($subjects as $subject) : ?>
@@ -204,8 +210,8 @@ $maGiaoVien ='';
 
               </div>
             </div>
-            <div class="mb-3">
-              <label class="form-label">Grade</label>
+            <div class="col-md-6 mt-md-0 mt-3">
+              <label class="form-label">Khối</label>
               <div class="row row-cols-5">
               <select name="grades[]" class="form-select" aria-label="Default select example" multiple >
                                     <?php foreach ($grades as $grad) : ?>
@@ -217,9 +223,12 @@ $maGiaoVien ='';
 
               </div>
             </div>
+          </div>
+<div style="text-align: right;">
 
-
-            <button type="submit" class="btn btn-primary">Save Change</button>
+<button type="submit" class="btn btn-primary">Save Change</button>
+</div>
+          
         </form>
       </div>
     </body>

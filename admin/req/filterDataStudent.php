@@ -10,9 +10,8 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
-include("../DB_Mysqli.php");
 
-if(isset($_POST["filter"]))
+if(isset($_POST["filter1"]))
 {
     $filterDataByCategory = filterDataByCategory();
 
@@ -20,13 +19,13 @@ if(isset($_POST["filter"]))
 
 
 function filterDataByCategory() {
-    $filterByCategory = $_POST['filterByCategory'];
+    $filterByCategory = $_POST['filterByCategory1'];
     global $conn;
     
     $data =[];
     if(!empty($filterByCategory)){
     
-        $query = "SELECT * FROM teachers WHERE mamonhoc= '$filterByCategory'";
+        $query = "SELECT * FROM students WHERE malop= '$filterByCategory'";
      
      
         $result = $conn->query($query);

@@ -114,6 +114,48 @@ else if(isset($_GET["schedule"])) {
         echo "Error executing the query: " . $e->getMessage();
     }
 }
+else if(isset($_GET["timetable"])) {
+    echo '<a href="./req/export.php?timetablesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    try {
+        $input = $_POST['input'];
+        $query = "SELECT * FROM students JOIN (SELECT * FROM schedule GROUP BY Class) as sche on sche.Class = students.malop WHERE hotenhs LIKE '{$input}%'";
+        $rows = $pdo->query($query)->fetchAll(PDO::FETCH_ASSOC);
+    
+        // If there are any results, display them in a table
+        if (count($rows) > 0) {
+            echo '<table class="table table-striped" id="searchresult">';
+            echo '<thead>';
+            echo '<tr>';
+            echo '<th scope="col">Ma</th>';
+            echo '<th scope="col">Ho Ten</th>';
+            echo '<th scope="col">Lop</th>';
+            echo '<th scope="col">Action</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+    
+            foreach ($rows as $row) {
+                echo '<tr>';
+                echo '<td>' . $row['mahs'] . '</td>';
+                echo '<td>' . $row['hotenhs'] . '</td>';
+                echo '<td>' . $row['malop'] . '</td>';
+                
+                
+                echo '<td>';
+                echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo(`./inc/TimeTableinfo.php?id='. $row["malop"] .'`)" data-bs-id='. $row["malop"] .'>Detail </button>';
+                echo '</td>';
+                echo '</tr>';
+            }
+    
+            echo '</tbody>';
+            echo '</table>';
+        } else {
+            echo '<h3>No Time Tables found.</h3>';
+        }
+    } catch (PDOException $e) {
+        echo "Error executing the query: " . $e->getMessage();
+    }
+}
 else {echo '<a href="./req/export.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
 
 // Try to execute the query

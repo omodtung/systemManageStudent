@@ -23,6 +23,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         $nameClass ='';
         
         $idclass =  '';
+
+        $idnamhoc= '';
         // $pass = '';
         // $flname = '';
         // $lopChuNhiem = '';
@@ -67,7 +69,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="container mt-5">
                 <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-                <form method="post" class="shadow p-3 mt-5 form-w" action="req/addClass.php">
+                <form method="post" class="shadow p-3 mt-5 form-w" action="applogic/addClass.php">
                     <h3> Site ADD class</h3>
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert danger" role="alert">
@@ -114,7 +116,29 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
 
 
+                        <div class="form-row">
+                            <div class="col">
+                                <label class="form-lable">
 
+                                Mã Năm Học
+                                </label>
+                                <input type="text" class="form-control" placeholder="example Tung" value="<?= $idnamhoc ?>" name="idnamhoc">
+                            </div>
+                         
+                        </div>
+                        <div class="row">
+                                <div class="col-md-3">
+                                    <label class="form-label"> Khoi Hoc</label>
+                                    <select name="grades" class="form-select" aria-label="Default select example">
+                                        <?php foreach ($grades as $grade) : ?>
+
+
+                                            <option value="<?= $grade['grade_id'] ?>"> <?= $grade['grade_code'] ?>-<?= $grade['grade'] ?></option>
+                                            <?php endforeach ?>0
+                                    </select>
+                                </div>
+
+                            </div>
                     </div>
 
 

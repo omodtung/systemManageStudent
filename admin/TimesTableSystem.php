@@ -107,14 +107,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         ?>
         <div class="container mt-5">
             <div class="table-responsive">
-                <table class="table table-success table-striped n-table table-hover mx-auto align-middle">
-                    <thead class="table-dark">
+                <table class="table table-striped">
+                    <thead class="table-dark" style="background-color:black; color:azure;">
                         <tr>
+                            <th scope="col">Ma</th>
                             <th scope="col">Ho Ten</th>
                             <th scope="col">Lop</th>
-                            <th scope="col">Start Time</th>
-                            <th scope="col"> End Time </th>
-                            <th scope="col"> Work Date </th>
                             <th scope="col"> Action </th>
                         </tr>
                     </thead>
@@ -122,15 +120,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <?php foreach ($timetable as  $table) { ?>
 
                             <tr>
-
+                                <td><?= $table['mahs'] ?></td>
                                 <td><?= $table['hotenhs'] ?></td>
                                 <td><?= $table['malop'] ?></td>
-                                <td><?= $table['StartTime'] ?></td>
-                                <td><?= $table['EndTime'] ?></td>
-                                <td><?= $table['WorkDate'] ?></td>
 
                                 <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo('./inc/ScheduleInfo.php?id=<?= $table['id'] ?>')" data-bs-id=<?= $table['id'] ?>>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo('./inc/TimeTableinfo.php?id=<?= $table['malop'] ?>')" data-bs-id=<?= $table['malop'] ?>>
                                         Detail
                                     </button>
                                 </td>
@@ -232,7 +227,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         }
 
         $(document).ready(function() {
-            $("#navLinks li:nth-child(7) a").addClass('active')
+            $("#navLinks li:nth-child(5) a").addClass('active')
         });
     </script>
 
@@ -288,7 +283,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 var input = $(this).val();
                 if (input != "") {
                     $.ajax({
-                        url: "livesearch.php?schedule=1",
+                        url: "livesearch.php?timetable=1",
                         method: "POST",
                         data: {
                             input: input

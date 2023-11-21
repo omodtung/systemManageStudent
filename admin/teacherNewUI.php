@@ -163,7 +163,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                             }
 
-                            td {
+                
+            td {
                                 text-align: center;
 
 
@@ -246,7 +247,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                     Edit
                                                 </button>
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
-                                                <a href="" class="btn btn-danger">Delete</a>
+                                                <a href="./applogic/deleteteacher.php?id=<?=$teacher['id'] ?>" class="btn btn-danger">Delete</a>
 
 
 
@@ -455,6 +456,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                 </div>
+                    <td><?= $teacher['hoten'] ?></td>
+              
             </div>
 
 

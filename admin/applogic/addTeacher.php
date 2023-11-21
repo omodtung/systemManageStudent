@@ -72,7 +72,35 @@ if (
                 $thongBao = " pass is require";
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
-            } else {
+            } 
+            
+            else if (empty($birthdate))
+            {
+                $thongBao = " pass is require";
+                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
+                exit;
+            }
+
+            else if (empty($gender))
+            {
+                $thongBao = " gender is require";
+                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
+                exit;
+            }
+            else if(empty($grades))
+            {
+                $thongBao = " grades is require";
+                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
+                exit;
+            }
+            else if (empty($subject))
+            {
+                $thongBao = " subjects is require";
+                header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
+                exit;
+            }
+
+            else {
                 //chuyen doi hashing pass 
                 include("../req/addTeacher.php");
 
