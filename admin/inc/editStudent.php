@@ -15,6 +15,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $student = getStudentUsingId($conn,$_GET['idstudent']);
     $class = getAllClass($conn);
     $id = $_GET['idstudent'];
+    $img = getImgById($conn,$id);
     $fname = '';
     $lname  = '';
     $uname  = '';
@@ -61,10 +62,41 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       //include "inc/navBar.php";
       ?>
 
+<?php 
+          
+          $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
+
+          if ($student['id'] && isset($img['id_student'])) {
+            $imagePath = $img['image_path'];
+        } else {
+            // Nếu không có ảnh, sử dụng ảnh mặc định
+            $imagePath = $defaultImagePath;
+        }
+     ?>
+
+ <img src="<?= $imagePath ?>"class="card-img-top" alt="Student Image" style="height: 220px; width: 220px" >
+         
+<div>
+          <form action="./inc/upload.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="hidden" name="id_student_hide" value="<?= $id ?>">
+        <input type="submit" value="Upload Image" name="submit">
+    </form>
+          </div>
+
       <div class="container mt-5 pb-3">
         <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
+
+
+         
+
+
+
+
+
+
 
             <div class="form-row">
                 <div class="col">

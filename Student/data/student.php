@@ -33,10 +33,10 @@ function getStudentsByLopCode($conn, $ma_lop) {
 
 function getStudentById($id, $conn){
    $sql = "SELECT *
-   FROM students s
-   JOIN avgscore a ON s.student_id = a.ID_student
-   JOIN avgscore2 a2 ON s.student_id = a2.ID_student
-   WHERE s.student_id = ?";
+   FROM students 
+   JOIN avgscore  ON students.student_id = avgscore.student_id
+   JOIN avgscore2  ON students.student_id = avgscore2.ID_student
+   WHERE students.student_id = ?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$id]);
 
@@ -47,6 +47,22 @@ function getStudentById($id, $conn){
     return 0;
    }
 }
+
+function getImgById($conn, $id){
+  $sql = "SELECT *
+  FROM images 
+  WHERE images.id_student = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id]);
+
+  if ($stmt->rowCount() == 1) {
+    $student = $stmt->fetch();
+    return $student;
+  }else {
+   return 0;
+  }
+}
+
 
 function studentPasswordVerify($student_pass, $conn, $student_id){
   $sql = "SELECT * FROM students
@@ -67,6 +83,7 @@ function studentPasswordVerify($student_pass, $conn, $student_id){
    return 0;
   }
 }
+
 
 
 

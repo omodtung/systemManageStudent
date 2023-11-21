@@ -3,7 +3,7 @@
 $sName = "localhost";
 $uName = "root";
 $pass  = "";
-$db_name = "test1";
+$db_name = "test";
 
 try {
 	
