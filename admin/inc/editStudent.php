@@ -67,7 +67,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
           $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
           if ($student['id'] && isset($img['id_student'])) {
-            $imagePath = $img['image_path'];
+            $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
             // Nếu không có ảnh, sử dụng ảnh mặc định
             $imagePath = $defaultImagePath;
