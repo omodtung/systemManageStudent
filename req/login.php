@@ -70,6 +70,13 @@ if (isset($_POST['uname']) &&
 				        header("Location: ../login.php?error=$em");
 				        exit;
                     }
+					if($role == 'Teacher')
+					{
+						$id=$user['teacher_id'];
+                        $_SESSION['teacher_id']=$id;
+                        header("Location: ../teacher/teacher_site.php");
+                        exit;
+					}
 				    
             	}else {
 		        	$em  = "Incorrect Username or Password";

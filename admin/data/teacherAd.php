@@ -3,7 +3,7 @@
 
 // tim kiem tat ca giao vien
 function getAllTeachers($conn){
-   $sql = "SELECT * FROM teachers WHERE status = 1";
+   $sql = "SELECT * FROM teachers where active=1";
    $stmt = $conn->prepare($sql);
    $stmt->execute();
 
