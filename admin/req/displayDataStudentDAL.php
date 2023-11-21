@@ -42,13 +42,13 @@ foreach($filterDataByCategory as $teacher){
                     
                     <td style="display: inline-flex;">
                                                 <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editStudent.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?>>
                                                     Edit
                                                 </button>
 
 
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
-                                                <a href="" class="btn btn-danger">Delete</a>
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/StudentInfo.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?> class="btn btn-info">Info</button>
+                                                <a href="req/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
 
 
 

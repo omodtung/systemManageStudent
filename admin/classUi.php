@@ -10,7 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
        
 
         $classes = getAllClass($conn);
-
+$teacher
         //print_r($teachers);
 ?>
 
@@ -111,6 +111,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                     <tr>
                                         <!-- <th scope="row">1</th> -->
+
                                         <td><?= $class['manamhoc'] ?></td>
                                         <td><?= $class['classname'] ?></td>
 
@@ -127,6 +128,71 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             </tbody>
                         </table>
                     </div>
+
+
+                    <script>
+                            function btnclick(_url) {
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    success: function(data) {
+                                        $('#modalbody').html(data);
+                                    },
+                                    error: function() {
+                                        $('#modalbody').text('An error occurred');
+                                    }
+                                });
+
+
+                            }
+
+                            function btnclickinfo(_url) {
+                                $.ajax({
+                                    url: _url,
+                                    type: 'post',
+                                    success: function(data) {
+                                        $('#modalbodyinfo').html(data);
+                                    },
+                                    error: function() {
+                                        $('#modalbodyinfo').text('An error occurred');
+                                    }
+                                });
+
+
+                            }
+
+
+                            function Save() {
+                                setTimeout(function() {
+
+                                    $('#modalbody').html('');
+
+                                }, 500);
+                            }
+
+
+
+                            function toastShow() {
+                                setTimeout(function() {
+                                    $('#liveToast').toast('show');
+                                }, 500);
+                            }
+                        </script>
+
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+                            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="10000">
+                                <div class="toast-header">
+                                    <i class="fa-solid fa-database fa-spin"></i>
+                                    <strong class="me-auto ms-1">System</strong>
+                                    <small>now</small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body" id="toasttext">
+                                    Sucsessfully edited student
+                                </div>
+                            </div>
+                        </div>
                 </div>
             <?php } else { ?>
                 <div class="alert alert-success" role="alert">
