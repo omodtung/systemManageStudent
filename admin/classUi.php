@@ -146,20 +146,6 @@ $teacher
 
                             }
 
-                            function btnclickinfo(_url) {
-                                $.ajax({
-                                    url: _url,
-                                    type: 'post',
-                                    success: function(data) {
-                                        $('#modalbodyinfo').html(data);
-                                    },
-                                    error: function() {
-                                        $('#modalbodyinfo').text('An error occurred');
-                                    }
-                                });
-
-
-                            }
 
 
                             function Save() {
