@@ -12,6 +12,9 @@ if (isset($_SESSION['student_id']) &&
        $student_id = $_SESSION['student_id'];
        
        $student = getStudentById($student_id, $conn);
+       $img = getImgById($conn,$student_id);
+      
+
 
  ?>
 <!DOCTYPE html>
@@ -39,11 +42,59 @@ if (isset($_SESSION['student_id']) &&
      ?>
      <?php 
         if ($student != 0) {
+          
+          $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
+
+          if ($student['student_id'] && isset($img['id_student'])) {
+            $imagePath = $img['image_path'];
+        } else {
+            // Nếu không có ảnh, sử dụng ảnh mặc định
+            $imagePath = $defaultImagePath;
+        }
      ?>
+     
      <div style="display: flex;" class="container mt-5">
          <div class="card" style="width: 22rem;">
-          <img src="../img/student-<?=$student['gioitinh']?>.jpg" class="card-img-top" alt="...">
+         <!-- Hình ảnh với sự kiện onclick -->
+<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; cursor: pointer;" onclick="triggerFileInput()">
+
+<!-- Form upload -->
+<div>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <!-- Input file ẩn -->
+        <input type="hidden" name="id_student_hide" value="<?= $student_id ?>">
+        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
+
+        <!-- Nút "Upload" được ẩn ban đầu -->
+        <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
+    </form>
+</div>
+
+<script>
+    // Hàm kích hoạt sự kiện click trên input file
+    function triggerFileInput() {
+        document.getElementById('fileToUpload').click();
+    }
+
+    // Khi chọn file, hiển thị nút "Upload"
+    document.getElementById('fileToUpload').addEventListener('change', function () {
+        // Kiểm tra xem có file đã chọn hay không
+        if (this.files.length > 0) {
+            // Hiển thị nút "Upload"
+            document.getElementById('uploadBtn').style.display = 'block';
+            // Hiển thị hình ảnh đã chọn (nếu có)
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.card-img-top').src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
+
+         
           <div class="card-body">
+          
             <h5 class="card-title text-center">@<?=$student['username']?></h5>
           </div>
           <ul class="list-group list-group-flush">
@@ -86,17 +137,17 @@ if (isset($_SESSION['student_id']) &&
           </tr>
           <tr>
             <td><?=$student['Toan']?></td>
-            <td><?=$student['VatLy']?></td>
-            <td><?=$student['Hoa']?></td>
-            <td><?=$student['NguVan']?></td>
-            <td><?=$student['LichSu']?></td>
-            <td><?=$student['DiaLi']?></td>
+            <td><?=$student['Vatly']?></td>
+            <td><?=$student['Hoahoc']?></td>
+            <td><?=$student['Nguvan']?></td>
+            <td><?=$student['Lichsu']?></td>
+            <td><?=$student['Dialy']?></td>
             <td><?=$student['TiengAnh']?></td>
             <td><?=$student['GDCD']?></td>
-            <td><?=$student['CongNghe']?></td>
-            <td><?=$student['TinHoc']?></td>
-            <td><?=$student['TheDuc']?></td>
-            <td><?=$student['SinhHoc']?></td>
+            <td><?=$student['Congnghe']?></td>
+            <td><?=$student['Tinhoc']?></td>
+            <td><?=$student['Theduc']?></td>
+            <td><?=$student['Sinhhoc']?></td>
           </tr>
         </table>
 
@@ -138,9 +189,12 @@ if (isset($_SESSION['student_id']) &&
         $(document).ready(function() {
           $("#navLinks li:nth-child(1) a").addClass('active')
         });
-      </script>  
+
+    
+</script>
+      </scrip>  
      </div>
-     <a class="btn_pdf" href="info.php">Export to PDF</a>
+     <a class="btn_pdf" href="info1.php">Export to PDF</a>
      <?php 
         }else {
           header("Location: student.php");
