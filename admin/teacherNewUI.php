@@ -165,6 +165,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                 
             td {
+
                                 text-align: center;
 
 

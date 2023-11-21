@@ -30,7 +30,9 @@
         <li class="nav-item">
           <a class="nav-link" href="schedule.php">Schedule</a>
         </li>
-        
+        <li class="nav-item">
+          <a class="nav-link" href="scoreUI.php">Score</a>
+        </li>
         
         <li class="nav-item">
           <a class="nav-link" href="#contact">Settings</a>

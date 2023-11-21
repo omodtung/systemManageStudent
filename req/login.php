@@ -33,7 +33,7 @@ if (isset($_POST['uname']) &&
         	$sql = "SELECT * FROM teachers 
         	        WHERE username = ?";
         	$role = "Teacher";
-        }else {
+        }else if($role == '3'){
         	$sql = "SELECT * FROM students 
         	        WHERE username = ?";
         	$role = "Student";
@@ -49,15 +49,26 @@ if (isset($_POST['uname']) &&
         	
             if ($username === $uname) {
             	if (password_verify($pass, $password)) {
-            		
             		$_SESSION['role'] = $role;
-            		if($role=='Admin')
-                    {
-                        $id=$user['admin_id'];
-                        $_SESSION['admin_id']=$id;
-						$_SESSION['admin_name']=array($user['fname'],$user['lname']);
+            		if ($role == 'Admin') {
+                        $id = $user['admin_id'];
+                        $_SESSION['admin_id'] = $id;
                         header("Location: ../admin/index.php");
                         exit;
+                    }else if ($role == 'Student') {
+                        $id = $user['student_id'];
+                        $_SESSION['student_id'] = $id;
+                        header("Location: ../Student/index.php");
+                        exit;
+                    }else if($role == 'Teacher'){
+                    	$id = $user['id'];
+                        $_SESSION['id'] = $id;
+                        header("Location: ../Teacher/index.php");
+                        exit;
+                    }else {
+                    	$em  = "Incorrect Username or Password";
+				        header("Location: ../login.php?error=$em");
+				        exit;
                     }
 				    
             	}else {
