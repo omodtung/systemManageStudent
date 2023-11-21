@@ -70,11 +70,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             ?>
 
             <div class="container mt-5">
-                <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
+                <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
                 <form method="post" class="shadow p-3 mt-5 form-w" action="req/addStudent.php">
-                    <h3> Site ADD Student</h3>
-
+                    <h3> Form Thêm Học Sinh</h3>
+                  
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert danger" role="alert">
                             <?= $_GET['error'] ?>
@@ -175,7 +175,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                 </label>
 
                                 <div class="row form-group">
-<<<<<<< HEAD
 
                                     <label for="date" class="col-sm-1 col-form-label"></label>
 
@@ -184,20 +183,16 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                         <span class="input-group-append">
                                             <span class="input-group-text bg-white">
                                                 <i class="fa fa-calendar"></i>
-=======
+
                                     <label for="date" class="col-sm-1 col-form-label">Date</label>
                                     <div class="col-sm-4">
                                         <div class="input-group date" id="datepicker">
-<<<<<<< HEAD
                                             <input type="text" class="form-control" name="birthdate"/>
-=======
-                                            <!-- <input type="text" class="form-control" name="birthdate">
->>>>>>> 015250ccc0625011f9ab613295547b13083efdfc -->
                                             <span class="input-group-append">
                                                 <span class="input-group-text bg-white">
                                                     <i class="fa fa-calendar"></i>
                                                 </span>
->>>>>>> duytan
+
                                             </span>
                                         </span>
                                     </div>
