@@ -15,7 +15,7 @@ function getAllClass($conn){
  }
 
  function getClass($conn,$idcls){
-  $sql = "SELECT * FROM class WHERE classname = $idcls";
+  $sql = "SELECT * FROM class WHERE classname = '$idcls'";
   $stmt = $conn->prepare($sql);
   $stmt->execute();
 

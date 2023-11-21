@@ -116,7 +116,7 @@ $teacher
                                         <td><?= $class['classname'] ?></td>
 
                                         <td>
-                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editClass.php?id=<?= $class['classname'] ?>')" data-bs-id=<?= $class['classname'] ?>>Edit</a>
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editClass.php?id=<?= $class['classname'] ?>')" data-bs-id=<?= $class['classname'] ?>>Edit</button>
                                             <a href="" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
