@@ -62,7 +62,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       //include "inc/navBar.php";
       ?>
 
-<?php 
+
+
+      <div class="container mt-5 pb-3">
+
+      <?php 
           
           $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
@@ -74,17 +78,44 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         }
      ?>
 
- <img src="<?= $imagePath ?>"class="card-img-top" alt="Student Image" style="height: 220px; width: 220px" >
-         
-<div>
-          <form action="./inc/upload.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="hidden" name="id_student_hide" value="<?= $id ?>">
-        <input type="submit" value="Upload Image" name="submit">
-    </form>
-          </div>
+  <!-- Hình ảnh với sự kiện onclick -->
+<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()">
 
-      <div class="container mt-5 pb-3">
+<!-- Form upload -->
+<div>
+    <form action="inc/upload.php" method="post" enctype="multipart/form-data">
+        <!-- Input file ẩn -->
+        <input type="hidden" name="id_student_hide" value="<?= $id ?>">
+        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
+
+        <!-- Nút "Upload" được ẩn ban đầu -->
+        <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
+    </form>
+</div>
+
+<script>
+    // Hàm kích hoạt sự kiện click trên input file
+    function triggerFileInput() {
+        document.getElementById('fileToUpload').click();
+    }
+
+    // Khi chọn file, hiển thị nút "Upload"
+    document.getElementById('fileToUpload').addEventListener('change', function () {
+        // Kiểm tra xem có file đã chọn hay không
+        if (this.files.length > 0) {
+            // Hiển thị nút "Upload"
+            document.getElementById('uploadBtn').style.display = 'block';
+            // Hiển thị hình ảnh đã chọn (nếu có)
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.card-img-top').src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
+
+
         <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
