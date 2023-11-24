@@ -12,17 +12,17 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Dompdf\FontMetrics;
 
-if (isset($_SESSION['student_id']) && 
+if (isset($_SESSION['id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Student') {
-        $student_id = $_SESSION['student_id'];
+        $student_id = $_SESSION['id'];
         $student = getStudentById($student_id, $conn);
         $img = getImgById($conn,$student_id);
         $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
           if ($student['student_id'] && isset($img['id_student'])) {
-            $imagePath = $img['image_path'];
+            $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
             // Nếu không có ảnh, sử dụng ảnh mặc định
             $imagePath = $defaultImagePath;

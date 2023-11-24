@@ -34,9 +34,9 @@ function getStudentsByLopCode($conn, $ma_lop) {
 function getStudentById($id, $conn){
    $sql = "SELECT *
    FROM students 
-   JOIN avgscore  ON students.student_id = avgscore.student_id
-   JOIN avgscore2  ON students.student_id = avgscore2.ID_student
-   WHERE students.student_id = ?";
+   JOIN avgscore  ON students.id = avgscore.student_id
+   JOIN avgscore2  ON students.id = avgscore2.ID_student
+   WHERE students.id = ?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$id]);
 
@@ -66,7 +66,7 @@ function getImgById($conn, $id){
 
 function studentPasswordVerify($student_pass, $conn, $student_id){
   $sql = "SELECT * FROM students
-          WHERE student_id=?";
+          WHERE id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$student_id]);
 

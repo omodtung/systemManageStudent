@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION['student_id']) && 
+if (isset($_SESSION['id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Student') {
@@ -17,7 +17,7 @@ if (isset($_POST['old_pass']) &&
     $new_pass = $_POST['new_pass'];
     $c_new_pass = $_POST['c_new_pass'];
 
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['id'];
     
     if (empty($old_pass)) {
 		$em  = "Old password is required";
@@ -45,7 +45,7 @@ if (isset($_POST['old_pass']) &&
 
         $sql = "UPDATE students SET
                 password = ?
-                WHERE student_id=?";
+                WHERE id=?";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute([$new_pass, $student_id]);

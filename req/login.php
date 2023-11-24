@@ -56,8 +56,8 @@ if (isset($_POST['uname']) &&
                         header("Location: ../admin/index.php");
                         exit;
                     }else if ($role == 'Student') {
-                        $id = $user['student_id'];
-                        $_SESSION['student_id'] = $id;
+                        $id = $user['id'];
+                        $_SESSION['id'] = $id;
                         header("Location: ../Student/index.php");
                         exit;
                     }else if($role == 'Teacher'){

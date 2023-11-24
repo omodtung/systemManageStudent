@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION['student_id']) && 
+if (isset($_SESSION['id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Student') {
@@ -10,7 +10,7 @@ if (isset($_SESSION['student_id']) &&
      include "inc/navbar.php";
     // echo $_SESSION['malop'];
     //  $ma_lop = $_SESSION['malop'];
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['id'];
     $student = getStudentById($student_id, $conn);
 
      $mahocsinh = $student['mahs'];
