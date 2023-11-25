@@ -4,12 +4,14 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
-        include "../../DB_connection.php";
-        include "../data/schedule.php";
-        include "../data/teacherAd.php";
-        include "../data/class.php";
-        $class = getAllClass($conn);
-        $teachers = getAllTeachers($conn);
+        include_once "../../DB_connection.php";
+        include_once "../DAL/data/schedule.php";
+        include_once "../DAL/data/teacherAd.php";
+        include_once "../DAL/data/class.php";
+        include_once "../BL/data/class.php";
+        include_once "../BL/data/teacher.php";
+        $class = getAllClassBL($conn);
+        $teachers = getAllTeachersBL($conn);
 
 ?>
         <html lang="en">
@@ -40,11 +42,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body>
             <?php
-            //include "inc/navBar.php";
+            //include_once "inc/navBar.php";
             ?>
 
             <div class="container mt-5 pb-3">
-                <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/addSchedule.php">
+                <form method="post" class="shadow p-3 mt-2 form-w" action="BL/addSchedule.php">
 
                     <div class="mb-3">
 

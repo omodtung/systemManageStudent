@@ -3,13 +3,15 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "data/teacherAd.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "data/student.php";
-        $teachers =   getAllTeachers($conn);
-        $students = getAllStudents($conn);
+        include_once "../DB_connection.php";
+        include_once "DAL/data/teacherAd.php";
+        include_once "DAL/data/subject.php";
+        include_once "DAL/data/grade.php";
+        include_once "DAL/data/student.php";
+        include_once "BL/data/teacher.php";
+        include_once "BL/data/student.php";
+        $teachers =   getAllTeachersBL($conn);
+        $students = getAllStudentsBL($conn);
       
         //print_r($teachers);
 
@@ -31,14 +33,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body>
             <?php
-            include "inc/sidebar/index.html";
+            include_once "inc/sidebar/index.html";
             if ($students != 0) {
 
 
             ?>
                 <div class="container mt-5">
                     <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
-                    <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                    <a href="./DAL/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
                     <div class="table table-striped">
                         <table class="thead-dark">
                             <thead>
@@ -80,7 +82,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editStudent.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?>>
                                               Edit
                                             </button>
-                                            <a href="req/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="DAL/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
 

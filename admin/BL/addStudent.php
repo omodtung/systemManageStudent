@@ -25,9 +25,9 @@ if (
 
 
         ) {
-            include '../../DB_connection.php';
-            include "../data/teacherAd.php";
-            include "../data/student.php";
+            include_once '../../DB_connection.php';
+            include_once "../DAL/data/teacherAd.php";
+            include_once "../DAL/data/student.php";
 
             // print_r($_POST);
             // die();
@@ -95,7 +95,7 @@ $id = $_POST["id"];
                 exit;
             } else {
                 //chuyen doi hashing pass 
-                include("../req/addStudent.php");
+                include_once("../DAL/addStudent.php");
 
 
 

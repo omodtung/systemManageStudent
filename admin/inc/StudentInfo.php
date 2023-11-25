@@ -4,16 +4,20 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
-    include "../../DB_connection.php";
-    include "../data/subject.php";
-    include "../data/grade.php";
-    include "../data/getteacher.php";
-    include "../data/student.php";
-    include "../data/class.php";
-    $subjects = getAllSubjects($conn);
-    $grades = getAllGrade($conn);
-    $student = getStudentUsingId($conn,$_GET['idstudent']);
-    $class = getAllClass($conn);
+    include_once "../../DB_connection.php";
+    include_once "../DAL/data/subject.php";
+    include_once "../DAL/data/grade.php";
+    include_once "../DAL/data/getteacher.php";
+    include_once "../DAL/data/student.php";
+    include_once "../DAL/data/class.php";
+    include_once "../BL/data/class.php";
+    include_once "../BL/data/subject.php";
+    include_once "../BL/data/grade.php";
+    include_once "../BL/data/student.php";
+    $subjects = getAllSubjectsBL($conn);
+    $grades = getAllGradeBL($conn);
+    $student = getStudentUsingIdBL($conn,$_GET['idstudent']);
+    $class = getAllClassBL($conn);
     $id = $_GET['idstudent'];
     $fname = '';
     $lname  = '';
@@ -58,11 +62,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     <body>
       <?php
-      //include "inc/navBar.php";
+      //include_once "inc/navBar.php";
       ?>
 
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/student-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="DAL/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
 

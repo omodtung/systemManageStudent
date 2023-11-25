@@ -4,13 +4,16 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
-    include "../../DB_connection.php";
-    include "../data/subject.php";
-    include "../data/grade.php";
-    include "../data/getteacher.php";
-    $subjects = getAllSubjects($conn);
-    $grades = getAllGrade($conn);
-    $teacher = getTeacher($conn,$_GET['idteach']);
+    include_once "../../DB_connection.php";
+    include_once "../DAL/data/subject.php";
+    include_once "../DAL/data/grade.php";
+    include_once "../DAL/data/getteacher.php";
+    include_once "../BL/data/subject.php";
+    include_once "../BL/data/grade.php";
+    include_once "../BL/data/teacher.php";
+    $subjects = getAllSubjectsBL($conn);
+    $grades = getAllGradeBL($conn);
+    $teacher = getTeacherBL($conn,$_GET['idteach']);
     $id = $_GET['idteach'];
     $hoten = '';
     //$lname  = '';
@@ -55,11 +58,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     <body>
       <?php
-      //include "inc/navBar.php";
+      //include_once "inc/navBar.php";
       ?>
 
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/teacher-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="DAL/teacher-edit.php?id=<?= $id ?>">
           
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">

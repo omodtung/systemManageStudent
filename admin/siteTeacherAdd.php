@@ -4,15 +4,18 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
-    include "../DB_connection.php";
-    include "req/data/subject.php";
-    include "req/data/grade.php";
-    include "req/data/teacherAd.php";
+    include_once "../DB_connection.php";
+    include_once "DAL/data/subject.php";
+    include_once "DAL/data/grade.php";
+    include_once "DAL/data/teacherAd.php";
+    include_once "BL/data/subject.php";
+    include_once "BL/data/teacher.php";
+    include_once "BL/data/grade.php";
 
-    $subjects = getAllSubjects($conn);
-    $teacher = getAllTeachers($conn);
+    $subjects = getAllSubjectsBL($conn);
+    $teacher = getAllTeachersBL($conn);
 
-    $grades = getAllGrade($conn);
+    $grades = getAllGradeBL($conn);
     $fname = '';
     $lname  = '';
     $uname  = '';
@@ -60,7 +63,7 @@ $maGiaoVien ='';
 
     <body >
     <?php 
-        include "inc/navBar.php";
+        include_once "inc/navBar.php";
      ?>
 
       <div class="container mt-5">

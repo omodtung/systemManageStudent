@@ -8,9 +8,9 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 {
     if ($_SESSION['role']=='Admin')
     {
-        include "../../DB_connection.php";
+        include_once "../../DB_connection.php";
         
-        include_once "../data/grade.php";
+        include_once "../DAL/data/grade.php";
         $id = $_GET['id'];
         $hotenhs = $_POST['hotenhs'];
         //$lname = $_POST['lname'];
@@ -47,7 +47,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 
         else{
         
-        include("../req/student-edit.php");
+        include_once("../DAL/student-edit.php");
         header("Location: ../studentUI.php?sucsess=$id");
         }
     }

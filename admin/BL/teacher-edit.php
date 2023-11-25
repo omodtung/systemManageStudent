@@ -8,9 +8,9 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 {
     if ($_SESSION['role']=='Admin')
     {
-        include "../../DB_connection.php";
-        include "../data/subject.php";
-        include "../data/grade.php";
+        include_once "../../DB_connection.php";
+        include_once "../DAL/data/subject.php";
+        include_once "../DAL/data/grade.php";
         $id = $_GET['id'];
         $hoten = $_POST['hoten'];
         //$lname = $_POST['lname'];
@@ -42,10 +42,10 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         else{
         $subjects = implode(",", $_POST['subjects']);
         $grades = implode(",", $_POST['grades']);
-        // include("../req/teacher-edit.php");
+        // include_once("../DAL/teacher-edit.php");
         // header("Location: ../teacherNewUI.php?sucsess=$id");
         header('HTTP/1.1 307 Temporary Redirect');
-        header("Location: ../req/teacher-edit.php?id=$id");
+        header("Location: ../DAL/teacher-edit.php?id=$id");
         }
     }
 }

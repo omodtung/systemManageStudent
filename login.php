@@ -13,7 +13,7 @@
 <body class="body-login">
 	<div class="black-fill"><br /> <br />
 		<div class="d-flex justify-content-center align-items-center flex-column">
-			<form class="login" method="post" action="req/login.php">
+			<form class="login" method="post" action="DAL/login.php">
 
 
 

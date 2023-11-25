@@ -8,10 +8,10 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
-    include "../DB_connection.php";
-    include "data/subject.php";
-    include "data/grade.php";
-    include "data/getteacher.php";
+    include_once "../DB_connection.php";
+    include_once "DAL/data/subject.php";
+    include_once "DAL/data/grade.php";
+    include_once "DAL/data/getteacher.php";
     $subjects = getAllSubjects($conn);
     $grades = getAllGrade($conn);
     $teacher = getTeacher($conn,$_GET['idteach']);
@@ -59,14 +59,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     <body>
       <?php
-      include "inc/navBar.php";
+      include_once "inc/navBar.php";
       ?>
 
       <div class="container mt-5 pb-3">
         
         <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-2 form-w" action="req/teacher-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="DAL/teacher-edit.php?id=<?= $id ?>">
           <h3> Site EDIT teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">
@@ -138,7 +138,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?idteach=' + id,
+                                url: 'DAL/resetpass.php?idteach=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }
@@ -241,7 +241,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?idteach=' + id,
+                                url: 'DAL/resetpass.php?idteach=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }

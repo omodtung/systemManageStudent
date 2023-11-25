@@ -3,9 +3,10 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "req/data/score.php";
-        include "inc/navBar.php";
+        include_once "../DB_connection.php";
+        include_once "DAL/data/score.php";
+        include_once "inc/navBar.php";
+        include_once "BL/data/score.php";
         $scores = 0;
         
 ?>
@@ -102,7 +103,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     
     if(isset($_POST['btnTimkiem'])){
         $mahocsinh = $_POST['btnTimkiem'];
-        $scores = getAllScore($conn, $mahocsinh);
+        $scores = getAllScoreBL($conn, $mahocsinh);
     }?>
 
 

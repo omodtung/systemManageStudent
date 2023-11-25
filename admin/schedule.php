@@ -3,15 +3,16 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "data/teacherAd.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "data/getteacher.php";
-        include "data/schedule.php";
+        include_once "../DB_connection.php";
+        include_once "DAL/data/teacherAd.php";
+        include_once "DAL/data/subject.php";
+        include_once "DAL/data/grade.php";
+        include_once "DAL/data/getteacher.php";
+        include_once "DAL/data/schedule.php";
         //$teachers =   getAllTeachers($conn);
+        include_once "BL/data/schedule.php";
 
-        $schedules = getAllSchedules($conn);
+        $schedules = getAllSchedulesBL($conn);
     }
 }
 ?>
@@ -80,7 +81,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
           
           
             <li>
-                <a target="_blank" rel="noopener noreferrer" href="./req/export.php?schedule=1">
+                <a target="_blank" rel="noopener noreferrer" href="./DAL/export.php?schedule=1">
                     <i class="bx bx-export"></i>
                     <span class="link_name">Export All Schedules</span>
                 </a>
@@ -108,7 +109,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     </div>
     <section class="home-section">
         <?php
-        include "inc/navBar.php";
+        include_once "inc/navBar.php";
         ?>
         <div class="container mt-5">
             <div class="table-responsive">
@@ -142,7 +143,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editSchedule.php?id=<?= $schedule['ID_Schedule'] ?>')" data-bs-id=<?= $schedule['ID_Schedule'] ?>>
                                         Edit
                                     </button>
-                                    <a href="applogic/deleteschedule.php?id=<?= $schedule['ID_Schedule'] ?>" class="btn btn-danger">Delete</a>
+                                    <a href="BL/deleteschedule.php?id=<?= $schedule['ID_Schedule'] ?>" class="btn btn-danger">Delete</a>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo('./inc/ScheduleInfo.php?id=<?= $schedule['TeacherId'] ?>')" data-bs-id=<?= $schedule['TeacherId'] ?>>
                                         Detail
                                     </button>

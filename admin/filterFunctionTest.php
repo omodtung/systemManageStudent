@@ -1,11 +1,11 @@
 <?php
 
 session_start();
-include "../DB_connection.php";
-include "data/teacherAd.php";
-include "data/grade.php";
-include "data/class.php";
-include "data/subject.php";
+include_once "../DB_connection.php";
+include_once "DAL/data/teacherAd.php";
+include_once "DAL/data/grade.php";
+include_once "DAL/data/class.php";
+include_once "DAL/data/subject.php";
 
 $teachers = getAllTeachers($conn);
 $subjects = getAllSubjects($conn);

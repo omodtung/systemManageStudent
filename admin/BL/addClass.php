@@ -22,13 +22,13 @@ if (
 
 
         ) {
-            include '../../DB_connection.php';
-            include "../data/teacherAd.php";
+            include_once '../../DB_connection.php';
+            include_once "../DAL/data/teacherAd.php";
 
             // print_r($_POST);
             // die();
 
-            include "../data/class.php";
+            include_once "../DAL/data/class.php";
 
 
             // print_r($_POST);
@@ -73,7 +73,7 @@ if (
 
             else
             {
-                include("../req/addClass.php");
+                include_once("../DAL/addClass.php");
 
 
 

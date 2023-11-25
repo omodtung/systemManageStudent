@@ -4,12 +4,12 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
+        include_once "../DB_connection.php";
        
-        include "req/data/class.php";
-       
+        include_once "DAL/data/class.php";
+        include_once "BL/data/class.php";
 
-        $classes = getAllClass($conn);
+        $classes = getAllClassBL($conn);
 $teacher
         //print_r($teachers);
 ?>
@@ -82,7 +82,7 @@ $teacher
             </div>
         <section class="home-section">
             <?php
-            include "inc/navBar.php";
+            include_once "inc/navBar.php";
             if ($classes != 0) {
 
 
@@ -117,7 +117,7 @@ $teacher
 
                                         <td>
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editClass.php?id=<?= $class['classname'] ?>')" data-bs-id=<?= $class['classname'] ?>>Edit</button>
-                                            <a href="req/deleteclass.php?id=<?= $class['classname'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="DAL/deleteclass.php?id=<?= $class['classname'] ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
 

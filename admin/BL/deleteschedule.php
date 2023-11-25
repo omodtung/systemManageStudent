@@ -7,8 +7,8 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 {
     if ($_SESSION['role']=='Admin')
     {
-        include '../../DB_connection.php';
-        include("../req/deleteschedule.php");
+        include_once '../../DB_connection.php';
+        include_once("../DAL/deleteschedule.php");
         header("Location: ../schedule.php");
         exit;
     }

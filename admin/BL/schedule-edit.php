@@ -8,7 +8,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
 {
     if ($_SESSION['role']=='Admin')
     {
-        include "../../DB_connection.php";
+        include_once "../../DB_connection.php";
         $id = $_GET['id'];
 
         if(!isset($_POST['teacherid']) || empty($_POST['teacherid'])){
@@ -30,7 +30,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
         else{
         
         header('HTTP/1.1 307 Temporary Redirect');
-        header("Location: ../req/schedule-edit.php?id=$id");
+        header("Location: ../DAL/schedule-edit.php?id=$id");
         }
     }
 }

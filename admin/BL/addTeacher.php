@@ -25,8 +25,8 @@ if (
 
 
         ) {
-            include '../../DB_connection.php';
-            include "../req/data/teacherAd.php";
+            include_once '../../DB_connection.php';
+            include_once "../DAL/data/teacherAd.php";
         
 
             $flname =  $_POST['flname'];
@@ -103,7 +103,7 @@ if (
 
             else {
                 //chuyen doi hashing pass 
-                include("../req/addTeacher.php");
+                include_once("../DAL/addTeacher.php");
 
 
 

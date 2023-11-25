@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $conn = new mysqli('localhost', 'root', '', 'test7');
+    $conn = new mysqli('localhost', 'root', '', 'test3');
 
     // Check connection for errors
     if ($conn->connect_error) {
@@ -10,7 +10,7 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
-include("../DB_Mysqli.php");
+include_once("../DB_Mysqli.php");
 
 if(isset($_POST["filter"]))
 {
@@ -26,7 +26,7 @@ function filterDataByCategory() {
     $data =[];
     if(!empty($filterByCategory)){
     
-        $query = "SELECT * FROM teachers WHERE mamonhoc= '$filterByCategory'";
+        $query = "SELECT * FROM teachers WHERE mamonhoc= '$filterByCategory' AND status = 1";
      
      
         $result = $conn->query($query);
