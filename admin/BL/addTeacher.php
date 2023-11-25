@@ -26,7 +26,8 @@ if (
 
         ) {
             include '../../DB_connection.php';
-            include "../data/teacherAd.php";
+            include "../req/data/teacherAd.php";
+        
 
             $flname =  $_POST['flname'];
 
@@ -61,7 +62,7 @@ if (
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
             } else if (empty($idgv)) {
-                $thongBao = " idgv  is require";
+                $thongBao = " ma giao vien  is require";
                 header("Location: ../siteTeacherAdd.php?error=$thongBao&$data");
                 exit;
             } else if (!findNameDocNhat($uname, $conn)) {
