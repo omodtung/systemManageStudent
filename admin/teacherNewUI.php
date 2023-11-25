@@ -4,11 +4,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
         include "../DB_connection.php";
-        include "data/teacherAd.php";
+        include "req/data/teacherAd.php";
         include "data/subject.php";
         include "data/grade.php";
         include "data/getteacher.php";
 
+        
         $teachers =   getAllTeachers($conn);
 
 

@@ -5,9 +5,9 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
     include "../DB_connection.php";
-    include "data/subject.php";
-    include "data/grade.php";
-    include "data/teacherAd.php";
+    include "req/data/subject.php";
+    include "req/data/grade.php";
+    include "req/data/teacherAd.php";
 
     $subjects = getAllSubjects($conn);
     $teacher = getAllTeachers($conn);
@@ -66,7 +66,7 @@ $maGiaoVien ='';
       <div class="container mt-5">
         <a href="teacherNewUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form  method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
+        <form  method="post" class="shadow p-3 mt-5 form-w" action="BL/addTeacher.php">
           <h3> Form Thêm Giáo Viên</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">
