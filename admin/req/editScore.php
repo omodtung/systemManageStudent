@@ -21,7 +21,9 @@ session_start();
             
             $_SESSION['sucsess'] = $id;
         
-                header("Location: ../scoreUI.php");
+                header("Location: ../scoreViewUI.php");
+
+                
                 exit;
 
 ?>

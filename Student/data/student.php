@@ -86,6 +86,19 @@ function studentPasswordVerify($student_pass, $conn, $student_id){
 
 
 
+function getScheduleMaLop($conn,$ma_lop){
+  $sql = "SELECT * FROM schedule WHERE Class = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$ma_lop]);
+
+  if ($stmt->rowCount() >= 1) {
+    $schedules = $stmt->fetchAll();
+    return $schedules;
+  }else {
+    return 0;
+  }
+}
+
 
 // function getDiem($conn, $id_student) {
 //   $sql = "SELECT * FROM avgscore WHERE ID_student = ?";

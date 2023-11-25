@@ -65,7 +65,7 @@ $id = $_POST["id"];
                 $thongBao = " last Name is require";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;
-            } else if (!findNameDocNhat($uname, $conn)) {
+            } else if (!findNameDocNhatHs($uname, $conn)) {
                 $thongBao = " Username Da Ton Tai Su Dung Username Khac";
                 header("Location: ../siteAddStudent.php?error=$thongBao&$data");
                 exit;

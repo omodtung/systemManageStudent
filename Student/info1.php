@@ -21,7 +21,7 @@ if (isset($_SESSION['id']) &&
         $img = getImgById($conn,$student_id);
         $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
-          if ($student['student_id'] && isset($img['id_student'])) {
+          if ($student['id'] && isset($img['id_student'])) {
             $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
             // Nếu không có ảnh, sử dụng ảnh mặc định
