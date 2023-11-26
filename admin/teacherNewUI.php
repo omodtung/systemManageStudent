@@ -499,7 +499,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <?php include_once("indexFilter.php"); ?>
+                        <?php include_once("BL/indexFilterTeacherBL.php"); ?>
                     </div>
                 </div>
             </div>

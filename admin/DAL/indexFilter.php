@@ -1,7 +1,8 @@
 <?php
 include_once("database.php");
-include_once("getCategory.php");
+
 include_once("filter-data.php");
+include_once("BL/getcategoryTeacherBL.php")
 ?>
 
 <form method="post" action="BL/rebound.php?indexFilter=1">
@@ -9,7 +10,8 @@ include_once("filter-data.php");
   <select name="filterByCategory">
 
     <?php
-    $getCategories = getCategory();
+    $getCategories = getcategoryBL();
+
 
     foreach ($getCategories as $category) {
 
@@ -28,5 +30,5 @@ include_once("filter-data.php");
 
 
 <?php
-include_once("display-data.php");
+include_once("BL/displayFilterDataTeacherBL.php");
 ?>
