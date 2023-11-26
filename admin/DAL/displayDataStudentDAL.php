@@ -48,8 +48,7 @@ foreach($filterDataByCategory as $teacher){
 
 
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/StudentInfo.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?> class="btn btn-info">Info</button>
-                                                <a href="req/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
-
+                                                <a href="BL/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
 
 
 

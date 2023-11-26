@@ -1,5 +1,5 @@
 <?php
 
-include_once ("../DAL/displayDataStudentDAL.php");
+include_once ("DAL/displayDataStudentDAL.php");
 
 ?>

@@ -66,7 +66,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         
         <a href="teacherUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form method="post" class="shadow p-3 mt-2 form-w" action="DAL/teacher-edit.php?id=<?= $id ?>">
+        <form method="post" class="shadow p-3 mt-2 form-w" action="BL/teacher-edit.php?id=<?= $id ?>">
           <h3> Site EDIT teacher</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">

@@ -2,6 +2,8 @@
 include_once("database.php");
 include_once("DAL/getCategoriesStudent.php");
 include_once("DAL/filterDataStudent.php");
+include_once("BL/getcategoryBL.php");
+
 
 
 ?>
@@ -30,5 +32,5 @@ include_once("DAL/filterDataStudent.php");
 
 
 <?php
-include_once("../BL/displayDataStudent.php");
+include_once("BL/displayDataStudent.php");
 ?>

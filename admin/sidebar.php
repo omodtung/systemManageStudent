@@ -82,7 +82,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editStudent.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?>>
                                               Edit
                                             </button>
-                                            <a href="DAL/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
+                                            <a href="BL/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
 
