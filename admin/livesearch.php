@@ -11,7 +11,7 @@ try {
     exit;
 }
 if(isset($_GET["student"])) {
-    echo '<a href="./req/export.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./DAL/export.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE hotenhs LIKE '{$input}%' AND status = 1";
@@ -63,7 +63,7 @@ if(isset($_GET["student"])) {
     }
 }
 else if(isset($_GET["schedule"])) {
-    echo '<a href="./req/export.php?schedulesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./DAL/export.php?schedulesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM schedule WHERE HoTen LIKE '{$input}%'";
@@ -99,7 +99,7 @@ else if(isset($_GET["schedule"])) {
                 
                 echo '<td>';
                 echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick(`./inc/editSchedule.php?id=' . $row["ID_Schedule"] . '`)" data-bs-id='. $row["ID_Schedule"] .'> Edit </button>';
-                echo '<a href="applogic/deleteschedule.php?id=' . $row['ID_Schedule'] .'" class="btn btn-danger">Delete</a>';
+                echo '<a href="BL/deleteschedule.php?id=' . $row['ID_Schedule'] .'" class="btn btn-danger">Delete</a>';
                 echo '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalforminfo" onclick="btnclickinfo(`./inc/ScheduleInfo.php?id='. $row["TeacherId"] .'`)" data-bs-id='. $row["TeacherId"] .'>Detail </button>';
                 echo '</td>';
                 echo '</tr>';
@@ -115,7 +115,7 @@ else if(isset($_GET["schedule"])) {
     }
 }
 else if(isset($_GET["timetable"])) {
-    echo '<a href="./req/export.php?timetablesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./DAL/export.php?timetablesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM students JOIN (SELECT * FROM schedule GROUP BY Class) as sche on sche.Class = students.malop WHERE hotenhs LIKE '{$input}%'";
@@ -156,7 +156,7 @@ else if(isset($_GET["timetable"])) {
         echo "Error executing the query: " . $e->getMessage();
     }
 }
-else {echo '<a href="./req/export.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+else {echo '<a href="./DAL/export.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
 
 // Try to execute the query
 try {

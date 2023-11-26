@@ -3,13 +3,14 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "data/teacherAd.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "data/student.php";
-        $teachers =   getAllTeachers($conn);
-        $students = getAllStudents($conn);
+        include_once "../DB_connection.php";
+        //include_once "DAL/data/teacherAd.php";
+        //include_once "DAL/data/subject.php";
+        //include_once "DAL/data/grade.php";
+        include_once "BL/data/student.php";
+        include_once "BL/data/teacher.php";
+        $teachers =   getAllTeachersBL($conn);
+        $students = getAllStudentsBL($conn);
 
         //print_r($teachers);
 
@@ -77,7 +78,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </li>
                    
                     <li>
-                        <a href="./req/encryptpasswords.php?table=students">
+                        <a href="./DAL/encryptpasswords.php?table=students">
                             <i class="bx bx-chat"></i>
                             <span class="link_name">Encrypt All Passwords</span>
                         </a>
@@ -99,7 +100,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </li>
                    
                     <li>
-                        <a target="_blank" rel="noopener noreferrer" href="./req/export.php?student=1">
+                        <a target="_blank" rel="noopener noreferrer" href="./DAL/export.php?student=1">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Students</span>
                         </a>
@@ -127,14 +128,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             </div>
             <section class="home-section">
                 <?php
-                include "inc/navBar.php";
+                include_once "inc/navBar.php";
                 if ($students != 0) {
 
 
                 ?>
                     <div class="container mt-5">
                         <!-- <a href="siteAddStudent.php" class="btn btn-outline-primary btn_add_teacher">Add New Student</a>
-                        <a href="./req/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a> -->
+                        <a href="./DAL/encryptpasswords.php?table=students" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a> -->
                         <div class="table table-striped">
                             <table class="thead-dark">
                                 <thead>
@@ -178,7 +179,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                 </button>
 
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/StudentInfo.php?idstudent=<?= $student['id'] ?>')" data-bs-id=<?= $student['id'] ?> class="btn btn-info">Info</button>
-                                                <a href="req/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
+                                                <a href="BL/deletestudent.php?id=<?= $student['id'] ?>" class="btn btn-danger">Delete</a>
                                             </td>
                                         </tr>
                                         <div id="searchresult"></div>
@@ -391,7 +392,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <?php include("req/IndexFilterStudentDAL.php"); ?>
+                        <?php include_once("BL/indexFilterBL.php"); ?>
                     </div>
                 </div>
             </div>

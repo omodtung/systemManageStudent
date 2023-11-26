@@ -4,16 +4,21 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
-        include "../../DB_connection.php";
-        include "../data/schedule.php";
-        include "../data/teacherAd.php";
-        include "../data/getteacher.php";
-        include "../data/subject.php";
-        include "../data/class.php";
         
-        $class = getAllClass($conn);
-        $teachers = getAllTeachers($conn);
-        $thissche = getScheduleFromClass($conn,$_GET["id"]);
+        include_once "../../DB_connection.php";
+        //include_once "../DAL/data/schedule.php";
+        //include_once "../DAL/data/teacherAd.php";
+        //include_once "../DAL/data/getteacher.php";
+        //include_once "../DAL/data/subject.php";
+        //include_once "../DAL/data/class.php";
+        include_once "../BL/data/class.php";
+        include_once "../BL/data/teacher.php";
+        include_once "../BL/data/schedule.php";
+        include_once "../BL/data/subject.php";
+        
+        $class = getAllClassBL($conn);
+        $teachers = getAllTeachersBL($conn);
+        $thissche = getScheduleFromClassBL($conn,$_GET["id"]);
         
         //$allsche = getAllSchedules($conn);
 
@@ -71,7 +76,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body>
             <?php
-            //include "inc/navBar.php";
+            //include_once "inc/navBar.php";
             ?>
 
             <div class="container mt-5 pb-3">
@@ -99,13 +104,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                                 <tr>
                                     <td><?= $schedule['StartTime'] ?> - <?= $schedule['EndTime'] ?></td>
-                                    <td><?php echo ("Thứ Hai" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
-                                    <td><?php echo ("Thứ Ba" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
-                                    <td><?php echo ("Thứ Tư" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
-                                    <td><?php echo ("Thứ Năm" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
-                                    <td><?php echo ("Thứ Sáu" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
-                                    <td><?php echo ("Thứ Bảy" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
-                                    <td><?php echo ("Chủ Nhật" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_code(getTeacher($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Thứ Hai" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Thứ Ba" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Thứ Tư" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Thứ Năm" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Thứ Sáu" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Thứ Bảy" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
+                                    <td><?php echo ("Chủ Nhật" == $schedule['WorkDate']) ? (($schedule["Class"] == $_GET["id"]) ? getSubjectBySubject_codeBL(getTeacherBL($conn,$schedule['TeacherId'])['mamonhoc'],$conn)['subject'] : '') : ''; ?></td>
 
                                     
                                 </tr>

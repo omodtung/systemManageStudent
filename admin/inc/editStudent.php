@@ -4,16 +4,21 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
-    include "../../DB_connection.php";
-    include "../data/subject.php";
-    include "../data/grade.php";
-    include "../data/getteacher.php";
-    include "../data/student.php";
-    include "../data/class.php";
-    $subjects = getAllSubjects($conn);
-    $grades = getAllGrade($conn);
-    $student = getStudentUsingId($conn,$_GET['idstudent']);
-    $class = getAllClass($conn);
+    include_once "../../DB_connection.php";
+    //include_once "../DAL/data/subject.php";
+    //include_once "../DAL/data/grade.php";
+    //include_once "../DAL/data/getteacher.php";
+    //include_once "../DAL/data/student.php";
+    //include_once "../DAL/data/class.php";
+    include_once "../BL/data/class.php";
+    include_once "../BL/data/teacher.php";
+    include_once "../BL/data/grade.php";
+    include_once "../BL/data/student.php";
+    include_once "../BL/data/subject.php";
+    $subjects = getAllSubjectsBL($conn);
+    $grades = getAllGradeBL($conn);
+    $student = getStudentUsingIdBL($conn,$_GET['idstudent']);
+    $class = getAllClassBL($conn);
     $id = $_GET['idstudent'];
     $img = getImgById($conn,$id);
     $fname = '';
@@ -59,12 +64,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     <body>
       <?php
-      //include "inc/navBar.php";
+      //include_once "inc/navBar.php";
       ?>
 
 
 
       <div class="container mt-5 pb-3">
+<<<<<<< HEAD
 
       <?php 
           
@@ -73,39 +79,36 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
           if ($student['id'] && isset($img['id_student'])) {
             $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
-            // Nếu không có ảnh, sử dụng ảnh mặc định
+
             $imagePath = $defaultImagePath;
         }
      ?>
 
-  <!-- Hình ảnh với sự kiện onclick -->
 <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()">
 
-<!-- Form upload -->
 <div>
     <form action="inc/upload.php" method="post" enctype="multipart/form-data">
-        <!-- Input file ẩn -->
+
         <input type="hidden" name="id_student_hide" value="<?= $id ?>">
         <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
 
-        <!-- Nút "Upload" được ẩn ban đầu -->
         <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
     </form>
 </div>
 
 <script>
-    // Hàm kích hoạt sự kiện click trên input file
+
     function triggerFileInput() {
         document.getElementById('fileToUpload').click();
     }
 
-    // Khi chọn file, hiển thị nút "Upload"
+
     document.getElementById('fileToUpload').addEventListener('change', function () {
-        // Kiểm tra xem có file đã chọn hay không
+
         if (this.files.length > 0) {
-            // Hiển thị nút "Upload"
+
             document.getElementById('uploadBtn').style.display = 'block';
-            // Hiển thị hình ảnh đã chọn (nếu có)
+
             var reader = new FileReader();
             reader.onload = function (e) {
                 document.querySelector('.card-img-top').src = e.target.result;
@@ -117,6 +120,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
         <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
+=======
+        <form method="post" class="shadow p-3 mt-2 form-w" action="BL/student-edit.php?id=<?= $id ?>">
+>>>>>>> main
           
           <div class="mb-3">
 
@@ -203,7 +209,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?table=students&idstudent=' + id,
+                                url: 'DAL/resetpass.php?table=students&idstudent=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }
@@ -309,7 +315,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if(confirm("Are you sure to reset password")){
                             
                             $.ajax({
-                                url: 'req/resetpass.php?idteach=' + id,
+                                url: 'DAL/resetpass.php?idteach=' + id,
                                 success: function(response) {
                                     $('#passtext').val(response);
                                 }

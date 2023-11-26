@@ -3,10 +3,11 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "req/data/score.php";
+        include_once "../DB_connection.php";
+        include_once "DAL/data/score.php";
+        include_once "BL/data/score.php";
         $id = $_GET['idscore'];
-     $score = getScore($conn,$id);
+     $score = getScoreBL($conn,$id);
 
      ?>
 
@@ -25,7 +26,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         </head>
     <body>
-    <form method="post" action="req/uploadScoreExcel.php?= $id ?>">
+    <form method="post" action="BL/uploadScoreExcel.php?= $id ?>">
     <!-- <input type="hidden" name="idscore" value="<?= $score['id_score'] ?>">
     <div class="form-group">
         <label for="diem15">Điểm 15 phút:</label>

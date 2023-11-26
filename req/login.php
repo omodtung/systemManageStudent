@@ -5,7 +5,7 @@ if (isset($_POST['uname']) &&
     isset($_POST['pass']) &&
     isset($_POST['role'])) {
 
-	include "../DB_connection.php";
+	include_once "../DB_connection.php";
 	
 	$uname = $_POST['uname'];
 	$pass = $_POST['pass'];

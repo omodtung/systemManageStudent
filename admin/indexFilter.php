@@ -1,10 +1,10 @@
 <?php
-include("database.php");
-include("getCategory.php");
-include("filter-data.php");
+include_once("database.php");
+include_once("getCategory.php");
+include_once("filter-data.php");
 ?>
 
-<form method="post" action="applogic/rebound.php?indexFilter=1">
+<form method="post" action="BL/rebound.php?indexFilter=1">
 
   <select name="filterByCategory">
 
@@ -28,5 +28,5 @@ include("filter-data.php");
 
 
 <?php
-include("display-data.php");
+include_once("display-data.php");
 ?>

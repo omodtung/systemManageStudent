@@ -24,10 +24,8 @@ if (isset($_SESSION['id']) &&
           if ($student['id'] && isset($img['id_student'])) {
             $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
-            // Nếu không có ảnh, sử dụng ảnh mặc định
             $imagePath = $defaultImagePath;
         }
-        // Lấy hình ảnh từ database hoặc URL
         $imageData = file_get_contents($imagePath);
         $base64Image = base64_encode($imageData);
 

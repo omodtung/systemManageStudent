@@ -3,11 +3,11 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "data/teacherAd.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "data/getteacher.php";
+        include_once "../DB_connection.php";
+        include_once "DAL/data/teacherAd.php";
+        include_once "DAL/data/subject.php";
+        include_once "DAL/data/grade.php";
+        include_once "DAL/data/getteacher.php";
 
         $teachers =   getAllTeachers($conn);
 
@@ -40,7 +40,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body id="main-body">
             <?php
-            include "inc/navBar.php";
+            include_once "inc/navBar.php";
             if ($teachers != 0) {
 
 
@@ -48,7 +48,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <div class="container mt-5">
                     <div class="sticky-top">
                         <a href="siteTeacherAdd.php" class="btn btn-outline-primary btn_add_teacher">Add New Teacher</a>
-                        <a href="./req/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
+                        <a href="./DAL/encryptpasswords.php?table=teachers" class="btn btn-outline-primary btn_encrypt">Encrypt All Passwords</a>
                     </div>
                     <div class="table-responsive">
                         <!-- <table class="table table-success table-striped n-table"> -->

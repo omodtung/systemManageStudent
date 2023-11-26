@@ -4,13 +4,16 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
-        include "../../DB_connection.php";
-        include "../data/schedule.php";
-        include "../data/teacherAd.php";
-        include "../data/class.php";
-        $class = getAllClass($conn);
-        $teachers = getAllTeachers($conn);
-        $thissche = getSchedule($conn,$_GET["id"]);
+        include_once "../../DB_connection.php";
+        include_once "../DAL/data/schedule.php";
+        include_once "../DAL/data/teacherAd.php";
+        include_once "../DAL/data/class.php";
+        include_once "../BL/data/class.php";
+        include_once "../BL/data/teacher.php";
+        include_once "../BL/data/schedule.php";
+        $class = getAllClassBL($conn);
+        $teachers = getAllTeachersBL($conn);
+        $thissche = getScheduleBL($conn,$_GET["id"]);
 
 ?>
         <html lang="en">
@@ -41,11 +44,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body>
             <?php
-            //include "inc/navBar.php";
+            //include_once "inc/navBar.php";
             ?>
 
             <div class="container mt-5 pb-3">
-                <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/schedule-edit.php?id=<?=$_GET["id"] ?>">
+                <form method="post" class="shadow p-3 mt-2 form-w" action="BL/schedule-edit.php?id=<?=$_GET["id"] ?>">
 
                     <div class="mb-3">
 

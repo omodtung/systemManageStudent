@@ -23,7 +23,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     <body>
       <?php
-      include "inc/navBar.php";
+      include_once "inc/navBar.php";
       ?>
       <style>
 

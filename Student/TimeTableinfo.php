@@ -6,7 +6,7 @@ if (isset($_SESSION['id']) &&
     if ($_SESSION['role'] == 'Student') {
         include "../DB_connection.php";
         include "../admin/data/schedule.php";
-        include "../admin/data/teacherAd.php";
+        include "../admin/DAL/data/teacherAd.php";
         include "../admin/data/getteacher.php";
         include "../admin/data/subject.php";
         include "../admin/data/class.php";
