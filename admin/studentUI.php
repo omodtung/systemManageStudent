@@ -369,7 +369,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         var input = $(this).val();
                         if (input != "") {
                             $.ajax({
-                                url: "livesearch.php?student=1",
+                                url: "BL/livesearchBL.php?student=1",
                                 method: "POST",
                                 data: {
                                     input: input
