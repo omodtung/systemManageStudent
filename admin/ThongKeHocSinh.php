@@ -9,9 +9,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include_once "DAL/data/grade.php";
         include_once "DAL/data/student.php";
         include_once "BL/data/teacher.php";
-
+        include_once "BL/data/student.php";
         $teachers =   getAllTeachersBL($conn);
-
+// ------------------SUA LOI LINK NHAM GIAO QUA GIAO VIEN TU BAN HOC SINH--------------
         $countFemale = countFemale($conn);
         $countMale = countNumberStudentMaleBL($conn);
         $countTotalTeacher = $countFemale+$countMale;

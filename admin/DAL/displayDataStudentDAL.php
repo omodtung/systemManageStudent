@@ -54,7 +54,6 @@ foreach($filterDataByCategory as $teacher){
 
 
 
-
                                             </td>
 
 </tr>

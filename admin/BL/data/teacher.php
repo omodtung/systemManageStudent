@@ -5,6 +5,8 @@ include_once("DAL/data/teacherAd.php");
 include_once("../DAL/data/teacherAd.php");
 include_once("DAL/data/getteacher.php");
 include_once("../DAL/data/getteacher.php");
+
+
 function getAllTeachersBL($conn){
     
     return getAllTeachers($conn);
