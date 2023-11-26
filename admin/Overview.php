@@ -130,13 +130,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </a>
                         <span class="tooltip">Delete</span>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a target="_blank" rel="noopener noreferrer" href="./DAL/exportteacher.php">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Teachers</span>
                         </a>
                         <span class="tooltip">Delete</span>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="#">
                             <i class="bx bx-cart-alt"></i>

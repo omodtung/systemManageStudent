@@ -100,7 +100,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </li>
                    
                     <li>
-                        <a target="_blank" rel="noopener noreferrer" href="./DAL/export.php?student=1">
+                        <a target="_blank" rel="noopener noreferrer" href="./BL/export.php?student=1">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Students</span>
                         </a>
