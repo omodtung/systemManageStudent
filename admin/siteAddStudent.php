@@ -76,7 +76,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="container mt-5">
                 <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-                <form method="post" class="shadow p-3 mt-5 form-w" action="DAL/addStudent.php">
+                <form method="post" class="shadow p-3 mt-5 form-w" action="BL/addStudent.php">
                     <h3> Form Thêm Học Sinh</h3>
                     <?php if (isset($_GET['error'])) { ?>
                         <div class="alert alert danger" role="alert">

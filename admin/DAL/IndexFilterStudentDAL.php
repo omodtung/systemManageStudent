@@ -1,7 +1,9 @@
 <?php
 include_once("database.php");
-include_once("req/getCategoriesStudent.php");
-include_once("req/filterDataStudent.php");
+include_once("DAL/getCategoriesStudent.php");
+include_once("DAL/filterDataStudent.php");
+
+
 ?>
 
 <form method="post" action="BL/reboundStudent.php?indexFilterStudent=1">
@@ -9,7 +11,7 @@ include_once("req/filterDataStudent.php");
   <select name="filterByCategory1">
 
     <?php
-    $getCategories = getCategory();
+    $getCategories = getCategoriesBL();
 
     foreach ($getCategories as $category) {
 
@@ -28,5 +30,5 @@ include_once("req/filterDataStudent.php");
 
 
 <?php
-include_once("req/displayDataStudentDAL.php");
+include_once("../BL/displayDataStudent.php");
 ?>

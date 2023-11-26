@@ -6,10 +6,21 @@ include_once "DAL/data/teacherAd.php";
 include_once "DAL/data/grade.php";
 include_once "DAL/data/class.php";
 include_once "DAL/data/subject.php";
+include_once "BL/data/teacher.php";
 
-$teachers = getAllTeachers($conn);
-$subjects = getAllSubjects($conn);
-$classes = getAllClass($conn);
+
+// $teachers = getAllTeachers($conn);
+$teachers = getAllTeachersBL($conn);
+
+
+
+
+// $subjects = getAllSubjects($conn);
+$subjects = getAllSubjectsBL($conn);
+
+// $classes = getAllClass($conn);
+$classes =getAllClassBL($conn);
+
 ?>
 
 <html lang="en">
