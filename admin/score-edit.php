@@ -26,7 +26,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         </head>
     <body>
-    <form method="post" action="DAL/editScore.php?id=<?= $id ?>">
+    <form method="post" action="BL/editScore.php?id=<?= $id ?>">
     <input type="hidden" name="idscore" value="<?= $score['id_score'] ?>">
     <div class="form-group">
         <label for="diem15">Điểm 15 phút:</label>

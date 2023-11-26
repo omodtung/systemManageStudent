@@ -81,7 +81,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
           
           
             <li>
-                <a target="_blank" rel="noopener noreferrer" href="./DAL/export.php?schedule=1">
+                <a target="_blank" rel="noopener noreferrer" href="./BL/export.php?schedule=1">
                     <i class="bx bx-export"></i>
                     <span class="link_name">Export All Schedules</span>
                 </a>
