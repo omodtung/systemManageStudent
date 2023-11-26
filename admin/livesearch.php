@@ -11,7 +11,7 @@ try {
     exit;
 }
 if(isset($_GET["student"])) {
-    echo '<a href="./DAL/export.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./BL/export.php?studentsearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM students JOIN avgscore ON students.id=avgscore.student_id WHERE hotenhs LIKE '{$input}%' AND status = 1";
@@ -47,8 +47,11 @@ if(isset($_GET["student"])) {
                 echo '<td>' . $row['diachi'] . '</td>';
                 
                 echo '<td>';
-                echo '<a href="student-edit.php?idstudent=' . $row['id'] . '" class="btn btn-warning">Edit</a>';
-                echo '<a href="" class="btn btn-danger">Delete</a>';
+                echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick(`./inc/editStudent.php?idstudent='. $row["id"] .'`)" data-bs-id='. $row["id"] .'>
+                Edit
+            </button>';
+                echo '<button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo(`./inc/StudentInfo.php?idstudent='. $row["id"] .'`)" data-bs-id='. $row['id'] .' class="btn btn-info">Info</button>';
+                echo '<a href=`BL/deletestudent.php?id='. $row["id"] .'` class="btn btn-danger">Delete</a>';
                 echo '</td>';
                 echo '</tr>';
             }
@@ -63,7 +66,7 @@ if(isset($_GET["student"])) {
     }
 }
 else if(isset($_GET["schedule"])) {
-    echo '<a href="./DAL/export.php?schedulesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./BL/export.php?schedulesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM schedule WHERE HoTen LIKE '{$input}%'";
@@ -115,7 +118,7 @@ else if(isset($_GET["schedule"])) {
     }
 }
 else if(isset($_GET["timetable"])) {
-    echo '<a href="./DAL/export.php?timetablesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+    echo '<a href="./BL/export.php?timetablesearched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
     try {
         $input = $_POST['input'];
         $query = "SELECT * FROM students JOIN (SELECT * FROM schedule GROUP BY Class) as sche on sche.Class = students.malop WHERE hotenhs LIKE '{$input}%'";
@@ -156,7 +159,7 @@ else if(isset($_GET["timetable"])) {
         echo "Error executing the query: " . $e->getMessage();
     }
 }
-else {echo '<a href="./DAL/export.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
+else {echo '<a href="./BL/export.php?searched=' . $_POST['input'] . '" class="btn btn-outline-primary ">Export Search Result</a>';
 
 // Try to execute the query
 try {
@@ -195,8 +198,11 @@ try {
             echo '<td>' . $row['magv'] . '</td>';
             echo '<td>' . $row['makhoi'] . '</td>';
             echo '<td>';
-            echo '<a href="teacher-edit.php?idteach=' . $row['id'] . '" class="btn btn-warning">Edit</a>';
-            echo '<a href="" class="btn btn-danger">Delete</a>';
+            echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick(`./inc/editTeacher.php?idteach='.  $row["id"] .'`)" data-bs-id='. $row["id"] .'>
+            Edit
+        </button>';
+            echo '<button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo(`./inc/TeacherInfo.php?idteach='. $row['id'] .'`)" data-bs-id='.$row['id'] .' class="btn btn-info">Info</button>';
+            echo '<a href=`BL/deleteteacher.php?id='. $row["id"] .'` class="btn btn-danger">Delete</a>';
             echo '</td>';
             echo '</tr>';
         }
