@@ -70,7 +70,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
       <div class="container mt-5 pb-3">
-<<<<<<< HEAD
 
       <?php 
           
@@ -120,9 +119,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
         <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
-=======
-        <form method="post" class="shadow p-3 mt-2 form-w" action="BL/student-edit.php?id=<?= $id ?>">
->>>>>>> main
           
           <div class="mb-3">
 

@@ -77,12 +77,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
           if ($student['id'] && isset($img['id_student'])) {
             $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
-            // Nếu không có ảnh, sử dụng ảnh mặc định
             $imagePath = $defaultImagePath;
         }
      ?>
 
-  <!-- Hình ảnh với sự kiện onclick -->
+
 <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; ">
 
 

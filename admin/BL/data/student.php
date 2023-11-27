@@ -35,4 +35,9 @@ function findNameDocNhatHsBL($uname, $conn){
     return findNameDocNhatHs($uname, $conn);
 }
 
+
+function getImgById($conn, $id){
+    return getImgById($conn, $id);
+}
+
 ?>
