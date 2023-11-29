@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION['student_id']) && 
+if (isset($_SESSION['id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Student') {
@@ -9,7 +9,7 @@ if (isset($_SESSION['student_id']) &&
      include "data/student.php";
     // echo $_SESSION['malop'];
     //  $ma_lop = $_SESSION['malop'];
-    $student_id = $_SESSION['student_id'];
+    $student_id = $_SESSION['id'];
     $student = getStudentById($student_id, $conn);
 
      $ma_lop = $student['malop'];
@@ -51,7 +51,7 @@ if (isset($_SESSION['student_id']) &&
         </tr>
         <?php foreach ($students as $student) { ?>
           <tr>
-                                        <td><?= $student['student_id'] ?></td>
+                                        <td><?= $student['id'] ?></td>
                                         <td><?= $student['hotenhs'] ?></td>
                                         <td><?= $student['malop'] ?></td>
                                         <td><?= $student['ngaysinh'] ?></td>

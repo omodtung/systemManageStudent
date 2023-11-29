@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION['student_id']) && 
+if (isset($_SESSION['id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Student') {
@@ -8,10 +8,12 @@ if (isset($_SESSION['student_id']) &&
        include "data/student.php";
       //  include "data/subject.php";
        include "data/grade.php";
+
+    
       //  include "data/section.php";
-       $student_id = $_SESSION['student_id'];
+       $student_id = $_SESSION['id'];
        
-       $student = getStudentById($student_id, $conn);
+       $student = getStudentById($student_id, $conn); 
        $img = getImgById($conn,$student_id);
       
 
@@ -45,8 +47,8 @@ if (isset($_SESSION['student_id']) &&
           
           $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
-          if ($student['student_id'] && isset($img['id_student'])) {
-            $imagePath = $img['image_path'];
+          if ($student['id'] && isset($img['id'])) {
+            $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
             // Nếu không có ảnh, sử dụng ảnh mặc định
             $imagePath = $defaultImagePath;
@@ -56,41 +58,8 @@ if (isset($_SESSION['student_id']) &&
      <div style="display: flex;" class="container mt-5">
          <div class="card" style="width: 22rem;">
          <!-- Hình ảnh với sự kiện onclick -->
-<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; cursor: pointer;" onclick="triggerFileInput()">
+<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; cursor: pointer;">
 
-<!-- Form upload -->
-<div>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <!-- Input file ẩn -->
-        <input type="hidden" name="id_student_hide" value="<?= $student_id ?>">
-        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
-
-        <!-- Nút "Upload" được ẩn ban đầu -->
-        <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
-    </form>
-</div>
-
-<script>
-    // Hàm kích hoạt sự kiện click trên input file
-    function triggerFileInput() {
-        document.getElementById('fileToUpload').click();
-    }
-
-    // Khi chọn file, hiển thị nút "Upload"
-    document.getElementById('fileToUpload').addEventListener('change', function () {
-        // Kiểm tra xem có file đã chọn hay không
-        if (this.files.length > 0) {
-            // Hiển thị nút "Upload"
-            document.getElementById('uploadBtn').style.display = 'block';
-            // Hiển thị hình ảnh đã chọn (nếu có)
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                document.querySelector('.card-img-top').src = e.target.result;
-            };
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-</script>
 
          
           <div class="card-body">
@@ -196,9 +165,15 @@ if (isset($_SESSION['student_id']) &&
      </div>
      <a class="btn_pdf" href="info1.php">Export to PDF</a>
      <?php 
-        }else {
-          header("Location: student.php");
-          exit;
+        }else {?>
+          <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+          <hr>
+          <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+      </div>
+
+      <?php    exit;
         }
      ?>
      

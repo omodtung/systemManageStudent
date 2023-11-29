@@ -25,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['teachers'])) {
     $teacherId = $_POST['teachers'];
 
 
-    if (deleteTeacher($teacherId, $conn)) {
-        echo 'Teacher deleted successfully';
-    } else {
-        echo 'Failed to delete teacher';
-    }
+    // if (deleteTeacher($teacherId, $conn)) {
+    //     echo 'Teacher deleted successfully';
+    // } else {
+    //     echo 'Failed to delete teacher';
+    // }
 }
 ?>
 

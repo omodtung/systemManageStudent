@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['student_id']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Student') {
         include "../DB_connection.php";
         
@@ -9,7 +9,7 @@ if (isset($_SESSION['student_id']) && isset($_SESSION['role'])) {
         $id = $_POST['id_student_hide'];
         echo $id;
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["fileToUpload"])) {
-            $targetDirectory = "uploads/";
+            $targetDirectory = "../admin/uploads/";
 
             // Đổi tên file thành chuỗi bằng cách thêm dấu . và chuỗi hậu tố ngẫu nhiên
             $randomSuffix = uniqid();

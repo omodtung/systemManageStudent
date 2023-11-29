@@ -100,6 +100,23 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <div class="mb-3">
 
 
+                    <?php 
+    $defaultImagePath = "../img/student-Nam.jpg";
+?>
+
+
+<img src="<?= $defaultImagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()">
+
+<div>
+    <form   enctype="multipart/form-data">
+
+        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
+
+    
+    
+    </form>
+</div>
+
 
                         <div class="form-row">
                             <div class="col">
@@ -312,11 +329,36 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                         </div>
 <div style="text-align: right;">
-                        <button  type="submit" class="btn btn-primary">Save Change</button>
+                        <button  type="submit" class="btn btn-primary" name="submit">Save Change</button>
 
 
 </div>
                 </form>
+                <script>
+
+    function triggerFileInput() {
+        document.getElementById('fileToUpload').click();
+    }
+
+    document.getElementById('fileToUpload').addEventListener('change', function () {
+        var fileInput = document.getElementById('fileToUpload');
+        
+        if (fileInput.files.length > 0) {
+            var file = fileInput.files[0];
+            
+            // Thực hiện các bước upload cần thiết tại đây
+            console.log('File uploaded:', file);
+
+            // Hiển thị hình ảnh đã chọn
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.card-img-top').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            
+        }
+    });
+</script>
             </div>
         </body>
 
