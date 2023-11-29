@@ -9,7 +9,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         // Nhận id_student từ form
         $id = $_POST['id_student_hide'];
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["fileToUpload"])) {
-            $targetDirectory = "../uploads/";
+
+            $targetDirectory = "../../admin/uploads/";
 
             // Đổi tên file thành chuỗi bằng cách thêm dấu . và chuỗi hậu tố ngẫu nhiên
             $randomSuffix = uniqid();
@@ -17,6 +18,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             $newFileName = $originalFileName . '_' . $randomSuffix;
 
             $targetFile = $targetDirectory . $newFileName . "." . strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
+
             $uploadOk = 1;
 
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);

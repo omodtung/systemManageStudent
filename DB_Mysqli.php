@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $conn = new mysqli('localhost', 'root', '', 'test7');
+    $conn = new mysqli('localhost', 'root', '', 'test');
 
     // Check connection for errors
     if ($conn->connect_error) {

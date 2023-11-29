@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION['student_id']) && 
+if (isset($_SESSION['id']) && 
     isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] == 'Student') {
@@ -9,7 +9,7 @@ if (isset($_SESSION['student_id']) &&
       //  include "data/subject.php";
        include "data/grade.php";
       //  include "data/section.php";
-       $student_id = $_SESSION['student_id'];
+       $student_id = $_SESSION['id'];
        
        $student = getStudentById($student_id, $conn);
        $img = getImgById($conn,$student_id);
@@ -45,8 +45,8 @@ if (isset($_SESSION['student_id']) &&
           
           $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
-          if ($student['student_id'] && isset($img['id_student'])) {
-            $imagePath = $img['image_path'];
+          if ($student['id'] && isset($img['id'])) {
+            $imagePath ='systemManageStudentNew/' .$img['image_path'];
         } else {
             // Nếu không có ảnh, sử dụng ảnh mặc định
             $imagePath = $defaultImagePath;
@@ -56,41 +56,8 @@ if (isset($_SESSION['student_id']) &&
      <div style="display: flex;" class="container mt-5">
          <div class="card" style="width: 22rem;">
          <!-- Hình ảnh với sự kiện onclick -->
-<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; cursor: pointer;" onclick="triggerFileInput()">
+<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; cursor: pointer;">
 
-<!-- Form upload -->
-<div>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <!-- Input file ẩn -->
-        <input type="hidden" name="id_student_hide" value="<?= $student_id ?>">
-        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
-
-        <!-- Nút "Upload" được ẩn ban đầu -->
-        <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
-    </form>
-</div>
-
-<script>
-    // Hàm kích hoạt sự kiện click trên input file
-    function triggerFileInput() {
-        document.getElementById('fileToUpload').click();
-    }
-
-    // Khi chọn file, hiển thị nút "Upload"
-    document.getElementById('fileToUpload').addEventListener('change', function () {
-        // Kiểm tra xem có file đã chọn hay không
-        if (this.files.length > 0) {
-            // Hiển thị nút "Upload"
-            document.getElementById('uploadBtn').style.display = 'block';
-            // Hiển thị hình ảnh đã chọn (nếu có)
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                document.querySelector('.card-img-top').src = e.target.result;
-            };
-            reader.readAsDataURL(this.files[0]);
-        }
-    });
-</script>
 
          
           <div class="card-body">

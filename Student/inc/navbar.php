@@ -21,7 +21,7 @@
           <a class="nav-link" href="class.php">Student list</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="timetable.php">Time table</a>
+          <a class="nav-link" href="TimeTableinfo.php">Time table</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="pass.php">Change password</a>

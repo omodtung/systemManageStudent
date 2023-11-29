@@ -2,10 +2,10 @@
 
 // All Students 
 function getAllStudents($conn){
-   $sql = "SELECT * FROM students";
+   $sql = "SELECT * FROM students where status =1";
    $stmt = $conn->prepare($sql);
    $stmt->execute();
-
+   
    if ($stmt->rowCount() >= 1) {
      $students = $stmt->fetchAll();
      return $students;
@@ -34,9 +34,9 @@ function getStudentsByLopCode($conn, $ma_lop) {
 function getStudentById($id, $conn){
    $sql = "SELECT *
    FROM students 
-   JOIN avgscore  ON students.student_id = avgscore.student_id
-   JOIN avgscore2  ON students.student_id = avgscore2.ID_student
-   WHERE students.student_id = ?";
+   JOIN avgscore  ON students.id = avgscore.student_id
+   JOIN avgscore2  ON students.id = avgscore2.ID_student
+   WHERE students.id = ?";
    $stmt = $conn->prepare($sql);
    $stmt->execute([$id]);
 
@@ -48,25 +48,25 @@ function getStudentById($id, $conn){
    }
 }
 
-function getImgById($conn, $id){
-  $sql = "SELECT *
-  FROM images 
-  WHERE images.id_student = ?";
-  $stmt = $conn->prepare($sql);
-  $stmt->execute([$id]);
+// function getImgById($conn, $id){
+//   $sql = "SELECT *
+//   FROM images 
+//   WHERE images.id_student = ?";
+//   $stmt = $conn->prepare($sql);
+//   $stmt->execute([$id]);
 
-  if ($stmt->rowCount() == 1) {
-    $student = $stmt->fetch();
-    return $student;
-  }else {
-   return 0;
-  }
-}
+//   if ($stmt->rowCount() == 1) {
+//     $student = $stmt->fetch();
+//     return $student;
+//   }else {
+//    return 0;
+//   }
+// }
 
 
 function studentPasswordVerify($student_pass, $conn, $student_id){
   $sql = "SELECT * FROM students
-          WHERE student_id=?";
+          WHERE id=?";
   $stmt = $conn->prepare($sql);
   $stmt->execute([$student_id]);
 
@@ -85,6 +85,19 @@ function studentPasswordVerify($student_pass, $conn, $student_id){
 }
 
 
+
+function getScheduleMaLop($conn,$ma_lop){
+  $sql = "SELECT * FROM schedule WHERE Class = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$ma_lop]);
+
+  if ($stmt->rowCount() >= 1) {
+    $schedules = $stmt->fetchAll();
+    return $schedules;
+  }else {
+    return 0;
+  }
+}
 
 
 // function getDiem($conn, $id_student) {
