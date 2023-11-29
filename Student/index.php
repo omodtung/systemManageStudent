@@ -5,9 +5,9 @@ if (isset($_SESSION['id']) &&
 
     if ($_SESSION['role'] == 'Student') {
        include "../DB_connection.php";
-       include "data/student.php";
+       include "../Student/data/student.php";
       //  include "data/subject.php";
-       include "data/grade.php";
+       include "../Student/data/grade.php";
       //  include "data/section.php";
        $student_id = $_SESSION['id'];
        

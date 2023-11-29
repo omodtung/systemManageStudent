@@ -22,7 +22,7 @@ if (isset($_SESSION['id']) &&
         $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
 
           if ($student['id'] && isset($img['id_student'])) {
-            $imagePath ='systemManageStudentNew/' .$img['image_path'];
+            $imagePath ='systemManageStudent/' .$img['image_path'];
         } else {
             $imagePath = $defaultImagePath;
         }
@@ -141,7 +141,7 @@ if (isset($_SESSION['id']) &&
         $dompdf->render();
 
         $canvas = $dompdf->getCanvas();
-        $fontMetrics = new FontMetrics($canvas, $options);
+        $fontMetrics = new  FontMetrics($canvas, $options);
         $w = $canvas->get_width();
         $h = $canvas->get_height();
         $font = $fontMetrics->getFont('times');
