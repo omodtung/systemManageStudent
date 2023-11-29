@@ -10,10 +10,11 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     //include_once "../DAL/data/getteacher.php";
     //include_once "../DAL/data/student.php";
     //include_once "../DAL/data/class.php";
+    
     include_once "../BL/data/class.php";
     include_once "../BL/data/teacher.php";
     include_once "../BL/data/grade.php";
-    include_once "../DAL/data/student.php";
+    include_once "../BL/data/student.php";
     include_once "../BL/data/subject.php";
     $subjects = getAllSubjectsBL($conn);
     $grades = getAllGradeBL($conn);

@@ -2,6 +2,7 @@
 error_reporting(E_ALL ^ E_WARNING);
 include_once("DAL/data/student.php");
 include_once("../DAL/data/student.php");
+include_once("../../DAL/data/student.php");
 function getAllStudentsBL($conn){
     
     return getAllStudents($conn);
@@ -34,10 +35,5 @@ function countHocLucKemBL($conn){
 function findNameDocNhatHsBL($uname, $conn){
     return findNameDocNhatHs($uname, $conn);
 }
-
-
-// function getImgById($conn, $id){
-//     return getImgById($conn, $id);
-// }
 
 ?>
