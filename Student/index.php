@@ -8,10 +8,12 @@ if (isset($_SESSION['id']) &&
        include "data/student.php";
       //  include "data/subject.php";
        include "data/grade.php";
+
+    
       //  include "data/section.php";
        $student_id = $_SESSION['id'];
        
-       $student = getStudentById($student_id, $conn);
+       $student = getStudentById($student_id, $conn); 
        $img = getImgById($conn,$student_id);
       
 
@@ -163,9 +165,15 @@ if (isset($_SESSION['id']) &&
      </div>
      <a class="btn_pdf" href="info1.php">Export to PDF</a>
      <?php 
-        }else {
-          header("Location: student.php");
-          exit;
+        }else {?>
+          <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Well done!</h4>
+          <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+          <hr>
+          <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+      </div>
+
+      <?php    exit;
         }
      ?>
      

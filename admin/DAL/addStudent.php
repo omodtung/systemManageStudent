@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL ^ E_WARNING);
 
 session_start();
 
@@ -27,11 +27,12 @@ if (
         ) {
             include_once '../../DB_connection.php';
            // include_once "../DAL/data/teacherAd.php";
-            include_once "../req/DAL/data/student.php";
+            // include_once "DAL/data/student.php";
+            include_once"DAL/data/student.php";
 
             // print_r($_POST);
             // die();
-$id = $_POST["id"];
+// $id = $_POST["id"];
             $flname = $_POST['flname'];
             $pass = $_POST['pass'];
             $uname = $_POST['uname'];
