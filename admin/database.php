@@ -3,7 +3,7 @@ define("teacherTable","teachers");
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$databasename = "test7";
+$databasename = "test3";
 
 
 $conn = mysqli_connect($hostname, $username, $password, $databasename);
@@ -15,7 +15,7 @@ if(!$conn)
 
 
 // try {
-//     $conn = new mysqli('localhost', 'root', '', 'test7');
+//     $conn = new mysqli('localhost', 'root', '', 'test3');
 
 //     // Check connection for errors
 //     if ($conn->connect_error) {

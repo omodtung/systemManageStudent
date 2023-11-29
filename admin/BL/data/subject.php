@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL ^ E_WARNING);
+//error_reporting(E_ALL ^ E_WARNING);
 include_once("DAL/data/subject.php");
 include_once("../DAL/data/subject.php");
 function getAllSubjectsBL($conn){
