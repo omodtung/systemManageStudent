@@ -4,12 +4,12 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
+        include_once "../DB_connection.php";
        
-        include "req/data/class.php";
-       
+        include_once "DAL/data/class.php";
+        include_once "BL/data/class.php";
 
-        $classes = getAllClass($conn);
+        $classes = getAllClassBL($conn);
 $teacher
         //print_r($teachers);
 ?>
@@ -82,7 +82,7 @@ $teacher
             </div>
         <section class="home-section">
             <?php
-            include "inc/navBar.php";
+            include_once "inc/navBar.php";
             if ($classes != 0) {
 
 
@@ -116,7 +116,8 @@ $teacher
                                         <td><?= $class['classname'] ?></td>
 
                                         <td>
-                                        
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editClass.php?id=<?= $class['classname'] ?>')" data-bs-id=<?= $class['classname'] ?>>Edit</button>
+                                            <a href="BL/deleteclass.php?id=<?= $class['classname'] ?>" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
 
@@ -145,20 +146,6 @@ $teacher
 
                             }
 
-                            function btnclickinfo(_url) {
-                                $.ajax({
-                                    url: _url,
-                                    type: 'post',
-                                    success: function(data) {
-                                        $('#modalbodyinfo').html(data);
-                                    },
-                                    error: function() {
-                                        $('#modalbodyinfo').text('An error occurred');
-                                    }
-                                });
-
-
-                            }
 
 
                             function Save() {
@@ -205,12 +192,89 @@ $teacher
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
             <script>
+        function btnclick(_url) {
+            $.ajax({
+                url: _url,
+                type: 'post',
+                success: function(data) {
+                    $('#modalbody').html(data);
+                },
+                error: function() {
+                    $('#modalbody').text('An error occurred');
+                }
+            });
+
+
+        }
+
+        function btnclickinfo(_url) {
+            $.ajax({
+                url: _url,
+                type: 'post',
+                success: function(data) {
+                    $('#modalbodyinfo').html(data);
+                },
+                error: function() {
+                    $('#modalbodyinfo').text('An error occurred');
+                }
+            });
+
+
+        }
+
+        function btnclickadd(_url) {
+            $.ajax({
+                url: _url,
+                type: 'post',
+                success: function(data) {
+                    $('#modalbodyadd').html(data);
+                },
+                error: function() {
+                    $('#modalbodyadd').text('An error occurred');
+                }
+            });
+
+
+        }
+
+
+        function Save() {
+            setTimeout(function() {
+
+                $('#modalbody').html('');
+
+            }, 500);
+        }
+
+
+
+        function toastShow() {
+            setTimeout(function() {
+                $('#liveToast').toast('show');
+            }, 500);
+        }
                 $(document).ready(function() {
                     $("#navLinks li:nth-child(4) a").addClass('active')
                 });
             </script>
         </section>
+            <div class="modal fade" id="modalform" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Class</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
+                    </div>
+                    <div class="modal-body" id="modalbody">
 
+                    </div>
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
                     <script src="../js/script.js"></script>
         </body>
 

@@ -4,15 +4,18 @@
 session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
   if ($_SESSION['role'] == 'Admin') {
-    include "../DB_connection.php";
-    include "data/subject.php";
-    include "data/grade.php";
-    include "data/teacherAd.php";
+    include_once "../DB_connection.php";
+    include_once "DAL/data/subject.php";
+    include_once "DAL/data/grade.php";
+    include_once "DAL/data/teacherAd.php";
+    include_once "BL/data/subject.php";
+    include_once "BL/data/teacher.php";
+    include_once "BL/data/grade.php";
 
-    $subjects = getAllSubjects($conn);
-    $teacher = getAllTeachers($conn);
+    $subjects = getAllSubjectsBL($conn);
+    $teacher = getAllTeachersBL($conn);
 
-    $grades = getAllGrade($conn);
+    $grades = getAllGradeBL($conn);
     $fname = '';
     $lname  = '';
     $uname  = '';
@@ -60,13 +63,13 @@ $maGiaoVien ='';
 
     <body >
     <?php 
-        include "inc/navBar.php";
+        include_once "inc/navBar.php";
      ?>
 
       <div class="container mt-5">
         <a href="teacherNewUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-        <form  method="post" class="shadow p-3 mt-5 form-w" action="req/addTeacher.php">
+        <form  method="post" class="shadow p-3 mt-5 form-w" action="BL/addTeacher.php">
           <h3> Form Thêm Giáo Viên</h3>
           <?php if (isset($_GET['error'])) { ?>
             <div class="alert alert-danger" role="alert">

@@ -3,19 +3,20 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "req/data/teacherAd.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "req/data/student.php";
-
-        $teachers =   getAllTeachers($conn);
-
-        $countFemale = countNumberStudentFemale($conn);
-        $countMale = countNumberStudentMale($conn);
+        include_once "../DB_connection.php";
+        include_once "DAL/data/teacherAd.php";
+        include_once "DAL/data/subject.php";
+        include_once "DAL/data/grade.php";
+        include_once "DAL/data/student.php";
+        include_once "BL/data/teacher.php";
+        include_once "BL/data/student.php";
+        $teachers =   getAllTeachersBL($conn);
+// ------------------SUA LOI LINK NHAM GIAO QUA GIAO VIEN TU BAN HOC SINH--------------
+        $countFemale = countFemale($conn);
+        $countMale = countNumberStudentMaleBL($conn);
         $countTotalTeacher = $countFemale+$countMale;
-        $hocLucGioi = countHocLucGioi($conn);
-        $hocLucKha =  countHocLucKem($conn)
+        $hocLucGioi = countHocLucGioiBL($conn);
+        $hocLucKha =  countHocLucKemBL($conn)
         //print_r($teachers);
 
 ?>
@@ -97,7 +98,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">List student</span>
                     </li>
                     <li>
-                        <a href="./req/encryptpasswords.php?table=teachers">
+                        <a href="./DAL/encryptpasswords.php?table=teachers">
                             <i class="bx bx-chat"></i>
                             <span class="link_name">Encrypt All Passwords</span>
                         </a>
@@ -131,7 +132,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         <span class="tooltip">Delete</span>
                     </li>
                     <li>
-                        <a target="_blank" rel="noopener noreferrer" href="./req/exportteacher.php">
+                        <a target="_blank" rel="noopener noreferrer" href="./DAL/exportteacher.php">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Teachers</span>
                         </a>
@@ -167,7 +168,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
 
                 <?php
-                include "inc/navBar.php";
+                include_once "inc/navBar.php";
                 if ($teachers != 0) {
 
 
@@ -406,7 +407,7 @@ new Chart("myChart2", {
             <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <?php include("indexFilter.php"); ?>
+                        <?php include_once("indexFilter.php"); ?>
                     </div>
                 </div>
             </div>

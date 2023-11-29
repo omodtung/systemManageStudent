@@ -6,16 +6,20 @@ session_start();
 // print_r($_SESSION);
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 'Admin') {
-        include "../DB_connection.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "data/student.php";
-        include "data/class.php";
+        include_once "../DB_connection.php";
+        include_once "DAL/data/subject.php";
+        include_once "DAL/data/grade.php";
+        include_once "DAL/data/student.php";
+        include_once "DAL/data/class.php";
+        include_once "BL/data/subject.php";
+        include_once "BL/data/grade.php";
+        include_once "BL/data/student.php";
+        include_once "BL/data/class.php";
 
-        $subjects = getAllSubjects($conn);
-        $grades = getAllGrade($conn);
-        $students = getAllStudents($conn);
-        $classes = getAllClass($conn);
+        $subjects = getAllSubjectsBL($conn);
+        $grades = getAllGradeBL($conn);
+        $students = getAllStudentsBL($conn);
+        $classes = getAllClassBL($conn);
 
 
         $id = '';
@@ -66,13 +70,13 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
         <body>
             <?php
-            include "inc/navBar.php";
+            include_once "inc/navBar.php";
             ?>
 
             <div class="container mt-5">
                 <a href="studentUI.php" class="btn btn-outline-primary btn_add_teacher">Back</a>
 
-                <form method="post" class="shadow p-3 mt-5 form-w" action="req/addStudent.php">
+                <form method="post" class="shadow p-3 mt-5 form-w" action="BL/addStudent.php">
                     <h3> Form Thêm Học Sinh</h3>
                   
                     <?php if (isset($_GET['error'])) { ?>

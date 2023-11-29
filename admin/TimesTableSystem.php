@@ -3,15 +3,16 @@ session_start();
 if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] = 'Admin') {
-        include "../DB_connection.php";
-        include "req/data/student.php";
-        include "data/subject.php";
-        include "data/grade.php";
-        include "req/data/timetable.php";
-        include "data/schedule.php";
+        include_once "../DB_connection.php";
+        include_once "DAL/data/student.php";
+        include_once "DAL/data/subject.php";
+        include_once "DAL/data/grade.php";
+        include_once "DAL/data/timetable.php";
+        include_once "DAL/data/schedule.php";
         //$teachers =   getAllTeachers($conn);
+        include_once "BL/data/timetable.php";
 
-        $timetable = getAllTimeTable($conn);
+        $timetable = getAllTimeTableBL($conn);
     }
 }
 ?>
@@ -69,7 +70,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <span class="tooltip">Search</span>
             </li>
             <li>
-                <a target="_blank" rel="noopener noreferrer" href="./req/export.php?schedule=1">
+                <a target="_blank" rel="noopener noreferrer" href="./DAL/export.php?schedule=1">
                     <i class="bx bx-export"></i>
                     <span class="link_name">Export All Schedules</span>
                 </a>
@@ -103,7 +104,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     </div>
     <section class="home-section">
         <?php
-        include "inc/navBar.php";
+        include_once "inc/navBar.php";
         ?>
         <div class="container mt-5">
             <div class="table-responsive">
