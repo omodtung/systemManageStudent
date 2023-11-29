@@ -9,7 +9,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include_once "DAL/data/grade.php";
         include_once "DAL/data/getteacher.php";
         include_once "BL/data/teacher.php";
-
+        
         $teachers =   getAllTeachersBL($conn);
 
 
@@ -111,7 +111,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     </li>
 
                     <li>
-                        <a target="_blank" rel="noopener noreferrer" href="./DAL/export.php?teacher=1">
+                        <a target="_blank" rel="noopener noreferrer" href="./BL/export.php?teacher=1">
                             <i class="bx bx-export"></i>
                             <span class="link_name">Export All Teachers</span>
                         </a>
@@ -248,7 +248,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                     Edit
                                                 </button>
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
-                                                <a href="./BL/deleteteacher.php?id=<?= $teacher['id'] ?>" class="btn btn-danger">Delete</a>
+                                                <a href="./BL/deleteteacher.php?id=<?=$teacher['id'] ?>" class="btn btn-danger">Delete</a>
 
 
 
@@ -445,7 +445,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 <div class="modal-dialog modal-dialog-scrollable modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="sttest7aticBackdropLabel">Teacher Info</h1>
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Teacher Info</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="Save()"></button>
                         </div>
                         <div class="modal-body" id="modalbodyinfo">
@@ -457,8 +457,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                 </div>
-                <td><?= $teacher['hoten'] ?></td>
-
+                    <td><?= $teacher['hoten'] ?></td>
+              
             </div>
 
 
@@ -474,7 +474,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if (input != "") {
 
                             $.ajax({
-                                url: "BL/livesearchBL.php",
+                                url: "livesearch.php",
                                 method: "POST",
                                 data: {
                                     input: input
@@ -499,7 +499,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <?php include_once("BL/indexFilterTeacherBL.php"); ?>
+                        <?php include_once("indexFilter.php"); ?>
                     </div>
                 </div>
             </div>
