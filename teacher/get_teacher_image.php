@@ -4,7 +4,7 @@ include "../DB_connection.php"; // Ensure this path is correct
 if (isset($_GET['teacher_id'])) {
     $teacher_id = $_GET['teacher_id'];
 
-    $sql = "SELECT image FROM schema3.teachers WHERE magv = ?";
+    $sql = "SELECT image FROM schema5.teachers WHERE magv = ?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$teacher_id]);
     $stmt->bindColumn(1, $image, PDO::PARAM_LOB);

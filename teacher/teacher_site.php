@@ -33,7 +33,7 @@
 
         /* Button Styles */
         button {
-            background-color: #f9748f;
+            background-color: #86cbfd;
             border: none;
             color: white;
             padding: 10px 20px;
@@ -46,7 +46,7 @@
 
         button:hover {
             transform: scale(1.05);
-            background-color: #fd868c;
+            background-color: #0000FF;
         }
 
         /* Table Styles */
@@ -100,12 +100,12 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background-color: #f9748f; /* or any color you prefer */
+            background-color: #86cbfd; /* or any color you prefer */
             color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px -5px #f9748f; /* same as other buttons for consistency */
+            box-shadow: 0 4px 15px -5px #0000FF; /* same as other buttons for consistency */
             font-weight: bold;
             cursor: pointer;
         }
@@ -113,10 +113,46 @@
         .btn-logout:hover {
             background-color: #fd868c; /* a slightly different color on hover */
         }
+        
+        .navbar-nav .nav-link {
+            font-size: 20px; /* Increase the font size */
+            font-weight: bold; /* Optional: makes the text bold */
+        }
 
     </style>
 </head>
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #444444;">
+        <!-- Replace 'School Portal' text with an image -->
+        <a class="navbar-brand" href="teacher_site.php">
+            <img src="../sgu-logo.png" alt="Logo" style="height: 50px;"> <!-- Adjust the path and size as needed -->
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="teacher_site.php">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="teacher_table_site.php">Teachers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="change_password.php">Change Password</a>
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <button type="button" onclick="window.location.href='../login.php'" class="btn-logout">Log Out</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
     <form method="POST" action="">
         <!-- Larger "Select Grade" text using Bootstrap classes -->
         <label class="h4">Select Grade:</label>
@@ -137,8 +173,8 @@
         
             // Your SQL query to filter by selected grade
             $sql = "SELECT students.mahs, students.hotenhs, AVG(score.tbm) AS diem_tb
-                    FROM schema3.score
-                    JOIN schema3.students ON score.student_code = students.mahs
+                    FROM schema5.score
+                    JOIN schema5.students ON score.student_code = students.mahs
                     WHERE students.makhoi = :selected_grade
                     GROUP BY students.mahs, students.hotenhs
                     ";
@@ -165,12 +201,6 @@
                     echo '<td>' . $score['hotenhs'] . '</td>';
                     echo '<td>' . number_format($score['diem_tb'], 2) . '</td>';
                 
-                    // echo '<td>';
-                    // echo '<button type="button" onclick="window.location.href=\'Score_student.php?student_id=' . $score['mahs'] . '\'">';
-                    // echo 'View More';
-                    // echo '</button>';
-                    // echo '</td>';
-
                     echo '<td>';
                     echo '<button type="button" onclick="window.location.href=\'Score_student.php?student_id=' . $score['mahs'] . '\'">View More</button>';
                     echo '&nbsp;'; 
@@ -224,78 +254,6 @@
 
     </script>
 
-    <form method="POST" action="">
-        <!-- Larger "Select Grade" text using Bootstrap classes -->
-        <label class="h4">Select teacher information:</label>
-        <select name="selected_teacher_grade" onchange="this.form.submit()" class="form-control">
-            <option value="" disabled selected>Select a teacher</option>
-            <option value="1">Khối 10</option>
-            <option value="2">Khối 11</option>
-            <option value="3">Khối 12</option>
-        
-        </select>
-    </form>
-    
-    <?php
-        if (isset($_POST["selected_teacher_grade"])) {
-            $selected_teacher_grade = $_POST["selected_teacher_grade"];
-            $query = "SELECT * FROM teachers WHERE makhoi = :selected_teacher_grade";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':selected_teacher_grade', $selected_teacher_grade, PDO::PARAM_STR);
-            $stmt->execute();
-            $name_teachers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        if (isset($_POST["selected_teacher_grade"])) {
-            $selected_teacher_grade = $_POST["selected_teacher_grade"];
-            $query = "SELECT magv, hoten, mamonhoc, makhoi, ngaysinh, gioitinh, diachi FROM teachers WHERE makhoi = :selected_teacher_grade";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':selected_teacher_grade', $selected_teacher_grade, PDO::PARAM_STR);
-            $stmt->execute();
-            $teachers = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-            if (!empty($teachers)) {
-                echo '<table class="table table-bordered mt-3">';
-                echo '<thead>';
-                echo '<tr>';
-                echo '<th>Mã Giáo Viên</th>';
-                echo '<th>Tên Giáo Viên</th>';
-                echo '<th>Mã môn học </th>';
-                echo '<th>Mã khối</th>';
-                echo '<th>Ngày sinh</th>';
-                echo '<th>Giới Tính</th>';
-                echo '<th>Địa Chỉ</th>';
-
-                echo '</tr>';
-                echo '</thead>';
-                echo '<tbody>';
-                foreach ($teachers as $teacher) {
-                    echo '<tr>';
-                    echo '<td>' . $teacher['magv'] . '</td>';
-                    echo '<td>' . $teacher['hoten'] . '</td>';
-                    echo '<td>' . $teacher['mamonhoc'] . '</td>';
-                    echo '<td>' . $teacher['makhoi'] . '</td>';
-                    echo '<td>' . $teacher['ngaysinh'] . '</td>';
-                    echo '<td>' . $teacher['gioitinh'] . '</td>';
-                    echo '<td>' . $teacher['diachi'] . '</td>';
-
-                    echo '<td>';
-                    echo '<button type="button" onclick="window.location.href=\'TeacherInfo.php?teacher_info=' . $teacher['magv'] . '\'">';
-                    echo 'View More';
-                    echo '</button>';
-                    echo '</td>';
-                    
-                    echo '</tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
-            } else {
-                echo '<p>No teachers available for the selected grade.</p>';
-            }
-        }
-        
-
-        
-    ?>
 
     <form action="upload_scores.php" method="post" enctype="multipart/form-data">
         Chọn excel file điểm học sinh:
@@ -322,8 +280,10 @@
                 if (this.status == 200) {
                     if (this.responseText.trim() == 'success') {
                         alert('File uploaded successfully!');
+                        window.location.reload()
                     } else {
                         alert('File uploaded successfully!');
+                        window.location.reload()
                     }
                 }
             };
@@ -332,7 +292,7 @@
         }
     </script>
 
-    <button type="button" onclick="window.location.href='../login.php'" class="btn-logout">Log Out</button>
+    <!-- <button type="button" onclick="window.location.href='../login.php'" class="btn-logout">Log Out</button> -->
 
 
 </body>
