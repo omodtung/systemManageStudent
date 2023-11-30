@@ -72,7 +72,7 @@ if (isset($_POST['uname']) &&
                     }
 					if($role == 'Teacher')
 					{
-						$id=$user['teacher_id'];
+						$id=$user['id'];
                         $_SESSION['teacher_id']=$id;
                         header("Location: ../teacher/teacher_site.php");
                         exit;
