@@ -242,14 +242,15 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                 ?>
                                             </td>
 
-                                            <td style="display:inline-flex">
+                                            <td >
+                                                <div style="display:inline-flex;column-gap: 2px; justify-content: space-between;">
                                                 <!-- <a href="teacher-edit.php?idteach=<?= $teacher['id'] ?>" class="btn btn-warning">Edit</a> -->
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick('./inc/editTeacher.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?>>
                                                     Edit
                                                 </button>
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
                                                 <a href="./BL/deleteteacher.php?id=<?=$teacher['id'] ?>" class="btn btn-danger">Delete</a>
-
+                                                </div>
 
 
 
