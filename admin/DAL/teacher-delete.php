@@ -60,8 +60,8 @@ if (isset($_POST["selected_grade"])) {
 
     // Your SQL query to filter by selected grade
     $sql = "SELECT students.mahs, students.hotenhs, AVG(score.tbm) AS diem_tb
-            FROM schema3.score
-            JOIN schema3.students ON score.student_code = students.mahs
+            FROM schema5.score
+            JOIN schema5.students ON score.student_code = students.mahs
             WHERE students.makhoi = :selected_grade
             GROUP BY students.mahs, students.hotenhs
             ";

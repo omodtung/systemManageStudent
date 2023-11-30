@@ -161,6 +161,11 @@
             $('#editModal').modal('show');
         }
 
+        function saveChangesAndGoBack() {
+            alert('Changes saved!');
+            window.location.href = 'teacher_site.php';
+        }
+
     </script>
 
     <form method="POST" action="score_pdf.php">
@@ -172,7 +177,10 @@
         <input type="hidden" name="student_id" value="<?= $student_id ?>">
         <button type="submit" class="btn btn-success mt-3">Export Scores to Excel</button>
     </form>
-
+ 
+    <div class="fixed-bottom bg-light p-3 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" onclick="saveChangesAndGoBack()">Save Changes and Back</button>
+    </div>
 
     <!-- Include jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
