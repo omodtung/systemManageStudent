@@ -6,6 +6,6 @@
         $sql = "DELETE FROM class WHERE classname = '$id'";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        header("Location: ../classUI.php");
+        header("Location: ../classUi.php");
         exit;
 ?>

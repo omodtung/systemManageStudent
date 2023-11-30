@@ -9,7 +9,7 @@ if(isset($_SESSION['admin_id']) && isset($_SESSION['role']))
     {
         include_once '../../DB_connection.php';
         include_once("../DAL/deleteclass.php");
-        header("Location: ../classUI.php");
+        header("Location: ../classUi.php");
         exit;
     }
 }

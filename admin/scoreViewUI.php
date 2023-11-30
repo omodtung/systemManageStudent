@@ -51,28 +51,37 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     <body>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <!-- <label for="mahs">Mã học sinh:</label> -->
+
+    <div style="margin-left: 200px;">
     <input type="text" name="btnTimkiem" required placeholder="example: HS001">
     <input type="submit" value="submit">
+
+    </div>
+    <!-- <input type="text" name="btnTimkiem" required placeholder="example: HS001">
+    <input type="submit" value="submit"> -->
+
+
+    
+
+
+
+
     </form>
 
-    <div class="sidebar">
+    <div class="sidebar" >
                 <div class="logo_details">
                     <i class="bx bxl-audible icon"></i>
                     <div class="logo_name">Admin </div>
                     <i class="bx bx-menu" id="btn"></i>
                 </div>
                 <ul class="nav-list">
+                  
                     <li>
-                        <i class="bx bx-search"></i>
-                        <input type="text" id="live_search" placeholder="Search...">
-                        <span class="tooltip">Input Name Student</span>
-                    </li>
-                    <li>
-                        <a href="addClassSite.php">
-                            <i class="bx bx-grid-alt"></i>
-                            <span class="link_name"> list Score </span>
+                        <a data-toggle="modal" data-target=".bd-example-modal-lg">
+                            <i class="bx bx-folder"></i>
+                            <span class="link_name">Filter Lop</span>
                         </a>
-                        <span class="tooltip">list score</span>
+                        <span class="tooltip">Filter</span>
                     </li>
 
                    
@@ -139,18 +148,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     <i class="bx bx-menu" id="btn"></i>
                 </div>
                 <ul class="nav-list">
-                    <li>
-                        <i class="bx bx-search"></i>
-                        <input type="text" id="live_search" placeholder="Search...">
-                        <span class="tooltip">Search</span>
-                    </li>
-                    <li>
-                        <a href="addClassSite.php">
-                            <i class="bx bx-grid-alt"></i>
-                            <span class="link_name"> ADD Class </span>
-                        </a>
-                        <span class="tooltip">ADD</span>
-                    </li>
+                   
 
                    
 
@@ -178,7 +176,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     
             
                 <div style="display: flex;"   >
-         <div class="card" style="width: 22rem;" >
+         <div class="card" style="width: 22rem; margin-left:200px; " >
           <img src="../img/student-<?=$scores[0]['gioitinh']?>.jpg" class="card-img-top" alt="...">
           <div class="card-body" style="flex: 0 0 auto;">
             <h5 class="card-title text-center">@<?=$scores[0]['username']?></h5>
@@ -244,7 +242,22 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                 </div>
                 </div>
 
-                
+                <?php
+                        if (isset($_SESSION['openfilter2'])) {
+                        ?>
+                            <script type="text/javascript">
+                                $(document).ready(function() {
+                                    $('#modalfilter').modal('show');
+                                });
+                            </script>
+                        <?php
+
+                            unset($_SESSION['openfilter2']);
+                        }
+
+
+                        ?>
+
                 <script>
                             function btnclick(_url) {
                                 $.ajax({
@@ -319,6 +332,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                     $("#navLinks li:nth-child(7) a").addClass('active')
                 });
             </script>
+
+<div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <?php include_once("BL/indexFilterScoreBL.php"); ?>
+                    </div>
+                </div>
+            </div>
         </body>
 
         </html>

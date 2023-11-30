@@ -28,5 +28,5 @@ session_start();
 
                 
                 $_SESSION['sucsess'] = $id;
-                header("Location: ../classUI.php");
+                header("Location: ../classUi.php");
                 exit;
