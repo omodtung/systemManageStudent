@@ -25,7 +25,7 @@ function filterDataByCategory() {
     $data =[];
     if(!empty($filterByCategory)){
     
-        $query = "SELECT * FROM students WHERE malop= '$filterByCategory' and status =1";
+        $query = "SELECT * FROM students WHERE malop= '$filterByCategory'";
      
      
         $result = $conn->query($query);

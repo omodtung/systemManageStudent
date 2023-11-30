@@ -31,7 +31,7 @@ if (
 
             // print_r($_POST);
             // die();
-$id = $_POST["id"];
+// $id = $_POST["id"];
             $flname = $_POST['flname'];
             $pass = $_POST['pass'];
             $uname = $_POST['uname'];

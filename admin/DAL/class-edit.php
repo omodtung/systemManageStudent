@@ -17,7 +17,7 @@ session_start();
             
 
 
-                $sql = "UPDATE `class` SET makhoi = '$makhoi',StartTime = '$manamhoc' WHERE classname = $classname";
+                $sql = "UPDATE `class` SET makhoi = '$makhoi',manamhoc = '$manamhoc' WHERE classname = '$classname'";
 
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
@@ -28,5 +28,5 @@ session_start();
 
                 
                 $_SESSION['sucsess'] = $id;
-                header("Location: ../schedule.php");
+                header("Location: ../classUi.php");
                 exit;

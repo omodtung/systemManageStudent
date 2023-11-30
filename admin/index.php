@@ -39,7 +39,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
               <i class="fa fa-graduation-cap fs-1" aria-hidden="true"></i><br>
               Students
             </a>
-            <a href="scoreUI.php" class="col btn btn-dark m-2 py-3">
+            <a href="scoreViewUI.php" class="col btn btn-dark m-2 py-3">
               <i class="fa fa-pencil-square fs-1" aria-hidden="true"></i><br>
               Score
             </a>
