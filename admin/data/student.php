@@ -46,6 +46,20 @@ function getAllStudentNotavg($conn){
       return 0;
   }
 }
+function getImgById($conn, $id){
+  $sql = "SELECT *
+  FROM images 
+  WHERE images.id_student = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id]);
+
+  if ($stmt->rowCount() == 1) {
+    $student = $stmt->fetch();
+    return $student;
+  }else {
+   return 0;
+  }
+}
 
 // function countStatusExist($conn)
 // {

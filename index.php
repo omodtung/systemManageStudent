@@ -86,11 +86,7 @@
 			</div>
 
 		</div>
-		<?php
-			$password = password_hash("123",PASSWORD_BCRYPT);
-			echo($password);
-		?>
-	</div>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

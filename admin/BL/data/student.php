@@ -2,6 +2,7 @@
 error_reporting(E_ALL ^ E_WARNING);
 include_once("DAL/data/student.php");
 include_once("../DAL/data/student.php");
+include_once("../../DAL/data/student.php");
 function getAllStudentsBL($conn){
     
     return getAllStudents($conn);
