@@ -47,8 +47,10 @@ if(isset($_GET["student"])) {
                 echo '<td>' . $row['diachi'] . '</td>';
                 
                 echo '<td>';
-                echo '<a href="student-edit.php?idstudent=' . $row['id'] . '" class="btn btn-warning">Edit</a>';
-                echo '<a href="" class="btn btn-danger">Delete</a>';
+                echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick("./inc/editStudent.php?idstudent='. $row["id"] .'")" data-bs-id='. $row["id"] .'>
+                Edit
+            </button>';
+                echo '<a href="BL/deletestudent.php?id='. $row["id"] .'" class="btn btn-danger">Delete</a>';
                 echo '</td>';
                 echo '</tr>';
             }
