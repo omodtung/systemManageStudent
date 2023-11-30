@@ -19,6 +19,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $student = getStudentUsingIdBL($conn,$_GET['idstudent']);
     $class = getAllClassBL($conn);
     $id = $_GET['idstudent'];
+    $img = getImgById($conn,$id);
     $fname = '';
     $lname  = '';
     $uname  = '';
@@ -68,6 +69,22 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       <div class="container mt-5 pb-3">
         <form method="post" class="shadow p-3 mt-2 form-w" action="DAL/student-edit.php?id=<?= $id ?>">
           
+
+        <?php 
+          
+          $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
+
+          if ($student['id'] && isset($img['id_student'])) {
+            $imagePath ='systemManageStudentNew/' .$img['image_path'];
+        } else {
+            $imagePath = $defaultImagePath;
+        }
+     ?>
+
+
+<!-- <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; "> -->
+
+
           <div class="mb-3">
 
             <div class="form-row">

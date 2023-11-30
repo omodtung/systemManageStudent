@@ -31,7 +31,7 @@ if (
 
             // print_r($_POST);
             // die();
-// $id = $_POST["id"];
+$id = $_POST["id"];
             $flname = $_POST['flname'];
             $pass = $_POST['pass'];
             $uname = $_POST['uname'];
@@ -98,14 +98,14 @@ if (
                 $pass = password_hash($pass, PASSWORD_DEFAULT);
 
 
-                $sql = "INSERT INTO `students`(`username`, `password`, `mahs`, `makhoi`, `malop`, `hotenhs`, `ngaysinh`, `gioitinh`, `diachi`,`hanhkiem`,`status`)  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                $sql = "INSERT INTO `students`(`id`,`username`, `password`, `mahs`, `makhoi`, `malop`, `hotenhs`, `ngaysinh`, `gioitinh`, `diachi`,`hanhkiem`,`status`)  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-                // $sql2 = "INSERT INTO `avgscore` (`student_id`) VALUES (?)";
+                $sql2 = "INSERT INTO `avgscore` (`student_id`) VALUES (?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->execute([$uname, $pass, $mahocsinh, $grades, $classes, $flname, $birthdate, $gender, $diaChi, $hanhkiem, $status]);
+                $stmt->execute([$id,$uname, $pass, $mahocsinh, $grades, $classes, $flname, $birthdate, $gender, $diaChi, $hanhkiem, $status]);
 
-                // $stmt2 = $conn->prepare($sql2);
-                // $stmt2->execute([$id]);
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->execute([$id]);
 
 
 

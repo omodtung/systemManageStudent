@@ -10,6 +10,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     //include_once "../DAL/data/getteacher.php";
     //include_once "../DAL/data/student.php";
     //include_once "../DAL/data/class.php";
+    
     include_once "../BL/data/class.php";
     include_once "../BL/data/teacher.php";
     include_once "../BL/data/grade.php";
@@ -20,6 +21,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $student = getStudentUsingIdBL($conn,$_GET['idstudent']);
     $class = getAllClassBL($conn);
     $id = $_GET['idstudent'];
+    $img = getImgById($conn,$id);
     $fname = '';
     $lname  = '';
     $uname  = '';
@@ -66,10 +68,69 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       //include_once "inc/navBar.php";
       ?>
 
+
+
       <div class="container mt-5 pb-3">
-        <form method="post" class="shadow p-3 mt-2 form-w" action="BL/student-edit.php?id=<?= $id ?>">
+
+      <?php 
+          
+          $defaultImagePath = "../img/student-{$student['gioitinh']}.jpg";
+
+          if ($student['id'] && isset($img['id_student'])) {
+            $imagePath ='systemManageStudentNew/' .$img['image_path'];
+        } else {
+
+            $imagePath = $defaultImagePath;
+        }
+     ?>
+
+<!-- <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()"> -->
+
+<div>
+    <form action="inc/upload.php" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="id_student_hide" value="<?= $id ?>">
+        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
+
+        <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
+    </form>
+</div>
+
+<script>
+
+    function triggerFileInput() {
+        document.getElementById('fileToUpload').click();
+    }
+
+
+    document.getElementById('fileToUpload').addEventListener('change', function () {
+
+        if (this.files.length > 0) {
+
+            document.getElementById('uploadBtn').style.display = 'block';
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.card-img-top').src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
+
+
+        <form method="post" class="shadow p-3 mt-2 form-w" action="applogic/student-edit.php?id=<?= $id ?>">
           
           <div class="mb-3">
+
+
+         
+
+
+
+
+
+
 
             <div class="form-row">
                 <div class="col">
