@@ -15,6 +15,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $grades = getAllGradeBL($conn);
     $teacher = getTeacherBL($conn,$_GET['idteach']);
     $id = $_GET['idteach'];
+    $img = getImgById2($conn,$id);
     $hoten = '';
     //$lname  = '';
     $uname  = '';
@@ -62,6 +63,52 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
       ?>
 
       <div class="container mt-5 pb-3">
+      <?php 
+          
+          $defaultImagePath = "../img/student-{$teacher['gioitinh']}.jpg";
+
+          if ($teacher['id'] && isset($img['id_teacher'])) {
+              $imagePath ='systemManageStudentNew/' .$img['image_path'];
+        } else {
+
+            $imagePath = $defaultImagePath;
+        }
+     ?>
+
+<!-- <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()"> -->
+
+<div>
+    <form action="inc/upload2.php" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="id_teacher_hide" value="<?= $id ?>">
+        <input type="file" name="fileToUpload" id="fileToUpload" style="display: none;">
+
+        <input type="submit" value="Upload Image" name="submit" id="uploadBtn" style="display: none;">
+    </form>
+</div>
+
+<script>
+
+    function triggerFileInput() {
+        document.getElementById('fileToUpload').click();
+    }
+
+
+    document.getElementById('fileToUpload').addEventListener('change', function () {
+
+        if (this.files.length > 0) {
+
+            document.getElementById('uploadBtn').style.display = 'block';
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector('.card-img-top').src = e.target.result;
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+</script>
+
         <form method="post" class="shadow p-3 mt-2 form-w" action="BL/teacher-edit.php?id=<?= $id ?>">
           
           <?php if (isset($_GET['error'])) { ?>

@@ -82,7 +82,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
      ?>
 
 
-<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; ">
+<!-- <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; "> -->
 
 
           <div class="mb-3">
