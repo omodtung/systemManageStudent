@@ -164,8 +164,8 @@ if (isset($_SESSION['id']) &&
      <a class="btn_pdf" href="info1.php">Export to PDF</a>
      <?php 
         }else {
-          header("Location: index.php");
-          exit;
+          // header("Location: .php");
+          // exit;
         }
      ?>
      
