@@ -26,7 +26,7 @@ array_shift($rows);
 $sName = "localhost";
 $uName = "root";
 $pass  = "";
-$db_name = "schema3";
+$db_name = "schema5";
 
 try {
     $conn = new PDO("mysql:host=$sName;dbname=$db_name", $uName, $pass);
