@@ -37,7 +37,7 @@ if (
                 $imageContent = file_get_contents($_FILES['avatar']['tmp_name']);
             }
 
-            $sql = "INSERT INTO teachers (magv, username, password, hoten, mamonhoc, makhoi, ngaysinh, gioitinh, diachi, active, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO teachers (magv, username, password, hoten, mamonhoc, makhoi, ngaysinh, gioitinh, diachi, status, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(1, $idGV);
