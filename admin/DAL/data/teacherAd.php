@@ -86,4 +86,20 @@ return $total;
 
  
 }
+
+
+function getImgById2($conn, $id){
+  $sql = "SELECT *
+  FROM images2 
+  WHERE images2.id_teacher = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$id]);
+
+  if ($stmt->rowCount() == 1) {
+    $student = $stmt->fetch();
+    return $student;
+  }else {
+   return 0;
+  }
+}
 ?>

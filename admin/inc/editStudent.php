@@ -84,7 +84,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         }
      ?>
 
-<img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()">
+<!-- <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()"> -->
 
 <div>
     <form action="inc/upload.php" method="post" enctype="multipart/form-data">

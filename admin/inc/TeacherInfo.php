@@ -15,6 +15,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $grades = getAllGradeBL($conn);
     $teacher = getTeacherBL($conn,$_GET['idteach']);
     $id = $_GET['idteach'];
+    $img = getImgById2($conn,$id);
     $hoten = '';
     //$lname  = '';
     $uname  = '';
@@ -74,6 +75,24 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
           <?php } ?>
 
+          <?php
+      //include_once "inc/navBar.php";
+      ?>
+
+      <div class="container mt-5 pb-3">
+      <?php 
+          
+          $defaultImagePath = "../img/student-{$teacher['gioitinh']}.jpg";
+
+          if ($teacher['id'] && isset($img['id_teacher'])) {
+              $imagePath ='systemManageStudentNew/' .$img['image_path'];
+        } else {
+
+            $imagePath = $defaultImagePath;
+        }
+     ?>
+
+<!-- <img src="<?= $imagePath ?>" class="card-img-top" alt="Student Image" style="height: 220px; width:220px; cursor: pointer;" onclick="triggerFileInput()"> -->
           <div class="mb-3">
 
             <!-- <div class="form-row">
