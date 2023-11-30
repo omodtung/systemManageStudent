@@ -11,7 +11,7 @@ if (isset($_SESSION['id']) &&
       //  include "data/section.php";
        $student_id = $_SESSION['id'];
        
-       $student = getStudentById($student_id, $conn); 
+       $student = getStudentById($student_id, $conn);
        $img = getImgById($conn,$student_id);
       
 
@@ -164,7 +164,7 @@ if (isset($_SESSION['id']) &&
      <a class="btn_pdf" href="info1.php">Export to PDF</a>
      <?php 
         }else {
-          header("Location: index.php");
+          header("Location: ../login.php");
           exit;
         }
      ?>
