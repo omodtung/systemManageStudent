@@ -50,6 +50,7 @@ if(isset($_GET["student"])) {
                 echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick(`./inc/editStudent.php?idstudent='. $row["id"] .'`)" data-bs-id='. $row["id"] .'>
                 Edit
             </button>';
+            
                 echo '<button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo(`./inc/StudentInfo.php?idstudent='. $row["id"] .'`)" data-bs-id='. $row['id'] .' class="btn btn-info">Info</button>';
                 echo '<a href=`BL/deletestudent.php?id='. $row["id"] .'` class="btn btn-danger">Delete</a>';
                 echo '</td>';
