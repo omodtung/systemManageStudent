@@ -5,7 +5,9 @@ if (isset($_SESSION['id']) &&
 
     if ($_SESSION['role'] == 'Student') {
         include "../DB_connection.php";
-        include "../admin/data/schedule.php";
+    // include_once "../admin/data/schedule.php";
+
+include_once "../admin/DAL/data/schedule.php";
         include "../admin/DAL/data/teacherAd.php";
         include "../admin/data/getteacher.php";
         include "../admin/data/subject.php";
@@ -77,7 +79,7 @@ if (isset($_SESSION['id']) &&
 
         <body>
             <?php
-            include "inc/navBar.php";
+            include "./inc/navbar.php";
             ?>
 
             <div class="container mt-5 pb-3">

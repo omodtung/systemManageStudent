@@ -5,7 +5,7 @@ $pdo = null;
 
 // Try to connect to the database
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=test7", "root", "");
+    $pdo = new PDO("mysql:host=localhost;dbname=test3", "root", "");
 } catch (PDOException $e) {
     echo "Error connecting to the database: " . $e->getMessage();
     exit;
@@ -47,8 +47,11 @@ if(isset($_GET["student"])) {
                 echo '<td>' . $row['diachi'] . '</td>';
                 
                 echo '<td>';
-                echo '<a href="student-edit.php?idstudent=' . $row['id'] . '" class="btn btn-warning">Edit</a>';
-                echo '<a href="" class="btn btn-danger">Delete</a>';
+                echo '<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalform" onclick="btnclick("./inc/editStudent.php?idstudent='. $row["id"] .'")" data-bs-id='. $row["id"] .'>
+                Edit
+            </button>';
+                echo '<button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo(`./inc/StudentInfo.php?idstudent='. $row["id"] .'`)" data-bs-id='. $row["id"] .' class="btn btn-info">Info</button>';
+                echo '<a href="BL/deletestudent.php?id='. $row["id"] .'" class="btn btn-danger">Delete</a>';
                 echo '</td>';
                 echo '</tr>';
             }

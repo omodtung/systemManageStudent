@@ -9,7 +9,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
         include_once "DAL/data/grade.php";
         include_once "DAL/data/getteacher.php";
         include_once "BL/data/teacher.php";
-
+        
         $teachers =   getAllTeachersBL($conn);
 
 
@@ -164,8 +164,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
 
                             }
 
-
-                            td {
+                
+            td {
                                 text-align: center;
 
 
@@ -248,7 +248,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                                                     Edit
                                                 </button>
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#modalinfo" onclick="btnclickinfo('./inc/TeacherInfo.php?idteach=<?= $teacher['id'] ?>')" data-bs-id=<?= $teacher['id'] ?> class="btn btn-info">Info</button>
-                                                <a href="./BL/deleteteacher.php?id=<?= $teacher['id'] ?>" class="btn btn-danger">Delete</a>
+                                                <a href="./BL/deleteteacher.php?id=<?=$teacher['id'] ?>" class="btn btn-danger">Delete</a>
 
 
 
@@ -457,8 +457,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         </div>
                     </div>
                 </div>
-                <td><?= $teacher['hoten'] ?></td>
-
+                    <td><?= $teacher['hoten'] ?></td>
+              
             </div>
 
 
@@ -474,7 +474,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                         if (input != "") {
 
                             $.ajax({
-                                url: "BL/livesearchBL.php",
+                                url: "livesearch.php",
                                 method: "POST",
                                 data: {
                                     input: input
@@ -499,7 +499,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
             <div class="modal fade bd-example-modal-lg" id="modalfilter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <?php include_once("BL/indexFilterTeacherBL.php"); ?>
+                    <?php include_once("BL/indexFilterTeacherBL.php"); ?>
                     </div>
                 </div>
             </div>

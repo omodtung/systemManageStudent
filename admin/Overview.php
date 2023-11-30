@@ -239,12 +239,15 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
                             },
                             options: {
                                 scales: {
-                                    yAxes:[{
-                                        ticks: {
-                                            min:0
-                                        }
-                                    }],
-                                },
+        yAxes: [{
+            ticks: {
+            min:0
+            }
+        }],
+    },
+
+
+
                                 legend: {
                                     display: false
                                 },

@@ -21,7 +21,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['role'])) {
     $student = getStudentUsingIdBL($conn,$_GET['idstudent']);
     $class = getAllClassBL($conn);
     $id = $_GET['idstudent'];
-    $img = getImgById($conn,$id);
+    $img = getImgByIdBL($conn,$id);
     $fname = '';
     $lname  = '';
     $uname  = '';

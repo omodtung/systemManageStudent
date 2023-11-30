@@ -2,7 +2,7 @@
 function getAllSubjects($conn)
 {
 
-    $sql = " SELECT * From subjects";
+    $sql = " SELECT * From test3.subjects";
     //chuan bi cau lenh sql
     $stmt = $conn->prepare($sql);
 

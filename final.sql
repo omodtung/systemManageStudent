@@ -1,0 +1,1 @@
+SELECT * FROM schema3.teachers;
