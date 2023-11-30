@@ -1,7 +1,7 @@
 <?php
 
 try {
-    $conn = new mysqli('localhost', 'root', '', 'test7');
+    $conn = new mysqli('localhost', 'root', '', 'test3');
 
     // Check connection for errors
     if ($conn->connect_error) {
@@ -25,7 +25,7 @@ function filterDataByCategory() {
     $data =[];
     if(!empty($filterByCategory)){
     
-        $query = "SELECT * FROM students WHERE malop= '$filterByCategory' and status =1";
+        $query = "SELECT * FROM students WHERE malop= '$filterByCategory'";
      
      
         $result = $conn->query($query);
